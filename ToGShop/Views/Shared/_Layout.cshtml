@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ToG Shopping</title>
+
+
+
+    <!-- L I N K S -->
+    <!--    Bootstrap Icon CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!--    Bootstrap CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!--My CSS-->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <!--    Owl Carousel CSS-->
+    <link rel="stylesheet" href="~/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+
+</head>
+<body>
+
+    <!-- Messenger Sohbet Eklentisi Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Sohbet Eklentisi code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <!-- <div id="my-mouse"></div> -->
+
+    
+    @Html.Raw(@ViewData["Loader"])
+    @Html.Raw(@ViewData["LoaderTwo"])
+
+    
+
+
+
+    <header>
+
+        <nav id="togNav" class="navbar navbar-expand-lg navbar-light">
+
+            <div class="container">
+                <div class="navbar-brand">
+                    <a asp-controller="Home" asp-action="Index"><img draggable="false" width="100" src="~/assets/img/nav-logo.png"></a>
+                    <div class="logo-line"></div>
+                    <div id="logo-category" onclick="SidenavOpenClose()" class="logo-category"> <i id="icon" class="icon bi bi-folder2"></i> <p class="logo-category-text">Kateqoriyalar</p></div>
+                    <!-- <i class="fas fa-folder-open"></i> -->
+                </div>
+
+
+
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <div class="search-responsive">
+                        <form class="search" id="form">
+                            <div class="search-input">
+                                <input type="search" id="query" name="q" placeholder="Axtar...">
+                            </div>
+                            <button class="search-btn">Axtar</button>
+                        </form>
+                    </div>
+
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item text-center">
+                            <a class="nav-link" asp-controller="Cart" asp-action="Index"><i class="fas fa-shopping-cart"></i> 2</a>
+                        </li>
+
+                        <li class="nav-item text-center dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-language"></i> Dil
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a style="cursor: pointer" class="dropdown-item text-center"><img height="20" draggable="false" src="~/assets/flags/az.svg" alt=""> <p style="display: inline-block ;margin-left: 2px">Aze</p></a>
+                                <a style="cursor: pointer" class="dropdown-item text-center"><img height="20" draggable="false" src="~/assets/flags/gb.svg" alt=""> <p style="display: inline-block ;margin-left: 2px">Eng</p></a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item text-center dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-user"></i> Hesab
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a style="cursor: pointer" asp-controller="Account" asp-action="Index" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-in-right"></i> <p style="display: inline-block ;margin-left: 2px">Daxil ol</p></a>
+                            </div>
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </nav>
+
+
+        <section class="side-navbar">
+            <div id="mySidenav" class="sidenav">
+                <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+                <div class="dropdown-container">
+                    <a class="text-center category-item" href="#"><p>Apple</p></a>
+                    <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+                    <a class="text-center category-item" href="#"><p>HP</p></a>
+                    <a class="text-center category-item" href="#"><p>Dell</p></a>
+                    <a class="text-center category-item" href="#"><p>Acer</p></a>
+                    <a class="text-center category-item" href="#"><p>Asus</p></a>
+                    <a class="text-center category-item" href="#"><p>MSI</p></a>
+                </div>
+                <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+                <div class="dropdown-container">
+                    <a class="text-center category-item" href="#"><p>Apple</p></a>
+                    <a class="text-center category-item" href="#"><p>Samsung</p></a>
+                    <a class="text-center category-item" href="#"><p>LG</p></a>
+                    <a class="text-center category-item" href="#"><p>Nokia</p></a>
+                </div>
+                <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+                <div class="dropdown-container">
+                    <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+                    <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+                    <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+                    <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+                    <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+                    <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+                </div>
+
+                <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+            </div>
+        </section>
+
+
+
+
+
+    </header>
+
+
+
+    @RenderBody()
+
+
+
+
+    <footer class="text-center text-lg-start bg-light text-muted">
+
+        <section class="footer-social d-flex justify-content-center border-bottom">
+
+
+            <div>
+                <a href="https://www.facebook.com/gryv21" class="first-icon me-4  text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/togrulgarazade/" class="me-4  text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="./togshopping.apk" download class="me-4  text-reset">
+                    <i class="fab fa-android"></i>
+                </a>
+                <a href="https://github.com/togrulgarayev" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+        </section>
+
+        <section class="footer-main">
+                <div class="container text-center" style="padding-bottom: 13px;">
+
+
+                    <div class="row text-center text-md-left mt-3 pb-3">
+
+
+                        <div class="col-md-3 col-lg-3 col-xl-3 mr-auto mt-3">
+                            <div class="text-nowrap mb-4">
+                                <a class="d-inline-block align-middle mt-n1 mr-3" asp-controller="Home" asp-action="Index">
+                                    <img width="150" style="height: 60px!important;" src="~/assets/img/logo.png">
+                                </a>
+                            </div>
+                            <div>
+                                <a href="./togshopping.apk">
+                                    <img height="50" src="~/assets/img/android.png" alt="">
+                                </a>
+                            </div>
+
+
+                        </div>
+
+
+                        <hr class="w-100 clearfix d-md-none">
+
+
+                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Şirkətimiz</h6>
+                            <ul class="widget-list">
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" asp-controller="About" asp-action="Index">Haqqımızda</a>
+                                </li>
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" href="">Mağazalar</a>
+                                </li>
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" href="">Vakansiyalar</a>
+                                </li>
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" href="">Kampaniyalar</a>
+                                </li>
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" href="">Şərtlərimiz</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                        <hr class="w-100 clearfix d-md-none">
+
+
+                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Müştərilərimiz</h6>
+                            <ul class="widget-list">
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" href="">Kredit</a>
+                                </li>
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" href="">Məxfilik Siyasəti</a>
+                                </li>
+
+                                <li class="widget-list-item">
+                                    <a class="widget-list-link" href="">İstifadə Qaydaları</a>
+                                </li>
+                                <li class="widget-list-item">
+                                    <a class="my-contact-btn widget-list-link">Əlaqə</a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <hr class="w-100 clearfix d-md-none">
+
+
+                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Məlumatlarımız</h6>
+
+
+                            <ul class="widget-list">
+
+                                <li class="widget-list-item"><i class="fas fa-home me-3"></i> <a class="widget-list-link" href="https://goo.gl/maps/nykiix3AGrz5fVNP8"> H.Cavid prospekti 25</a></li>
+                                <li class="widget-list-item"><i class="fas fa-envelope me-3"></i> <a class="widget-list-link" href="mailto:togrulgarazade@gmail.com"> togrulgarazade@gmail.com</a></li>
+                                <li class="widget-list-item "><i class="fas fa-phone me-3"></i> <a class="widget-list-link" href="tel:+994514307717"> +994 (51) 430-77-17</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+        </section>
+
+        <section class="my-copyright">
+            <div class="text-center p-4 " style="background-color: rgba(0, 0, 0, 0.05);">
+
+                © 2022 Bütün Hüquqlar Qorunur |
+
+                <a class="text-reset fw-bold" href="/togrulgarazade"> Togrul Garazade</a>
+            </div>
+        </section>
+
+    </footer>
+
+
+
+
+
+
+
+    <div style="display: none;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/xkDThoocEYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/xkDThoocEYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/xkDThoocEYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+
+
+
+    <!-- S C R I P T S -->
+    <!-- JQuery Link -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!--Fontswesome JS-->
+    <script src="https://kit.fontawesome.com/703d4d8784.js" crossorigin="anonymous"></script>
+    <!--Bootstrap JS Bundle-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <!-- OwlCarousel JS -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="~/assets/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+    <!--My JS-->
+    <script src="~/assets/js/script.js"></script>
+
+</body>
+</html>

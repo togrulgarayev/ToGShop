@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToGShop", "ToGShop\ToGShop.csproj", "{CBDFF89E-B659-43BA-8BA2-F829AC0767F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBDFF89E-B659-43BA-8BA2-F829AC0767F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDFF89E-B659-43BA-8BA2-F829AC0767F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDFF89E-B659-43BA-8BA2-F829AC0767F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDFF89E-B659-43BA-8BA2-F829AC0767F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1E1E254-3D8C-4B36-9FAB-C3B171BAE09B}
+	EndGlobalSection
+EndGlobal

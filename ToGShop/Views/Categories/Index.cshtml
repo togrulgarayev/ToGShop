@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+
+    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+}
+
+<main>
+
+
+
+    <section class="select-category">
+        <div class="container">
+            <div class="nav-pills-title">
+                <h2>Məhsul Kateqoriyaları</h2>
+            </div>
+            <ul class="nav nav-pills mb-3" id="categoryfirst-tab" role="tablist">
+                <li class="nav-item category-list" role="presentation">
+                    <a class="nav-link category-btn active" id="pills-smartphone-tab" data-toggle="pill" href="#pills-smartphone" role="tab" aria-controls="pills-smartphone" aria-selected="true">Smartfonlar</a>
+                </li>
+                <li class="nav-item category-list" role="presentation">
+                    <a class="nav-link category-btn" id="pills-computer-tab" data-toggle="pill" href="#pills-computer" role="tab" aria-controls="pills-computer" aria-selected="false">Kompüterlər</a>
+                </li>
+                <li class="nav-item category-list" role="presentation">
+                    <a class="nav-link category-btn" id="pills-accessories-tab" data-toggle="pill" href="#pills-accessories" role="tab" aria-controls="pills-accessories" aria-selected="false">Aksesuarlar</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="categoryfirst-tabContent">
+                <div class="tab-pane fade show active" id="pills-smartphone" role="tabpanel" aria-labelledby="pills-smartphone-tab">
+
+
+                    <div class="select-altcategory">
+
+
+                        <div class="row">
+                            <div class="col-3 responsive-select">
+                                <div class="nav flex-column nav-pills" id="v-altcategory-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link category-btn active" id="v-pills-applephone-tab" data-toggle="pill" href="#v-pills-applephone" role="tab" aria-controls="v-pills-applephone" aria-selected="true">Apple</a>
+                                    <a class="nav-link category-btn" id="v-pills-samsungphone-tab" data-toggle="pill" href="#v-pills-samsungphone" role="tab" aria-controls="v-pills-samsungphone" aria-selected="false">Samsung</a>
+                                    <a class="nav-link category-btn" id="v-pills-lgphone-tab" data-toggle="pill" href="#v-pills-lgphone" role="tab" aria-controls="v-pills-lgphone" aria-selected="false">LG</a>
+                                    <a class="nav-link category-btn" id="v-pills-nokiaphone-tab" data-toggle="pill" href="#v-pills-nokiaphone" role="tab" aria-controls="v-pills-nokiaphone" aria-selected="false">Nokia</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="tab-content" id="v-altcategory-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-applephone" role="tabpanel" aria-labelledby="v-pills-applephone-tab">Apple Telefonları</div>
+                                    <div class="tab-pane fade" id="v-pills-samsungphone" role="tabpanel" aria-labelledby="v-pills-samsungphone-tab">Samsung Telefonları</div>
+                                    <div class="tab-pane fade" id="v-pills-lgphone" role="tabpanel" aria-labelledby="v-pills-lgphone-tab">LG Telefonları</div>
+                                    <div class="tab-pane fade" id="v-pills-nokiaphone" role="tabpanel" aria-labelledby="v-pills-nokiaphone-tab">Nokia Telefonları</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="tab-pane fade" id="pills-computer" role="tabpanel" aria-labelledby="pills-computer-tab">
+
+
+                    <div class="select-altcategory">
+
+
+                        <div class="row">
+                            <div class="col-3 responsive-select">
+                                <div class="nav flex-column nav-pills" id="v-altcategory-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link category-btn active" id="v-pills-applecomputer-tab" data-toggle="pill" href="#v-pills-applecomputer" role="tab" aria-controls="v-pills-applecomputer" aria-selected="true">Apple</a>
+                                    <a class="nav-link category-btn" id="v-pills-lenovocomputer-tab" data-toggle="pill" href="#v-pills-lenovocomputer" role="tab" aria-controls="v-pills-lenovocomputer" aria-selected="false">Lenovo</a>
+                                    <a class="nav-link category-btn" id="v-pills-hpcomputer-tab" data-toggle="pill" href="#v-pills-hpcomputer" role="tab" aria-controls="v-pills-hpcomputer" aria-selected="false">HP</a>
+                                    <a class="nav-link category-btn" id="v-pills-dellcomputer-tab" data-toggle="pill" href="#v-pills-dellcomputer" role="tab" aria-controls="v-pills-dellcomputer" aria-selected="false">Dell</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="tab-content" id="v-altcategory-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-applecomputer" role="tabpanel" aria-labelledby="v-pills-applecomputer-tab">Apple Laptop</div>
+                                    <div class="tab-pane fade" id="v-pills-lenovocomputer" role="tabpanel" aria-labelledby="v-pills-lenovocomputer-tab">Lenovo Laptop</div>
+                                    <div class="tab-pane fade" id="v-pills-hpcomputer" role="tabpanel" aria-labelledby="v-pills-hpcomputer-tab">HP Laptop</div>
+                                    <div class="tab-pane fade" id="v-pills-dellcomputer" role="tabpanel" aria-labelledby="v-pills-dellcomputer-tab">Dell Laptop</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="tab-pane fade" id="pills-accessories" role="tabpanel" aria-labelledby="pills-accessories-tab">
+
+
+
+                    <div class="select-altcategory">
+
+
+                        <div class="row">
+                            <div class="col-3 responsive-select">
+                                <div class="nav flex-column nav-pills" id="v-altcategory-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link category-btn active" id="v-pills-headphones-accessories-tab" data-toggle="pill" href="#v-pills-headphones-accessories" role="tab" aria-controls="v-pills-headphones-accessories" aria-selected="true">Qulaqcıqlar</a>
+                                    <a class="nav-link category-btn" id="v-pills-mouse-accessories-tab" data-toggle="pill" href="#v-pills-mouse-accessories" role="tab" aria-controls="v-pills-mouse-accessories" aria-selected="false">Siçanlar</a>
+                                    <a class="nav-link category-btn" id="v-pills-keyboard-accessories-tab" data-toggle="pill" href="#v-pills-keyboard-accessories" role="tab" aria-controls="v-pills-keyboard-accessories" aria-selected="false">Klaviaturalar</a>
+                                    <a class="nav-link category-btn" id="v-pills-mousepad-acccessories-tab" data-toggle="pill" href="#v-pills-mousepad-acccessories" role="tab" aria-controls="v-pills-mousepad-acccessories" aria-selected="false">Siçan Altlıqları</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="tab-content" id="v-altcategory-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-headphones-accessories" role="tabpanel" aria-labelledby="v-pills-headphones-accessories-tab">Aksesuar 1</div>
+                                    <div class="tab-pane fade" id="v-pills-mouse-accessories" role="tabpanel" aria-labelledby="v-pills-mouse-accessories-tab">Aksesuar 2</div>
+                                    <div class="tab-pane fade" id="v-pills-keyboard-accessories" role="tabpanel" aria-labelledby="v-pills-keyboard-accessories-tab">Aksesuar 3</div>
+                                    <div class="tab-pane fade" id="v-pills-mousepad-acccessories" role="tabpanel" aria-labelledby="v-pills-mousepad-acccessories-tab">Aksesuar 4</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+</main>
+

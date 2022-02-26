@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+
+    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+}
+
+
+<main>
+
+    <section class="shopping-cart">
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="basket">
+
+                        <div class="basket-labels">
+                            <ul>
+                                <li class="item item-heading">Məhsul</li>
+                                <li class="price">Qiymət</li>
+                                <li class="quantity">Say</li>
+                                <li class="subtotal">Cəmi</li>
+                            </ul>
+                        </div>
+                        <div class="basket-product">
+                            <div class="item">
+                                <div class="basket-product-image">
+                                    <img height="100" src="~/assets/img/laptops/laptop1.png" alt="Placholder Image 2" class="basket-product-frame">
+                                </div>
+                                <div class="basket-product-details">
+                                    <h6><strong><span class="item-quantity">1</span>  ədəd</strong><br> Lenovo L3 15-IML05</h6>
+                                    <div class="fav-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="price"> 2059,00</div>
+                            <div class="quantity">
+                                <input type="number" value="1" min="1" class="quantity-field text-center">
+                            </div>
+                            <div class="subtotal"> 2059,00</div>
+                            <div class="remove">
+                                <button><i class="fas fa-trash"></i> Sil</button>
+                            </div>
+                        </div>
+
+
+                        <div class="basket-product">
+                            <div class="item">
+                                <div class="basket-product-image">
+                                    <img height="100" src="~/assets/img/laptops/mac1.jpg" alt="Placholder Image 2" class="basket-product-frame">
+                                </div>
+                                <div class="basket-product-details">
+                                    <h6><strong><span class="item-quantity">1</span>  ədəd</strong><br> Apple Macbook</h6>
+                                    <div class="fav-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="price"> 6099,00</div>
+                            <div class="quantity">
+                                <input type="number" value="1" min="1" class="quantity-field text-center">
+                            </div>
+                            <div class="subtotal"> 6099,00</div>
+                            <div class="remove">
+                                <button><i class="fas fa-trash"></i> Sil</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <aside>
+                        <div class="summary">
+                            <div class="summary-total-items">Səbətdə <span class="total-items"></span> məhsul var</div>
+                            <div class="summary-subtotal">
+                                <div class="subtotal-title">Qiymət</div>
+                                <div class="subtotal-value final-value" id="basket-subtotal"> 8158.00</div>
+
+                            </div>
+                            <div class="summary-delivery">
+                                <div class="subtotal-title">Çatdırılma</div>
+                                <div class="subtotal-value final-value" id="basket-subtotal"> 0.00</div>
+                            </div>
+                            <div class="summary-total">
+                                <div class="total-title">Cəmi</div>
+                                <div class="total-value final-value" id="basket-total"> 8158.00</div>
+                            </div>
+                            <div class="summary-checkout">
+                                <button class="checkout-cta">Satın Al</button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+
+</main>
+
