@@ -1,15 +1,12 @@
+using Core.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ToGShop.DataAccesLayer;
+using Data.DAL;
+using Microsoft.AspNetCore.Identity;
 
 namespace ToGShop
 {
@@ -29,6 +26,19 @@ namespace ToGShop
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
+            });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(Options =>
+            {
+                Options.Password.RequiredLength = 8;
+                Options.Password.RequireNonAlphanumeric = true;
+                Options.Password.RequireLowercase = false;
+                Options.Password.RequireUppercase = false;
+                Options.Password.RequireDigit = true;
             });
         }
 

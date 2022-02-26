@@ -17,5 +17,6 @@ namespace Data.DAL
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<BaseProduct> BaseProducts { get; set; }
+
     }
 }
