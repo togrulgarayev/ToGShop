@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Data.DAL;
+using Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 
 namespace ToGShop
@@ -40,6 +41,8 @@ namespace ToGShop
                 Options.Password.RequireUppercase = false;
                 Options.Password.RequireDigit = true;
             });
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
