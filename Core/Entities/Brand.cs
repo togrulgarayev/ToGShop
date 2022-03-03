@@ -15,6 +15,6 @@ namespace Core.Entities
         public Category Category { get; set; }
 
 
-        public List<BaseProduct> Products { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

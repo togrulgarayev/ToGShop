@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Core.Entities;
+using Core.Interfaces;
 using Data.DAL;
-using Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories.Implementations
@@ -67,7 +65,7 @@ namespace Data.Repositories.Implementations
             return await _context.Set<TEntity>().AnyAsync(expression);
         }
 
-        public async void Remove(TEntity entity)
+        public void Remove(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
         }

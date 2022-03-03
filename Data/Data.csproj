@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DAL\Migrations\20220301113228_CreateNewDb.cs" />
+    <Compile Remove="DAL\Migrations\20220301113228_CreateNewDb.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
   </ItemGroup>
 

@@ -1,3 +1,7 @@
+using AutoMapper;
+using Business.Implementations;
+using Business.Interfaces;
+using Core;
 using Core.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +46,7 @@ namespace ToGShop
                 Options.Password.RequireDigit = true;
             });
 
+            services.AddScoped<IProductService, ProductService>();  
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
@@ -67,6 +72,10 @@ namespace ToGShop
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
