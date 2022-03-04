@@ -1,4 +1,5 @@
-﻿
+﻿@model ProductCreateViewModel
+
 @{
     ViewData["Title"] = "Məhsul Yarat";
 }
@@ -9,7 +10,44 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
+            <form method="post" asp-controller="Product" asp-action="Create">
+                <div class="form-group">
+                    <label asp-for="Name">Məhsulun adı:</label>
+                    <input class="form-control" asp-for="Name" placeholder="Məhsulun adını daxil edin...">
+                    <span asp-validation-for="Name"></span>
+                </div>
 
+                <div class="form-group">
+                    <label asp-for="Description">Məhsul haqqında:</label>
+                    <input class="form-control" asp-for="Description" placeholder="Məhsul haqqında məlumat daxil edin...">
+                    <span asp-validation-for="Description"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Information">Məhsul haqqında əlavə məlumat:</label>
+                    <input class="form-control" asp-for="Information" placeholder="Məhsul haqqında əlavə məlumat daxil edin...">
+                    <span asp-validation-for="Information"></span>
+                </div>
+
+
+                <select class="form-control">
+                    <option>Məhsulun brendini seçin:</option>
+
+                </select>
+
+                <div class="form-group">
+                    <label asp-for="Count">Məhsulun sayı:</label>
+                    <input class="form-control" asp-for="Count" placeholder="Məhsulun sayını daxil edin...">
+                    <span asp-validation-for="Count"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price">Məhsulun qiyməti:</label>
+                    <input class="form-control" asp-for="Price" placeholder="Məhsulun qiymətini daxil edin...">
+                    <span asp-validation-for="Price"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Yarat</button>
+            </form>
         </div>
     </div>
 </div>

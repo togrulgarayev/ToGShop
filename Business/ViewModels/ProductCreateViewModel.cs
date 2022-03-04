@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Entities;
 
 namespace Business.ViewModels
 {
@@ -11,5 +12,7 @@ namespace Business.ViewModels
         public decimal Price { get; set; }
         public string Information { get; set; }
         public int Count { get; set; }
+
+        public List<Brand> Brands { get; set; }
     }
 }
