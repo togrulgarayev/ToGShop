@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.DAL.Migrations
 {
-    public partial class CreateDb : Migration
+    public partial class CreateTestDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,7 +48,7 @@ namespace Data.DAL.Migrations
                     PostalCode = table.Column<string>(nullable: true),
                     Balance = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
-                    IsActivated = table.Column<bool>(nullable: false,defaultValue:true)
+                    IsActivated = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,7 +185,7 @@ namespace Data.DAL.Migrations
                     Name = table.Column<string>(maxLength: 255, nullable: false),
                     CreateDT = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()"),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -195,7 +195,7 @@ namespace Data.DAL.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,8 +209,10 @@ namespace Data.DAL.Migrations
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
+                    Count = table.Column<int>(nullable: false),
                     Information = table.Column<string>(type: "TEXT", nullable: false),
-                    BrandId = table.Column<int>(nullable: true)
+                    CategoryId = table.Column<int>(nullable: false),
+                    BrandId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,7 +222,13 @@ namespace Data.DAL.Migrations
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,6 +305,11 @@ namespace Data.DAL.Migrations
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -45,7 +45,12 @@ namespace Business.Implementations
 
         public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            Brand dbBrand = await _unitOfWork.brandRepository.Get(b => b.Id == id);
+
+
+
+            _unitOfWork.brandRepository.Remove(dbBrand);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

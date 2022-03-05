@@ -9,6 +9,7 @@ namespace Business.Interfaces
     {
         Task<List<Product>> GetAllAsync();
         Task Create(ProductCreateViewModel productViewModel);
+        Task<ProductCreateViewModel> GetCreate();
         Task Update(int id, ProductUpdateViewModel productViewModel);
         Task Remove(int id);
     }

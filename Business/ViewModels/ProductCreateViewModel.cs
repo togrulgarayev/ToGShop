@@ -13,6 +13,9 @@ namespace Business.ViewModels
         public string Information { get; set; }
         public int Count { get; set; }
 
+        public int CategoryId { get; set; }
+        public List<Category> Categories { get; set; }
+        public int BrandId { get; set; }
         public List<Brand> Brands { get; set; }
     }
 }

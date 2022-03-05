@@ -30,10 +30,12 @@ namespace ToGShop.Areas.Admin.Controllers
         }
 
 
-
+        [HttpGet]
         public async Task<ActionResult> Create()
         {
-            return View();
+
+            
+            return View(await _productService.GetCreate());
         }
 
         [HttpPost]
@@ -41,16 +43,19 @@ namespace ToGShop.Areas.Admin.Controllers
         public async Task<ActionResult> Create(ProductCreateViewModel productViewModel)
         {
 
-            if (!ModelState.IsValid)
-            {
+            //if (!ModelState.IsValid)
+            //{
 
-                await _productService.Create(productViewModel);
-            }
-            else
-            {
-                return View(productViewModel);
-            }
+            //    await _productService.Create(productViewModel);
+            //}
+            //else
+            //{
+            //    return View(productViewModel);
+            //}
 
+
+
+            await _productService.Create(productViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -62,8 +67,7 @@ namespace ToGShop.Areas.Admin.Controllers
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> Delete(int id)
         {
             await _productService.Remove(id);

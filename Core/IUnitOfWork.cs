@@ -10,7 +10,7 @@ namespace Core
     {
         public IProductRepository productRepository { get; }
         public ICategoryRepository categoryRepository { get; }
-        public IBrandInterface brandRepository { get; }
+        public IBrandRepository brandRepository { get; }
         Task SaveAsync();
     }
 }

@@ -118,7 +118,7 @@ namespace Data.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDT")
@@ -177,7 +177,10 @@ namespace Data.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BrandId")
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("Count")
@@ -215,6 +218,8 @@ namespace Data.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -379,18 +384,24 @@ namespace Data.DAL.Migrations
 
             modelBuilder.Entity("Core.Entities.Brand", b =>
                 {
-                    b.HasOne("Core.Entities.Category", "Category")
+                    b.HasOne("Core.Entities.Category", null)
                         .WithMany("Brands")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
-                    b.HasOne("Core.Entities.Brand", null)
+                    b.HasOne("Core.Entities.Brand", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandId");
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Core.Entities.ProductImage", b =>

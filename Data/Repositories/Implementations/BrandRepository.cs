@@ -7,7 +7,7 @@ using Data.DAL;
 
 namespace Data.Repositories.Implementations
 {
-    public class BrandRepository : Repository<Brand>, IBrandInterface
+    public class BrandRepository : Repository<Brand>, IBrandRepository
     {
         public BrandRepository(AppDbContext context) : base(context)
         {

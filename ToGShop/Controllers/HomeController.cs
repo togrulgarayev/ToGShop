@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Interfaces;
+using Core;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,11 +12,19 @@ namespace ToGShop.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IProductService _productService;
+        private readonly IUnitOfWork _unitOfWork;
 
 
-        public IActionResult Index()
+        public HomeController(IUnitOfWork unitOfWork, IProductService productService)
         {
-            return View();
+            _unitOfWork = unitOfWork;
+            _productService = productService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View( await _unitOfWork.productRepository.GetAllAsync());
         }
     }
 }

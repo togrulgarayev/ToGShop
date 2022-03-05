@@ -14,7 +14,7 @@ namespace Data.Repositories
         private readonly AppDbContext _context;
         private IProductRepository _productRepository;
         private ICategoryRepository _categoryRepository;
-        private IBrandInterface _brandRepository;
+        private IBrandRepository _brandRepository;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -26,7 +26,7 @@ namespace Data.Repositories
         public ICategoryRepository categoryRepository =>
             _categoryRepository = _categoryRepository ?? new CategoryRepository(_context);
 
-        public IBrandInterface brandRepository => 
+        public IBrandRepository brandRepository => 
             _brandRepository = _brandRepository ?? new BrandRepository(_context);
 
 

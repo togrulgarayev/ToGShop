@@ -42,7 +42,12 @@ namespace Business.Implementations
 
         public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            Category dbCategory = await _unitOfWork.categoryRepository.Get(c => c.Id == id);
+
+
+
+            _unitOfWork.categoryRepository.Remove(dbCategory);
+            await _unitOfWork.SaveAsync();
         }
     }
 }

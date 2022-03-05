@@ -10,21 +10,24 @@ using Core;
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class BrandController : Controller
     {
-        private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
         private readonly IUnitOfWork _unitOfWork;
 
 
-        public CategoryController(IUnitOfWork unitOfWork, ICategoryService categoryService)
+        public BrandController(IUnitOfWork unitOfWork, IBrandService brandService)
         {
             _unitOfWork = unitOfWork;
-            _categoryService = categoryService;
+            _brandService = brandService;
         }
+
+
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.categoryRepository.GetAllAsync());
+            return View(await _unitOfWork.brandRepository.GetAllAsync());
         }
+
 
         public async Task<IActionResult> Create()
         {
@@ -33,19 +36,19 @@ namespace ToGShop.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CategoryCreateViewModel categoryViewModel)
+        public async Task<IActionResult> Create(BrandCreateViewModel brandViewModel)
         {
 
-            await _categoryService.Create(categoryViewModel);
+            await _brandService.Create(brandViewModel);
 
             return RedirectToAction(nameof(Index));
         }
 
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
 
-            await _categoryService.Remove(id);
+            await _brandService.Remove(id);
 
             return RedirectToAction(nameof(Index));
         }

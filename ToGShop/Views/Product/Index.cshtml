@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Core.Entities.Product>
 @{
     ViewData["Title"] = "Index";
 
@@ -10,81 +10,67 @@
 <main>
 
     <div class="product-page-container">
-        <div class="product-page-main">
-            <div class="product-page-main-image">
+        @foreach (var item in Model)
+        {
+            <div class="product-page-main">
+                <div class="product-page-main-image">
 
-                <a href="#" class="share"><i class="fas fa-share-alt"></i></a>
+                    <a href="#" class="share"><i class="fas fa-share-alt"></i></a>
 
-                <div class="product-page-carousel owl-carousel owl-theme">
-                    <div class="product-page-item">
-                        <div class="product-page-image">
-                            <img draggable="false" src="~/assets/img/laptops/laptop1.png" alt="It is Lenovo Laptop">
+                    <div class="product-page-carousel owl-carousel owl-theme">
+                        <div class="product-page-item">
+                            <div class="product-page-image">
+                                <img draggable="false" src="~/assets/img/laptops/laptop1.png" alt="It is Lenovo Laptop">
+                            </div>
+                        </div>
+
+                        <div class="product-page-item">
+                            <div class="product-page-image">
+                                <img draggable="false" src="~/assets/img/laptops/laptop2.png" alt="It is Lenovo Laptop">
+                            </div>
+                        </div>
+
+                        <div class="product-page-item">
+                            <div class="product-page-image">
+                                <img draggable="false" src="~/assets/img/laptops/laptop3.png" alt="It is Lenovo Laptop">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="product-page-item">
-                        <div class="product-page-image">
-                            <img draggable="false" src="~/assets/img/laptops/laptop2.png" alt="It is Lenovo Laptop">
+
+                </div>
+                <div class="product-page-main-content">
+                    <div class="page-product-name">
+                        <div>
+                            <h2 class="big">@item.Name</h2>
+                            <span class="new">Yeni</span>
                         </div>
+                        <h3 class="small">#@item.Name</h3>
                     </div>
 
-                    <div class="product-page-item">
-                        <div class="product-page-image">
-                            <img draggable="false" src="~/assets/img/laptops/laptop3.png" alt="It is Lenovo Laptop">
+                    <div class="page-product-parameter">
+                        <h3 class="title">Xüsusiyyətlər</h3>
+                        <p class="text">
+                            <ul>
+                                @item.Description
+                                <hr>
+                                @item.Information
+                            </ul>
+                        </p>
+                    </div>
+
+
+                    <div class="buy-price">
+                        <a href="#" class="buy"><i class="fas fa-shopping-cart"></i>Səbətə At</a>
+                        <div class="price">
+                            <p style="font-size: 20px;"></p>
+                            @*<h2>@item.Price</h2>*@
+                             <h2><s>@item.Price </s> @item.Price</h2> 
                         </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="product-page-main-content">
-                <div class="page-product-name">
-                    <div>
-                        <h2 class="big">Lenovo L3 (15IML-05)</h2>
-                        <span class="new">Yeni</span>
-                    </div>
-                    <h3 class="small">#Kompüterlər</h3>
-                </div>
-
-                <div class="page-product-parameter">
-                    <h3 class="title">Xüsusiyyətlər</h3>
-                    <p class="text">
-                        <ul>
-                            <li>Brend : Lenovo</li>
-                            <li>Zəmanət : 6 Ay</li>
-                            <li>Rəng : Boz</li>
-                            <li>Ekran : 15.6" 1366 x 768 HD</li>
-                            <li>Mikrofon : Var</li>
-                            <li>Kamera : Var</li>
-                            <li>Çəki : 2.2 kq</li>
-                            <li>Əməliyyat sistemi : Free DOS</li>
-                            <hr>
-                            <li>SD Kart Girişi : Var</li>
-                            <li>HDMI Girişi : Var</li>
-                            <li>LAN Girişi : Var</li>
-                            <li>USB Portları : 2 x USB 3.1 , 1 x Type-C</li>
-                            <hr>
-                            <li>Bluetooth : Bluetooth 5.0</li>
-                            <li>Yaddaş : 1 TB HDD + 128 GB SSD</li>
-                            <li>RAM : 12GB DDR4</li>
-                            <li>Ekran Kartı : NVIDIA® GeForce® MX330</li>
-                            <li>CPU : Intel® Core ™ i7-10510U</li>
-                            <li>Wi-Fi : Wi-Fi® 802.11ac</li>
-                        </ul>
-                    </p>
-                </div>
-
-
-                <div class="buy-price">
-                    <a href="#" class="buy"><i class="fas fa-shopping-cart"></i>Səbətə At</a>
-                    <div class="price">
-                        <p style="font-size: 20px;"></p>
-                        <h2>2049</h2>
-                        <!-- <h2><s>7000 </s> 6539</h2> -->
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </main>
 

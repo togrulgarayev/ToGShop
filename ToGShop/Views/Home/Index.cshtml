@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Core.Entities.Product>
+
+@{
     ViewData["Title"] = "Home Page";
 
     ViewData["Loader"] = "<div id=\"loader\"></div>";
@@ -137,7 +139,7 @@
 
 
                 <div class="myproduct owl-carousel owl-theme">
-                    <div class="myproduct-item">
+                    @*<div class="myproduct-item">
 
                         <a class="go-product" asp-controller="Product" asp-action="Index">
                             <div class="product-card">
@@ -173,83 +175,50 @@
                             </div>
                         </a>
 
-                    </div>
+                    </div>*@
+                    
+                    @foreach (var item in Model)
+                    {
+                        <div class="myproduct-item">
 
-                    <div class="myproduct-item">
+                            <a class="go-product" asp-controller="Product" asp-action="Index">
+                                <div class="product-card">
+                                    <div class="product-image">
+                                        <img src="~/assets/img/laptops/acer1.jpg" alt="">
+                                    </div>
 
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/laptops/mac1.jpg" alt="">
-                                </div>
+                                    <div class="add-fav">
+                                        <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
+                                    </div>
 
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
+                                    <div class="product-detail">
+                                        <h2>@item.Name</h2>
+                                        <div class="fav-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
 
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+
+                                        <p class="product-price">₼ @item.Price</p>
+
+                                    </div>
+
+                                    <div class="product-operations">
+
+                                        <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
                                     </div>
 
 
-                                    <p class="product-price">₼ 500</p>
-
                                 </div>
+                            </a>
 
-                                <div class="product-operations">
+                        </div>
+                    }
+                    
 
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/laptops/laptop1.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
                 </div>
 
 

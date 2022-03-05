@@ -5,7 +5,7 @@ using Core.Entities;
 
 namespace Core.Interfaces
 {
-    public interface IBrandInterface:IRepository<Brand>
+    public interface IBrandRepository:IRepository<Brand>
     {
     }
 }

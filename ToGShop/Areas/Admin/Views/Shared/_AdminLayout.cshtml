@@ -37,7 +37,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <img height="40" src="~/assets/img/nav-logo.png"/>
+                    <img height="40" src="~/assets/img/nav-logo.png" />
                 </div>
                 <div class="sidebar-brand-text mx-3">ToG Shopping</div>
             </a>
@@ -55,7 +55,7 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-            
+
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -84,6 +84,20 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Category" asp-action="Index">
+                    <i class="bi bi-bookmarks-fill"></i>
+                    <span>Kateqoriyalar</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Brand" asp-action="Index">
+                    <i class="bi bi-tags-fill"></i>
+                    <span>Brendlər</span>
+                </a>
+            </li>
+
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link">
@@ -99,7 +113,7 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-            
+
 
         </ul>
         <!-- End of Sidebar -->

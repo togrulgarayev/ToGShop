@@ -11,10 +11,7 @@ namespace Core.Entities
         public DateTime CreateDT { get; set; }
         public bool IsDeleted { get; set; }
 
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-
-
         public List<Product> Products { get; set; }
+
     }
 }
