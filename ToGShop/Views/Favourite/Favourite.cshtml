@@ -1,0 +1,69 @@
+﻿@model List<FavouriteItemViewModel>
+@{
+    ViewData["Title"] = "Bəyəndiklərim";
+    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+    int count = 1;
+}
+
+<div class="container">
+    <div style="padding-top: 55px; padding-bottom: 55px">
+    <div class="row">
+        
+               
+
+        @if (Model.Count != 0)
+            {
+                
+                <h2 style="padding-bottom: 15px">Bəyəndiklərim siyahısı:</h2>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Məhsulun adı</th>
+                            <th scope="col">Məhsulun sayı</th>
+                            <th scope="col">Məhsulun qiyməti</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@item.Name</td>
+                            <td>@item.Count</td>
+                            <td>
+                                ₼
+                                @if (@item.isDiscount == true)
+                                {
+                                    <s>@item.Price</s> @item.DiscountPrice
+                                }
+                                else
+                                {
+                                    @item.Price;
+                                }
+
+                            </td>
+                        </tr>
+                        count++;
+
+
+                    }
+
+                    </tbody>
+                </table>
+            
+            }
+
+            else
+            {
+                <h2>Bəyəndiklərim siyahısı boşdur !</h2>
+            }
+
+
+
+        </div>
+     
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Core.Entities.Product>
+﻿@model ProductViewModel
 @{
     ViewData["Title"] = "Index";
 
@@ -10,67 +10,59 @@
 <main>
 
     <div class="product-page-container">
-        @foreach (var item in Model)
-        {
-            <div class="product-page-main">
-                <div class="product-page-main-image">
+        
+        <div class="product-page-main">
+            <div class="product-page-main-image">
 
-                    <a href="#" class="share"><i class="fas fa-share-alt"></i></a>
+                <a href="#" class="share"><i class="fas fa-share-alt"></i></a>
 
-                    <div class="product-page-carousel owl-carousel owl-theme">
+                <div class="product-page-carousel owl-carousel owl-theme">
+                    
+                    @foreach (var item in Model.ProductImages.Where(p=>p.ProductId == Model.Products.Id).ToList())
+                    {
                         <div class="product-page-item">
                             <div class="product-page-image">
-                                <img draggable="false" src="~/assets/img/laptops/laptop1.png" alt="It is Lenovo Laptop">
+                                <img draggable="false" src="~/assets/img/@item.Image" alt="It is Lenovo Laptop">
                             </div>
                         </div>
-
-                        <div class="product-page-item">
-                            <div class="product-page-image">
-                                <img draggable="false" src="~/assets/img/laptops/laptop2.png" alt="It is Lenovo Laptop">
-                            </div>
-                        </div>
-
-                        <div class="product-page-item">
-                            <div class="product-page-image">
-                                <img draggable="false" src="~/assets/img/laptops/laptop3.png" alt="It is Lenovo Laptop">
-                            </div>
-                        </div>
-                    </div>
-
+                    }
 
                 </div>
-                <div class="product-page-main-content">
-                    <div class="page-product-name">
-                        <div>
-                            <h2 class="big">@item.Name</h2>
-                            <span class="new">Yeni</span>
-                        </div>
-                        <h3 class="small">#@item.Name</h3>
+
+
+            </div>
+            <div class="product-page-main-content">
+                <div class="page-product-name">
+                    <div>
+                        <h2 class="big"> Name</h2>
+                        <span class="new">Yeni</span>
                     </div>
+                    <h3 class="small">#@Model.Categories.Where(p=>p.Id == Model.Products.CategoryId).FirstOrDefault().Name</h3>
+                </div>
 
-                    <div class="page-product-parameter">
-                        <h3 class="title">Xüsusiyyətlər</h3>
-                        <p class="text">
-                            <ul>
-                                @item.Description
-                                <hr>
-                                @item.Information
-                            </ul>
-                        </p>
-                    </div>
+                <div class="page-product-parameter">
+                    <h3 class="title">Xüsusiyyətlər</h3>
+                    <p class="text">
+                        <ul>
+                             @Model.Products.Description
+                            <hr>
+                             @Model.Products.Information
+                        </ul>
+                    </p>
+                </div>
 
 
-                    <div class="buy-price">
-                        <a href="#" class="buy"><i class="fas fa-shopping-cart"></i>Səbətə At</a>
-                        <div class="price">
-                            <p style="font-size: 20px;"></p>
-                            @*<h2>@item.Price</h2>*@
-                             <h2><s>@item.Price </s> @item.Price</h2> 
-                        </div>
+                <div class="buy-price">
+                    <a href="#" class="buy"><i class="fas fa-shopping-cart"></i>Səbətə At</a>
+                    <div class="price">
+                        <p style="font-size: 20px;"></p>
+                        @*<h2> Price</h2>*@
+                        <h2><s> @Model.Products.Price </s>  @Model.Products.Id</h2> 
                     </div>
                 </div>
             </div>
-        }
+        </div>
+
     </div>
 </main>
 

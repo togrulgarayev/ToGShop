@@ -7,24 +7,36 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.ViewModels.HomeViewModel;
 
 namespace ToGShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICategoryService _categoryService;
+        private readonly IProductImageService _productImageService;
 
 
-        public HomeController(IUnitOfWork unitOfWork, IProductService productService)
+
+        public HomeController(IProductService productService, ICategoryService categoryService, IProductImageService productImageService)
         {
-            _unitOfWork = unitOfWork;
             _productService = productService;
+            _categoryService = categoryService;
+            _productImageService = productImageService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View( await _unitOfWork.productRepository.GetAllAsync());
+
+            var homeViewModel = new HomeViewModel()
+            {
+                Categories = await _categoryService.GetAllAsync(),
+                Products = await _productService.GetAllAsync(),
+                ProductImages = await _productImageService.GetAllAsync()
+            };
+
+            return View(homeViewModel);
         }
     }
 }

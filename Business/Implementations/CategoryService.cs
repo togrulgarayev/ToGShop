@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Business.Interfaces;
-using Business.ViewModels;
+using Business.ViewModels.CategoryViewModels;
 using Core;
 using Core.Entities;
 
@@ -22,6 +21,12 @@ namespace Business.Implementations
         public async Task<List<Category>> GetAllAsync()
         {
             return await _unitOfWork.categoryRepository.GetAllAsync(c=> c.IsDeleted == false);
+        }
+
+        public async Task<Category> Get(int id)
+        {
+            return await _unitOfWork.categoryRepository.Get(p => p.Id == id && p.IsDeleted == false);
+
         }
 
         public async Task Create(CategoryCreateViewModel categoryViewModel)

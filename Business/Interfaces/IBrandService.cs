@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Business.ViewModels;
+using Business.ViewModels.BrandViewModels;
 using Core.Entities;
 
 namespace Business.Interfaces

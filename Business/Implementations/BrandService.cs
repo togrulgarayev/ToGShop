@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Business.Interfaces;
-using Business.ViewModels;
+using Business.ViewModels.BrandViewModels;
 using Core;
 using Core.Entities;
-using Core.Interfaces;
 
 namespace Business.Implementations
 {

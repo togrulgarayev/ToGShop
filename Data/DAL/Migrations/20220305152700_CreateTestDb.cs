@@ -48,7 +48,7 @@ namespace Data.DAL.Migrations
                     PostalCode = table.Column<string>(nullable: true),
                     Balance = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
-                    IsActivated = table.Column<bool>(nullable: false)
+                    IsActivated = table.Column<bool>(nullable: false,defaultValue:true)
                 },
                 constraints: table =>
                 {
@@ -211,6 +211,8 @@ namespace Data.DAL.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
                     Count = table.Column<int>(nullable: false),
                     Information = table.Column<string>(type: "TEXT", nullable: false),
+                    IsDiscount = table.Column<bool>(nullable: false, defaultValue: false),
+                    DiscountPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
                     CategoryId = table.Column<int>(nullable: false),
                     BrandId = table.Column<int>(nullable: false)
                 },

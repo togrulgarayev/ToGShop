@@ -15,6 +15,7 @@ namespace Data.Repositories
         private IProductRepository _productRepository;
         private ICategoryRepository _categoryRepository;
         private IBrandRepository _brandRepository;
+        private IProductImageRepository _productImageRepository;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -28,6 +29,9 @@ namespace Data.Repositories
 
         public IBrandRepository brandRepository => 
             _brandRepository = _brandRepository ?? new BrandRepository(_context);
+
+        public IProductImageRepository productImageRepository =>
+            _productImageRepository = _productImageRepository ?? new ProductImageRepository(_context);
 
 
         public async Task SaveAsync()

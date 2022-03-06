@@ -16,6 +16,8 @@ namespace Core.Entities
         public string Information { get; set; }
         public List<ProductImage> ProductImages { get; set; }
 
+        public bool IsDiscount { get; set; }
+        public decimal DiscountPrice { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }

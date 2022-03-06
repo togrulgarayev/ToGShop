@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Business.ViewModels;
+﻿using Business.ViewModels.ProductViewModels;
 using FluentValidation;
 
 namespace Business.Validators.Product
 {
-    class ProductCreateViewModelValidator:AbstractValidator<ProductCreateViewModel>
+    public class ProductCreateViewModelValidator:AbstractValidator<ProductCreateViewModel>
     {
         public ProductCreateViewModelValidator()
         {
@@ -17,6 +14,7 @@ namespace Business.Validators.Product
             RuleFor(p => p.Count).GreaterThanOrEqualTo(0);
             RuleFor(p => p.BrandId).NotNull().NotEmpty();
             RuleFor(p => p.CategoryId).NotNull().NotEmpty();
+            RuleFor(p => p.ImageFiles).NotNull().NotEmpty();
         }
     }
 }

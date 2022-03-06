@@ -1,6 +1,7 @@
 using AutoMapper;
 using Business.Implementations;
 using Business.Interfaces;
+using Business.Validators.Product;
 using Core;
 using Core.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Data.DAL;
 using Data.Repositories;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 
 namespace ToGShop
@@ -27,7 +29,8 @@ namespace ToGShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddFluentValidation(p => p.RegisterValidatorsFromAssemblyContaining<ProductCreateViewModelValidator>());
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:Default"]);
@@ -50,6 +53,7 @@ namespace ToGShop
             services.AddScoped<ICategoryService, CategoryService>();  
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IProductImageService, ProductImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

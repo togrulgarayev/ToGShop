@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Business.Interfaces;
-using Business.ViewModels;
+using Business.ViewModels.CategoryViewModels;
 using Core;
 
 namespace ToGShop.Areas.Admin.Controllers

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using Business.Interfaces;
-using Business.ViewModels;
+using Business.Utilities;
+using Business.ViewModels.ProductViewModels;
 using Core;
 using Core.Entities;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.Implementations
 {
@@ -16,10 +15,12 @@ namespace Business.Implementations
     {
         
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _env;
 
-        public ProductService(IUnitOfWork unitOfWork)
+        public ProductService(IUnitOfWork unitOfWork, IWebHostEnvironment env)
         {
             _unitOfWork = unitOfWork;
+            _env = env;
         }
 
         public async Task<List<Product>> GetAllAsync()
@@ -31,47 +32,99 @@ namespace Business.Implementations
 
         }
 
+        public async Task <Product> Get(int id)
+        {
+            return await _unitOfWork.productRepository.Get(p=>p.Id == id && p.IsDeleted == false);
+        }
+
         public async Task Create(ProductCreateViewModel productViewModel)
         {
 
-
-            var newProduct = new Product(){
-
+            var newProduct = new Product()
+            {
                 Name = productViewModel.Name,
                 Description = productViewModel.Description,
                 Price = productViewModel.Price,
                 Information = productViewModel.Information,
                 Count = productViewModel.Count,
                 BrandId = productViewModel.BrandId,
-                CategoryId = productViewModel.CategoryId
-
-
-
+                CategoryId = productViewModel.CategoryId,
+                IsDiscount = productViewModel.IsDiscount,
+                DiscountPrice = productViewModel.DiscountPrice
             };
 
             await _unitOfWork.productRepository.CreateAsync(newProduct);
 
+
+            await _unitOfWork.SaveAsync();
+
+
+            var products = await _unitOfWork.productRepository.GetAllAsync();
+
+            var readyProduct = products[products.Count-1];
+            
+
+            for (int i = 0; i < productViewModel.ImageFiles.Count; i++)
+            {
+
+                string filename = await productViewModel.ImageFiles[i].SaveFileAsync(_env.WebRootPath, "assets", "img");
+
+                var productImage = new ProductImage()
+                {
+                    Image = filename,
+                    ProductId = readyProduct.Id
+
+                };
+
+
+                await _unitOfWork.productImageRepository.CreateAsync(productImage);
+
+                if (i==0)
+                {
+                    productImage.IsMain = true;
+                }
+
+                
+            }
+
+
+
+
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task<ProductCreateViewModel> GetCreate()
-        {
-            var myCategory = await _unitOfWork.categoryRepository.GetAllAsync(c => c.IsDeleted == false);
-            var myBrand = await _unitOfWork.brandRepository.GetAllAsync(b => b.IsDeleted == false);
+        
 
-            var productCreateViewModel = new ProductCreateViewModel()
+        public async Task Update(int id, ProductUpdateViewModel productViewModel)
+        {
+            Product dbProduct = await _unitOfWork.productRepository.Get(p => p.Id == id);
+
+            dbProduct.Name = productViewModel.Name;
+            dbProduct.Description = productViewModel.Description;
+            dbProduct.Price = productViewModel.Price;
+            dbProduct.Information = productViewModel.Information;
+            dbProduct.Count = productViewModel.Count;
+            dbProduct.BrandId = productViewModel.BrandId;
+            dbProduct.CategoryId = productViewModel.CategoryId;
+            dbProduct.IsDiscount = productViewModel.IsDiscount;
+            dbProduct.DiscountPrice = productViewModel.DiscountPrice;
+
+            await _unitOfWork.SaveAsync();
+
+            if (productViewModel.ImageFiles != null)
             {
-                Categories = myCategory,
-                Brands = myBrand
-            };
+                for (int i = 0; i < productViewModel.ImageFiles.Count; i++)
+                {
+                    string filename = await productViewModel.ImageFiles[i].SaveFileAsync(_env.WebRootPath, "assets", "img");
+                    var productImage = new ProductImage()
+                    {
+                        Image = filename,
+                        ProductId = id
 
-
-            return productCreateViewModel;
-        }
-
-        public Task Update(int id, ProductUpdateViewModel productViewModel)
-        {
-            throw new NotImplementedException();
+                    };
+                    await _unitOfWork.productImageRepository.CreateAsync(productImage);
+                }
+            }
         }
 
         public async Task Remove(int id)
@@ -83,5 +136,10 @@ namespace Business.Implementations
              _unitOfWork.productRepository.Remove(dbProduct);
             await _unitOfWork.SaveAsync();
         }
+
+
+
+        
+
     }
 }

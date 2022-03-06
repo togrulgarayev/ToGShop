@@ -18,7 +18,10 @@ namespace Data.Configurations
             builder.Property(p => p.Information).IsRequired().HasColumnType("TEXT");
             builder.Property(p => p.IsDeleted).HasDefaultValue(false);
             builder.Property(p => p.CreateDT).HasDefaultValueSql("GETUTCDATE()");
-            
+            builder.Property(p => p.IsDiscount).HasDefaultValue(false);
+            builder.Property(p => p.DiscountPrice).HasDefaultValue(0).HasColumnType("decimal(18,2)");
+
+
         }   
     }
 }
