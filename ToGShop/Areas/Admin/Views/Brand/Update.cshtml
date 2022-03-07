@@ -1,27 +1,25 @@
-﻿@model CategoryCreateViewModel
+﻿@model BrandUpdateViewModel
 
 @{
-    ViewData["Title"] = "Kateqoriya Yarat";
+    ViewData["Title"] = "Brend Yenilə";
 }
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Kateqoriya əlavə et</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Brend Yenilə</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <form method="post" asp-controller="Category" asp-action="Create">
+            <form method="post" asp-controller="Brand" asp-action="Update">
 
                 <div class="form-group">
-                    <label asp-for="Name">Kateqoriyanin adı:</label>
+                    <label asp-for="Name">Məhsulun adı:</label>
                     <input required class="form-control" asp-for="Name" placeholder="Məhsulun adını daxil edin...">
                     <span asp-validation-for="Name"></span>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Yarat</button>
+                <button type="submit" class="btn btn-primary">Yenilə</button>
             </form>
         </div>
     </div>
 </div>
-
-

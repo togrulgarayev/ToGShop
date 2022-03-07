@@ -42,7 +42,11 @@ namespace Business.Implementations
 
         public async Task Update(int id, CategoryUpdateViewModel categoryViewModel)
         {
-            throw new NotImplementedException();
+            Category dbCategory = await _unitOfWork.categoryRepository.Get(c => c.Id == id);
+
+            dbCategory.Name = categoryViewModel.Name;
+
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task Remove(int id)

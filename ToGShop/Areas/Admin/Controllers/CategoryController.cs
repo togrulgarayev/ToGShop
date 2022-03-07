@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.CategoryViewModels;
 using Core;
+using Core.Entities;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
@@ -44,6 +45,33 @@ namespace ToGShop.Areas.Admin.Controllers
 
             await _categoryService.Remove(id);
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<ActionResult> Update(int id)
+        {
+            Category category = await _categoryService.Get(id);
+
+            if (category == null) return NotFound();
+
+
+            var categoryViewModel = new CategoryUpdateViewModel()
+            {
+                Name = category.Name
+
+            };
+
+
+
+            return View(categoryViewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Update(int id, CategoryUpdateViewModel categoryViewModel)
+        {
+            await _categoryService.Update(id, categoryViewModel);
             return RedirectToAction(nameof(Index));
         }
     }

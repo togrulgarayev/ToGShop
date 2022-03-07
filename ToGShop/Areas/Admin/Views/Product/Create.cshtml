@@ -4,6 +4,8 @@
     ViewData["Title"] = "Məhsul Yarat";
 }
 
+
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Məhsul əlavə et</h6>
@@ -17,6 +19,8 @@
                     <span class="text-danger" asp-validation-for="Name"></span>
                 </div>
 
+
+
                 <div class="form-group">
                     <label asp-for="Description">Məhsul haqqında:</label>
                     <input required class="form-control" asp-for="Description" placeholder="Məhsul haqqında məlumat daxil edin...">
@@ -29,9 +33,34 @@
                     <span class="text-danger" asp-validation-for="Information"></span>
                 </div>
 
+                <div class="form-group">
+                    <label asp-for="Count">Məhsulun sayı:</label>
+                    <input required class="form-control" asp-for="Count" placeholder="Məhsulun sayını daxil edin...">
+                    <span class="text-danger" asp-validation-for="Count"></span>
+                </div>
 
+                <div class="form-group">
+                    <label asp-for="Price">Məhsulun qiyməti:</label>
+                    <input required class="form-control" asp-for="Price" placeholder="Məhsulun qiymətini daxil edin...">
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
 
+                <br />
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="IsDiscount">
+                    <label class="form-check-label" asp-for="IsDiscount">
+                        Endirimdədirmi?
+                    </label>
+                    <span class="text-danger" asp-validation-for="IsDiscount"></span>
+                </div>
+                <br />
 
+                <div class="form-group">
+                    <label asp-for="DiscountPrice">Endirim qiyməti:</label>
+                    <input required class="form-control" asp-for="DiscountPrice">
+                    <span class="text-danger" asp-validation-for="DiscountPrice"></span>
+                </div>
+                
                 <div class="form-group">
                     <label asp-for="CategoryId">Kateqoriya seçin:<span class="text-danger" class="text-danger">*</span></label>
                     <select class="form-control" asp-for="CategoryId">
@@ -43,7 +72,6 @@
 
                     </select>
                 </div>
-
 
                 <div class="form-group">
                     <label asp-for="BrandId">Brend seçin:<span class="text-danger" class="text-danger">*</span></label>
@@ -57,44 +85,12 @@
                     </select>
                 </div>
 
-
-
                 <div class="form-group">
-                    <label asp-for="IsDiscount">Məhsul Endirimdədirmi ?</label>
-                    <input class="form-control" asp-for="IsDiscount">
-                    <span class="text-danger" asp-validation-for="IsDiscount"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="DiscountPrice">Endirim qiyməti:</label>
-                    <input required class="form-control" asp-for="DiscountPrice">
-                    <span class="text-danger" asp-validation-for="DiscountPrice"></span>
-                </div>
-
-
-
-
-                <div class="form-group">
-                    <label asp-for="Count">Məhsulun sayı:</label>
-                    <input required class="form-control" asp-for="Count" placeholder="Məhsulun sayını daxil edin...">
-                    <span class="text-danger" asp-validation-for="Count"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Price">Məhsulun qiyməti:</label>
-                    <input required class="form-control" asp-for="Price" placeholder="Məhsulun qiymətini daxil edin...">
-                    <span class="text-danger" asp-validation-for="Price"></span>
-                </div>
-                
-                
-                
-                <div class="form-group">
-                    <label asp-for="ImageFiles">Məhsulun fotoları:</label>
+                    <label asp-for="ImageFiles">Məhsulun şəkilləri:</label>
                     <input required class="form-control" asp-for="ImageFiles">
                     <span class="text-danger" asp-validation-for="ImageFiles"></span>
                 </div>
-                
-                
+
 
                 <button type="submit" class="btn btn-primary">Yarat</button>
             </form>

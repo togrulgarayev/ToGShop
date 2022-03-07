@@ -6,5 +6,6 @@ namespace Business.ViewModels.BrandViewModels
 {
     public class BrandUpdateViewModel
     {
+        public string Name { get; set; }
     }
 }

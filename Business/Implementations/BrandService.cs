@@ -25,6 +25,11 @@ namespace Business.Implementations
             return await _unitOfWork.brandRepository.GetAllAsync(b=> !b.IsDeleted);
         }
 
+        public async Task<Brand> Get(int id)
+        {
+            return await _unitOfWork.brandRepository.Get(b => b.Id == id && b.IsDeleted == false);
+        }
+
         public async Task Create(BrandCreateViewModel brandViewModel)
         {
             var newBrand = new Brand()
@@ -38,7 +43,11 @@ namespace Business.Implementations
 
         public async Task Update(int id, BrandUpdateViewModel brandViewModel)
         {
-            throw new NotImplementedException();
+            Brand dbBrand = await _unitOfWork.brandRepository.Get(b => b.Id == id);
+
+            dbBrand.Name = brandViewModel.Name;
+
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task Remove(int id)

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.BrandViewModels;
 using Core;
+using Core.Entities;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
@@ -47,6 +48,34 @@ namespace ToGShop.Areas.Admin.Controllers
 
             await _brandService.Remove(id);
 
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public async Task<ActionResult> Update(int id)
+        {
+            Brand brand = await _brandService.Get(id);
+
+            if (brand == null) return NotFound();
+
+
+            var brandViewModel = new BrandUpdateViewModel()
+            {
+                Name = brand.Name
+
+            };
+
+
+
+            return View(brandViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Update(int id, BrandUpdateViewModel brandViewModel)
+        {
+
+            await _brandService.Update(id, brandViewModel);
             return RedirectToAction(nameof(Index));
         }
     }
