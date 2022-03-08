@@ -32,11 +32,11 @@
 
     <!-- <div id="my-mouse"></div> -->
 
-    
+
     @Html.Raw(@ViewData["Loader"])
     @Html.Raw(@ViewData["LoaderTwo"])
 
-    
+
 
 
 
@@ -81,12 +81,25 @@
                         </li>
 
                         <li class="nav-item text-center dropdown">
-                            <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user"></i> Hesab
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a style="cursor: pointer" asp-controller="Account" asp-action="Index" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-in-right"></i> <p style="display: inline-block ;margin-left: 2px">Daxil ol</p></a>
-                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.Name
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Index" class="dropdown-item my-login-btn text-center"><i class="fas fa-user"></i> <p style="display: inline-block ;margin-left: 2px">Hesabım</p></a>
+                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Logout" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-left"></i> <p style="display: inline-block ;margin-left: 2px">Çıxış</p></a>
+                                </div>
+                            }
+                            else
+                            {
+                                <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"></i> Hesab
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Login" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-in-right"></i> <p style="display: inline-block ;margin-left: 2px">Daxil ol</p></a>
+                                </div>
+                            }
                         </li>
 
 
@@ -142,6 +155,10 @@
     @RenderBody()
 
 
+    <a href="#" class="to-top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
 
 
     <footer class="text-center text-lg-start bg-light text-muted">
@@ -167,94 +184,94 @@
         </section>
 
         <section class="footer-main">
-                <div class="container text-center" style="padding-bottom: 13px;">
+            <div class="container text-center" style="padding-bottom: 13px;">
 
 
-                    <div class="row text-center text-md-left mt-3 pb-3">
+                <div class="row text-center text-md-left mt-3 pb-3">
 
 
-                        <div class="col-md-3 col-lg-3 col-xl-3 mr-auto mt-3">
-                            <div class="text-nowrap mb-4">
-                                <a class="d-inline-block align-middle mt-n1 mr-3" asp-controller="Home" asp-action="Index">
-                                    <img width="150" style="height: 60px!important;" src="~/assets/img/logo.png">
-                                </a>
-                            </div>
-                            <div>
-                                <a href="./togshopping.apk">
-                                    <img height="50" src="~/assets/img/android.png" alt="">
-                                </a>
-                            </div>
-
-
+                    <div class="col-md-3 col-lg-3 col-xl-3 mr-auto mt-3">
+                        <div class="text-nowrap mb-4">
+                            <a class="d-inline-block align-middle mt-n1 mr-3" asp-controller="Home" asp-action="Index">
+                                <img width="150" style="height: 60px!important;" src="~/assets/img/logo.png">
+                            </a>
+                        </div>
+                        <div>
+                            <a href="./togshopping.apk">
+                                <img height="50" src="~/assets/img/android.png" alt="">
+                            </a>
                         </div>
 
-
-                        <hr class="w-100 clearfix d-md-none">
-
-
-                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Şirkətimiz</h6>
-                            <ul class="widget-list">
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" asp-controller="About" asp-action="Index">Haqqımızda</a>
-                                </li>
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" href="">Mağazalar</a>
-                                </li>
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" href="">Vakansiyalar</a>
-                                </li>
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" href="">Kampaniyalar</a>
-                                </li>
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" href="">Şərtlərimiz</a>
-                                </li>
-
-                            </ul>
-                        </div>
-
-
-                        <hr class="w-100 clearfix d-md-none">
-
-
-                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Müştərilərimiz</h6>
-                            <ul class="widget-list">
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" href="">Kredit</a>
-                                </li>
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" href="">Məxfilik Siyasəti</a>
-                                </li>
-
-                                <li class="widget-list-item">
-                                    <a class="widget-list-link" href="">İstifadə Qaydaları</a>
-                                </li>
-                                <li class="widget-list-item">
-                                    <a class="my-contact-btn widget-list-link">Əlaqə</a>
-                                </li>
-                            </ul>
-                        </div>
-
-
-                        <hr class="w-100 clearfix d-md-none">
-
-
-                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Məlumatlarımız</h6>
-
-
-                            <ul class="widget-list">
-
-                                <li class="widget-list-item"><i class="fas fa-home me-3"></i> <a class="widget-list-link" href="https://goo.gl/maps/nykiix3AGrz5fVNP8"> H.Cavid prospekti 25</a></li>
-                                <li class="widget-list-item"><i class="fas fa-envelope me-3"></i> <a class="widget-list-link" href="mailto:togrulgarazade@gmail.com"> togrulgarazade@gmail.com</a></li>
-                                <li class="widget-list-item "><i class="fas fa-phone me-3"></i> <a class="widget-list-link" href="tel:+994514307717"> +994 (51) 430-77-17</a></li>
-                            </ul>
-                        </div>
 
                     </div>
+
+
+                    <hr class="w-100 clearfix d-md-none">
+
+
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Şirkətimiz</h6>
+                        <ul class="widget-list">
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" asp-controller="About" asp-action="Index">Haqqımızda</a>
+                            </li>
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" href="">Mağazalar</a>
+                            </li>
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" href="">Vakansiyalar</a>
+                            </li>
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" href="">Kampaniyalar</a>
+                            </li>
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" href="">Şərtlərimiz</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                    <hr class="w-100 clearfix d-md-none">
+
+
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Müştərilərimiz</h6>
+                        <ul class="widget-list">
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" href="">Kredit</a>
+                            </li>
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" href="">Məxfilik Siyasəti</a>
+                            </li>
+
+                            <li class="widget-list-item">
+                                <a class="widget-list-link" href="">İstifadə Qaydaları</a>
+                            </li>
+                            <li class="widget-list-item">
+                                <a class="my-contact-btn widget-list-link">Əlaqə</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <hr class="w-100 clearfix d-md-none">
+
+
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold footer-heder">Məlumatlarımız</h6>
+
+
+                        <ul class="widget-list">
+
+                            <li class="widget-list-item"><i class="fas fa-home me-3"></i> <a class="widget-list-link" href="https://goo.gl/maps/nykiix3AGrz5fVNP8"> H.Cavid prospekti 25</a></li>
+                            <li class="widget-list-item"><i class="fas fa-envelope me-3"></i> <a class="widget-list-link" href="mailto:togrulgarazade@gmail.com"> togrulgarazade@gmail.com</a></li>
+                            <li class="widget-list-item "><i class="fas fa-phone me-3"></i> <a class="widget-list-link" href="tel:+994514307717"> +994 (51) 430-77-17</a></li>
+                        </ul>
+                    </div>
+
                 </div>
+            </div>
         </section>
 
         <section class="my-copyright">
@@ -267,7 +284,6 @@
         </section>
 
     </footer>
-
 
 
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.DAL.Migrations
 {
-    public partial class CreateTestDb : Migration
+    public partial class CreateDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,7 +48,7 @@ namespace Data.DAL.Migrations
                     PostalCode = table.Column<string>(nullable: true),
                     Balance = table.Column<int>(nullable: false),
                     Image = table.Column<string>(nullable: true),
-                    IsActivated = table.Column<bool>(nullable: false,defaultValue:true)
+                    IsActivated = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -254,6 +254,37 @@ namespace Data.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ProductOperations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    ProductId = table.Column<int>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false),
+                    IsFavourite = table.Column<bool>(nullable: false, defaultValue: false),
+                    InCart = table.Column<bool>(nullable: false, defaultValue: false),
+                    IsOrdered = table.Column<bool>(nullable: false, defaultValue: false),
+                    IsSend = table.Column<bool>(nullable: false, defaultValue: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductOperations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductOperations_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductOperations_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -304,6 +335,16 @@ namespace Data.DAL.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductOperations_ApplicationUserId",
+                table: "ProductOperations",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOperations_ProductId",
+                table: "ProductOperations",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
@@ -333,6 +374,9 @@ namespace Data.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductImages");
+
+            migrationBuilder.DropTable(
+                name: "ProductOperations");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

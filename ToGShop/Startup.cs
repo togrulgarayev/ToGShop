@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Business.Implementations;
 using Business.Interfaces;
 using Business.Validators.Product;
@@ -47,6 +47,21 @@ namespace ToGShop
                 Options.Password.RequireLowercase = false;
                 Options.Password.RequireUppercase = false;
                 Options.Password.RequireDigit = true;
+
+
+                Options.User.AllowedUserNameCharacters = "abcçdeəfgğhiıjklmnopqrsştuvwxyzABCÇDEƏFGĞHİIJKLMNOPQRSŞTUVWXYZ0123456789-._@+/ ";
+            });
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "747003403352509";
+                options.AppSecret = "09ae3b4a78d9087a00ff5ea15247cd99";
+            });
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "972970270872-e7mqi91turg3d1euome2tf8uji98setv.apps.googleusercontent.com";
+                options.ClientSecret = "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";
             });
 
             services.AddScoped<IProductService, ProductService>();  
@@ -74,6 +89,7 @@ namespace ToGShop
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
