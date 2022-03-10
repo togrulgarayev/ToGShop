@@ -7,14 +7,12 @@ using Data.DAL;
 
 namespace Data.Repositories.Implementations
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class ProductOperationRepository : Repository<ProductOperation>, IProductOperationsRepository
     {
-
-        public CategoryRepository(AppDbContext context) : base(context)
+        public ProductOperationRepository(AppDbContext context) : base(context)
         {
             _context = context;
         }
-
         private readonly AppDbContext _context;
     }
 }

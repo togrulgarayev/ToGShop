@@ -23,6 +23,11 @@ namespace Business.Implementations
               return await _unitOfWork.productImageRepository.GetAllAsync();
         }
 
+        public async Task<List<ProductImage>> GetAllProductIdAsync(int id)
+        {
+            return await _unitOfWork.productImageRepository.GetAllAsync(pi=>pi.ProductId == id);
+        }
+
         public async Task<ProductImage> Get(int id)
         {
 

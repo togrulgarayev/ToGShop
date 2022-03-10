@@ -12,6 +12,7 @@ namespace Core
         public ICategoryRepository categoryRepository { get; }
         public IBrandRepository brandRepository { get; }
         public IProductImageRepository productImageRepository { get; }
+        public IProductOperationsRepository productOperationsRepository { get; }
         Task SaveAsync();
     }
 }

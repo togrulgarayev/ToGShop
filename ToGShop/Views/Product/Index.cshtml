@@ -3,66 +3,59 @@
     ViewData["Title"] = "Index";
 
     ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+
+    
 }
+
+
 
 
 
 <main>
 
-    <div class="product-page-container">
-        
-        <div class="product-page-main">
-            <div class="product-page-main-image">
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="product-div">
+                <div class="product-div-left">
+                    <div class="img-container">
+                        <img class="product-page-image" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId==Model.Products.Id && pi.IsMain==true).FirstOrDefault().Image" alt="watch">
+                        
 
-                <a href="#" class="share"><i class="fas fa-share-alt"></i></a>
-
-                <div class="product-page-carousel owl-carousel owl-theme">
-                    
-                    @foreach (var item in Model.ProductImages.Where(p=>p.ProductId == Model.Products.Id).ToList())
-                    {
-                        <div class="product-page-item">
-                            <div class="product-page-image">
-                                <img draggable="false" src="~/assets/img/@item.Image" alt="It is Lenovo Laptop">
-                            </div>
-                        </div>
-                    }
-
-                </div>
-
-
-            </div>
-            <div class="product-page-main-content">
-                <div class="page-product-name">
-                    <div>
-                        <h2 class="big"> Name</h2>
-                        <span class="new">Yeni</span>
+                        @*<img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png" alt="watch">*@
                     </div>
-                    <h3 class="small">#@Model.Categories.Where(p=>p.Id == Model.Products.CategoryId).FirstOrDefault().Name</h3>
+                    <div class="hover-container">
+
+                        @foreach (var item in Model.ProductImages.Where(pi => pi.ProductId == Model.Products.Id).ToList())
+                        {
+                            <div><img class="product-page-image" src="~/assets/img/@item.Image"></div>
+                        }
+
+                        @*<div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
+        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
+        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
+        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
+        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>*@
+                    </div>
                 </div>
-
-                <div class="page-product-parameter">
-                    <h3 class="title">Xüsusiyyətlər</h3>
-                    <p class="text">
-                        <ul>
-                             @Model.Products.Description
-                            <hr>
-                             @Model.Products.Information
-                        </ul>
-                    </p>
-                </div>
-
-
-                <div class="buy-price">
-                    <a href="#" class="buy"><i class="fas fa-shopping-cart"></i>Səbətə At</a>
-                    <div class="price">
-                        <p style="font-size: 20px;"></p>
-                        @*<h2> Price</h2>*@
-                        <h2><s> @Model.Products.Price </s>  @Model.Products.Id</h2> 
+                <div class="product-div-right">
+                    <span class="product-name">Salamzade</span>
+                    <span class="product-price">$ 50.25</span>
+                    <div class="product-rating">
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="fas fa-star"></i></span>
+                        <span><i class="fas fa-star-half-alt"></i></span>
+                        <span>(350 ratings)</span>
+                    </div>
+                    <p class="product-description">Description</p>
+                    <div class="btn-groups">
+                        <button type="button"  asp-controller="ProductOperation" asp-action="SetCart"  class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Səbətə at</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
 </main>
 

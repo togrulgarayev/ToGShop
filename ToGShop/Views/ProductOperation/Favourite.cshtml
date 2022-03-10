@@ -1,17 +1,17 @@
-﻿@model List<FavouriteItemViewModel>
+﻿@model Business.ViewModels.FavouriteViewModel
 @{
     ViewData["Title"] = "Bəyəndiklərim";
-    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
-    int count = 1;
+        ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+        int count = 1;
 }
 
 <div class="container">
     <div style="padding-top: 55px; padding-bottom: 55px">
-    <div class="row">
+        <div class="row">
         
                
 
-        @if (Model.Count != 0)
+            @if (Model.ProductOperations.Count != 0)
             {
                 
                 <h2 style="padding-bottom: 15px">Bəyəndiklərim siyahısı:</h2>
@@ -20,36 +20,43 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Məhsul</th>
                             <th scope="col">Məhsulun adı</th>
                             <th scope="col">Məhsulun sayı</th>
                             <th scope="col">Məhsulun qiyməti</th>
+                            <th scope="col"></th>
 
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model)
-                    {
+                        @foreach (var item in Model.ProductOperations)
+                        {
+                            var product = Model.Products.Where(p => p.Id == item.ProductId).FirstOrDefault();
+
                         <tr>
                             <th scope="row">@count</th>
-                            <td>@item.Name</td>
-                            <td>@item.Count</td>
+                            <td><img width="150" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image"/></td>
+                            <td>@product.Name</td>
+                            <td>@product.Count</td>
                             <td>
                                 ₼
-                                @if (@item.isDiscount == true)
+                                @if (@product.IsDiscount == true)
                                 {
-                                    <s>@item.Price</s> @item.DiscountPrice
+                                    <s>@product.Price</s> @product.DiscountPrice
                                 }
                                 else
                                 {
-                                    @item.Price;
+                                    @product.Price;
                                 }
 
                             </td>
+                            <td><a asp-controller="ProductOperation" asp-action="DeleteFavourite"><s><i class="fa-solid fa-heart"></i></s></a></td>
                         </tr>
-                        count++;
+
+                            count++;
 
 
-                    }
+                        }
 
                     </tbody>
                 </table>

@@ -49,7 +49,7 @@ namespace ToGShop
                 Options.Password.RequireDigit = true;
 
 
-                Options.User.AllowedUserNameCharacters = "abcçdeəfgğhiıjklmnopqrsştuvwxyzABCÇDEƏFGĞHİIJKLMNOPQRSŞTUVWXYZ0123456789-._@+/ ";
+                Options.User.AllowedUserNameCharacters = "abcçdeəfgğhiıjklmnopqrsştuüvyzxqwWABCÇDEƏFGĞHİIJKLMNOPQRSŞTUÜVYZXQ0123456789-._ ";
             });
 
             services.AddAuthentication().AddFacebook(options =>
@@ -69,6 +69,7 @@ namespace ToGShop
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IProductImageService, ProductImageService>();
+            services.AddScoped<IProductOperationService, ProductOperationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

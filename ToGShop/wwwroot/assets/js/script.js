@@ -14,6 +14,7 @@ window.addEventListener("scroll", () => {
 // Go to top - END
 
 
+
 // Loading Design
 
 const loading_two = document.getElementById("loader_two");
@@ -363,37 +364,60 @@ $(document).ready(function (){
 
 // Product Page Carousel
 
-$(document).ready(function (){
-    $('.product-page-carousel').owlCarousel({
-        loop:true,
-        nav:true,
-        dots:true,
-        margin:10,
-        autoplay:true,
-        autoplayTimeout:3500,
-        autoplayHoverPause:true,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1,
-                nav:true
-            },
-            400:{
-                items:1,
-                nav:true
-            },
-            770:{
-                items:1,
-                nav:true
-            },
-            1000:{
-                items:1,
-                nav:true,
-                loop:true
-            }
-        }
+//$(document).ready(function (){
+//    $('.product-page-carousel').owlCarousel({
+//        loop:true,
+//        nav:true,
+//        dots:true,
+//        margin:10,
+//        autoplay:true,
+//        autoplayTimeout:3500,
+//        autoplayHoverPause:true,
+//        responsiveClass:true,
+//        responsive:{
+//            0:{
+//                items:1,
+//                nav:true
+//            },
+//            400:{
+//                items:1,
+//                nav:true
+//            },
+//            770:{
+//                items:1,
+//                nav:true
+//            },
+//            1000:{
+//                items:1,
+//                nav:true,
+//                loop:true
+//            }
+//        }
+//    });
+//})
+
+
+const allHoverImages = document.querySelectorAll('.hover-container div img');
+const imgContainer = document.querySelector('.img-container');
+
+window.addEventListener('DOMContentLoaded', () => {
+    allHoverImages[0].parentElement.classList.add('active');
+});
+
+allHoverImages.forEach((image) => {
+    image.addEventListener('mouseover', () => {
+        imgContainer.querySelector('img').src = image.src;
+        resetActiveImg();
+        image.parentElement.classList.add('active');
     });
-})
+});
+
+function resetActiveImg() {
+    allHoverImages.forEach((img) => {
+        img.parentElement.classList.remove('active');
+    });
+}
+
 
 // Product Page Carousel - END
 

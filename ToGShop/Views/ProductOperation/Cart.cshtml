@@ -1,0 +1,112 @@
+﻿@model Business.ViewModels.CartViewModel.CartViewModel
+@{
+    ViewData["Title"] = "Index";
+
+    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+    int count = 1;
+    decimal totalprice = 0;
+}
+
+
+<main>
+
+    <section class="shopping-cart">
+
+    @if (Model.ProductOperations.Count != 0)
+    {
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="basket">
+
+                        <div class="basket-labels">
+                            <ul>
+                                <li class="item item-heading">Məhsul</li>
+                                <li class="price">Qiymət</li>
+                                <li class="quantity">Say</li>
+                                <li class="subtotal">Cəmi</li>
+                            </ul>
+                        </div>
+                        
+
+                        
+                        
+                        
+                        @foreach (var item in Model.ProductOperations)
+                        {
+                            var product = Model.Products.Where(p => p.Id == item.ProductId).FirstOrDefault();
+
+                    <div class="basket-product">
+                        <div class="item">
+                            <div class="basket-product-image">
+                                <img class="basket-product-frame" height="100" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image" />
+                            </div>
+                            <div class="basket-product-details">
+                                <h6><strong><span class="item-quantity">1</span>  ədəd</strong><br> @product.Name</h6>
+                                <div class="fav-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="price"> @product.Price</div>
+                        <div class="quantity">
+                            <input type="number" value="1" min="1" class="quantity-field text-center">
+                        </div>
+                        <div class="subtotal"> @product.Price</div>
+                        <div class="remove">
+                            <button><i class="fas fa-trash"></i> Sil</button>
+                        </div>
+                    </div>
+
+                            count++;
+                            totalprice = totalprice + @product.Price;
+
+                        }
+
+                        
+
+                    </div>
+                    <aside>
+                        <div class="summary">
+                            <div class="summary-total-items">Səbətdə <span class="total-items"></span> məhsul var</div>
+                            <div class="summary-subtotal">
+                                <div class="subtotal-title">Qiymət</div>
+                                <div class="subtotal-value final-value" id="basket-subtotal"> @totalprice</div>
+
+                            </div>
+                            <div class="summary-delivery">
+                                <div class="subtotal-title">Çatdırılma</div>
+                                <div class="subtotal-value final-value" id="basket-subtotal"> 0.00</div>
+                            </div>
+                            <div class="summary-total">
+                                <div class="total-title">Cəmi</div>
+                                <div class="total-value final-value" id="basket-total"> @totalprice</div>
+                            </div>
+                            <div class="summary-checkout">
+                                <button class="checkout-cta">Satın Al</button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    else
+    {
+        <h2>Sebet boşdur !</h2>
+    }
+
+    </section>
+
+
+
+
+</main>
+
