@@ -18,5 +18,12 @@ namespace Business.Interfaces
         Task SetCart(int productId, string userid);
         Task SetOrdered(int productId, string userid);
         Task SetSend(int productId, string userid);
+
+        Task DeleteFavourite(int productId, string userid);
+        Task DeleteCart(int productId, string userid);
+        Task DeleteOrdered(int productId, string userid);
+        Task DeleteSend(int productId, string userid);
+
+        
     }
 }

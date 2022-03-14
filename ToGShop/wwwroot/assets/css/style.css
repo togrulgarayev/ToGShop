@@ -181,6 +181,7 @@ html{
     opacity: 0 !important;
     pointer-events: none !important;
     transition: all .4s !important;
+    z-index: 99999;
 }
 
     .to-top.active {
@@ -2196,5 +2197,99 @@ aside {
   
 
 /* Login Register Page - End */
+
+/* Payment Page */
+
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #cecece 60%, #a2a2a2 40.1%);
+}
+
+.payment-container .payment-form {
+    padding: 20px;
+    width: 700px;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+}
+
+.payment-container .payment-form .payment-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.payment-container .payment-form .payment-row .payment-col {
+    flex: 1 1 250px;
+}
+
+.payment-container .payment-form .payment-row .payment-col .payment-title {
+    font-size: 20px;
+    color: #333;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.payment-container .payment-form .payment-row .payment-col .payment-inputBox {
+    margin: 15px 0;
+}
+
+.payment-container .payment-form .payment-row .payment-col .payment-inputBox span {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.payment-container .payment-form .payment-row .payment-col .payment-inputBox input {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-transform: none;
+}
+
+.payment-container .payment-form .payment-row .payment-col .payment-inputBox input:focus {
+    border: 1px solid #000;
+}
+
+.payment-container .payment-form .payment-row .payment-col .payment-flex {
+    display: flex;
+    gap: 15px;
+}
+
+                    .payment-container .payment-form .payment-row .payment-col .payment-flex .payment-inputBox {
+                        margin-top: 5px;
+                    }
+
+                .payment-container .payment-form .payment-row .payment-col .payment-inputBox img {
+                    height: 34px;
+                    margin-top: 5px;
+                    filter: drop-shadow(0 0 1px #000);
+                }
+
+        .payment-container .payment-form .payment-submit {
+            display: flex;
+            text-align: center;
+        }
+
+        .payment-container .payment-form .payment-submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            background: #a2a2a2;
+            color: #000;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+            .payment-container .payment-form .payment-submit-btn:hover {
+                background: #343434;
+                color: #fff;
+                transition: 0.8s ease;
+            }
+/* Payment Page - End */
 
 /* Pages End */

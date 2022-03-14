@@ -1,0 +1,80 @@
+﻿@model Business.ViewModels.PaymentViewModel.PaymentViewModel
+@{
+    ViewData["Title"] = "Payment";
+    Layout = null;
+    var totalprice = ViewData["totalPrice"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    @*<link rel="stylesheet" href="css/style.css">*@
+
+</head>
+<body>
+
+    <div class="payment-container">
+
+        <form class="payment-form" asp-controller="Checkout" asp-action="Index" method="post">
+
+            <div class="payment-row">
+
+                <div class="payment-col">
+
+                    <h3 class="payment-title">Sifariş Məlumatları</h3>
+
+                    <div class="payment-inputBox">
+                        <span>Adınız :</span>
+                        <input type="text" placeholder="Toğrul">
+                    </div>
+                    <div class="payment-inputBox">
+                        <span>Soyadınız :</span>
+                        <input type="text" placeholder="Qarazadə">
+                    </div>
+                    <div class="payment-inputBox">
+                        <span>Ünvan :</span>
+                        <input type="text" placeholder="küçə - bina - qapı">
+                    </div>
+                    <div class="payment-inputBox">
+                        <span>Şəhər :</span>
+                        <input type="text" placeholder="Bakı">
+                    </div>
+
+                    <div class="payment-flex">
+                        <div class="payment-inputBox">
+                            <span>Ərazi :</span>
+                            <input type="text" placeholder="Əhmədli">
+                        </div>
+                        <div class="payment-inputBox">
+                            <span>Poçt kodu :</span>
+                            <input type="text" placeholder="AZ 1129">
+                        </div>
+                    </div>
+
+
+                    <div class="payment-inputBox">
+                        <input asp-for="Price" value="@Model.Price" placeholder="@Model.Price">
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <div class="payment-submit">
+                @*<a asp-controller="Checkout" asp-action="Index"   class="payment-submit-btn">Ödənişə keçid</a>*@
+                <button type="submit">Odenise Kec</button>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>

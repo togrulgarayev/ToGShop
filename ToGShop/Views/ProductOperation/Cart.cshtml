@@ -28,46 +28,50 @@
                                 <li class="subtotal">Cəmi</li>
                             </ul>
                         </div>
-                        
 
-                        
-                        
-                        
+
+
+
+
                         @foreach (var item in Model.ProductOperations)
                         {
                             var product = Model.Products.Where(p => p.Id == item.ProductId).FirstOrDefault();
 
-                    <div class="basket-product">
-                        <div class="item">
-                            <div class="basket-product-image">
-                                <img class="basket-product-frame" height="100" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image" />
-                            </div>
-                            <div class="basket-product-details">
-                                <h6><strong><span class="item-quantity">1</span>  ədəd</strong><br> @product.Name</h6>
-                                <div class="fav-stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                            <div class="basket-product">
+                                <div class="item">
+                                    <div class="basket-product-image">
+                                        <img class="basket-product-frame" height="100" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image" />
+                                    </div>
+                                    <div class="basket-product-details">
+                                        <h6><strong><span class="item-quantity">1</span>  ədəd</strong><br> @product.Name</h6>
+                                        <div class="fav-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="price"> @product.Price</div>
+                                <div class="quantity">
+                                    <input type="number" value="1" min="1" class="quantity-field text-center">
+                                </div>
+                                <div class="subtotal"> @product.Price</div>
+                                <div class="remove">
+                                    <a asp-controller="ProductOperation" asp-action="DeleteCart" asp-route-id="@item.ProductId"><i class="fas fa-trash"></i> Sil</a>
                                 </div>
                             </div>
-                        </div>
-                            <div class="price"> @product.Price</div>
-                        <div class="quantity">
-                            <input type="number" value="1" min="1" class="quantity-field text-center">
-                        </div>
-                        <div class="subtotal"> @product.Price</div>
-                        <div class="remove">
-                            <button><i class="fas fa-trash"></i> Sil</button>
-                        </div>
-                    </div>
+
 
                             count++;
                             totalprice = totalprice + @product.Price;
+                            
+
+
 
                         }
-
+                        
                         
 
                     </div>
@@ -88,7 +92,7 @@
                                 <div class="total-value final-value" id="basket-total"> @totalprice</div>
                             </div>
                             <div class="summary-checkout">
-                                <button class="checkout-cta">Satın Al</button>
+                                <a class="checkout-cta" asp-controller="ProductOperation" asp-action="Payment" asp-route-id="@totalprice">Satın Al</a>
                             </div>
                         </div>
                     </aside>

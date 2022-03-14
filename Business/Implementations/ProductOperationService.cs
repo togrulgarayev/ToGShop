@@ -100,5 +100,39 @@ namespace Business.Implementations
             await _unitOfWork.productOperationsRepository.CreateAsync(productOperation);
             await _unitOfWork.SaveAsync();
         }
+
+        public async Task DeleteFavourite(int productId, string userid)
+        {
+            var dbProductOperation =
+                await _unitOfWork.productOperationsRepository.Get(po =>
+                    po.ProductId == productId && po.ApplicationUserId == userid && po.IsFavourite==true);
+
+            dbProductOperation.IsFavourite = false;
+
+             _unitOfWork.productOperationsRepository.Update(dbProductOperation);
+            await _unitOfWork.SaveAsync();
+        }
+
+        public async Task DeleteCart(int productId, string userid)
+        {
+            var dbProductOperation =
+                await _unitOfWork.productOperationsRepository.Get(po =>
+                    po.ProductId == productId && po.ApplicationUserId == userid && po.InCart == true);
+
+            dbProductOperation.InCart = false;
+
+            _unitOfWork.productOperationsRepository.Update(dbProductOperation);
+            await _unitOfWork.SaveAsync();
+        }
+
+        public async Task DeleteOrdered(int productId, string userid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task DeleteSend(int productId, string userid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

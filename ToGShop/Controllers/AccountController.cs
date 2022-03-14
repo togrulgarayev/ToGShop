@@ -70,6 +70,10 @@ namespace ToGShop.Controllers
                 var msgArea =
                     $"<div style=\"border:2px solid #a2a2a2; border-radius:8px; text-align:center;\"><h3 style=\"background:#a2a2a2; color:white; border: 2px solid #a2a2a2; border-radius:8px;text-align:center;\">ToG Shopping - Email Təsdiqləmə</h3><p>Sizi ToG Shopping-də gördüyümüz üçün şad olduq ! Aşağıdakı keçid linkinə tıklayın və emailinizi təsdiqləyərək hesabınızı aktivləşdirin! Diqqətiniz üçün təşəkkürlər :) </p><br><a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Təsdiqlə</a></div>";
 
+
+
+
+
                 bool emailResponse = SendEmail(registerViewModel.Email, msgArea);
 
                 if (emailResponse)
@@ -224,7 +228,8 @@ namespace ToGShop.Controllers
                         {
                             Email = loginInfo.Principal.FindFirstValue(ClaimTypes.Email),
                             FullName = loginInfo.Principal.FindFirstValue(ClaimTypes.Name),
-                            UserName = loginInfo.Principal.FindFirstValue(ClaimTypes.Surname)
+                            UserName = loginInfo.Principal.FindFirstValue(ClaimTypes.Surname),
+                            EmailConfirmed = true
                         };
                         var createResult = await _userManager.CreateAsync(user);
                         if (createResult.Succeeded)
@@ -242,5 +247,103 @@ namespace ToGShop.Controllers
 
             return RedirectToAction("Register");
         }
+
+
+
+
+        public IActionResult ResetPass(string token, string email)
+        {
+            if (token == null && email == null)
+            {
+                ModelState.AddModelError("", "Axtardığınız email ilə bağlanmış hesab yoxdur ! ");
+            }
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPass(ResetPassViewModel reset)
+        {
+            if (!ModelState.IsValid) return View(reset);
+
+            var user = await _userManager.FindByEmailAsync(reset.Email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Email ilə bağlanmış hesab tapılmadı !  Doğru emaili daxil etdiyinizdən əmin olun !");
+                return View(user);
+            }
+
+
+
+            var result = await _userManager.ResetPasswordAsync(user, reset.Token, reset.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                    return View();
+                }
+            }
+            return RedirectToAction("ResetSuccess", "Account");
+
+        }
+        public IActionResult ResetSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult ForgetPass()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgetPass(ForgetPassViewModel forget)
+        {
+            if (!ModelState.IsValid) return View(forget);
+
+            var user = await _userManager.FindByEmailAsync(forget.Email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Email ilə bağlanmış hesab tapılmadı !  Doğru emaili daxil etdiyinizdən əmin olun !");
+                return View(user);
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            string confirmationLink = Url.Action("ResetPass", "Account", new
+            {
+                email = user.Email,
+                token = token
+            }, protocol: HttpContext.Request.Scheme);
+
+
+            var msg = $"<a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Verify Email</a>";
+
+            //SendMailHelper sendEmailHelper = new SendMailHelper();
+            bool emailResponse = SendEmail(forget.Email, msg);
+
+
+            if (emailResponse)
+            {
+                return RedirectToAction("PassVerification", "Account");
+            }
+
+            return View();
+        }
+
+
+        public IActionResult PassVerification()
+        {
+            return View();
+        }
+
+
     }
 }

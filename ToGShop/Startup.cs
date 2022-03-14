@@ -14,6 +14,9 @@ using Data.DAL;
 using Data.Repositories;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
+using Stripe;
+using ToGShop.Data;
+using ProductService = Business.Implementations.ProductService;
 
 namespace ToGShop
 {
@@ -29,6 +32,7 @@ namespace ToGShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews()
                 .AddFluentValidation(p => p.RegisterValidatorsFromAssemblyContaining<ProductCreateViewModelValidator>());
             services.AddDbContext<AppDbContext>(options =>
@@ -51,6 +55,8 @@ namespace ToGShop
 
                 Options.User.AllowedUserNameCharacters = "abcçdeəfgğhiıjklmnopqrsştuüvyzxqwWABCÇDEƏFGĞHİIJKLMNOPQRSŞTUÜVYZXQ0123456789-._ ";
             });
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
             services.AddAuthentication().AddFacebook(options =>
             {
@@ -75,6 +81,9 @@ namespace ToGShop
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            StripeConfiguration.ApiKey =
+                "sk_test_51KbqgXHiIdGUNn87h5PeB4mkHo5FlwnPoBSrcgxw7H7hTYUkiM63cUTxyUzdOyCdeyR7CcnI8FmvhlprZCoZmWQk00sBSDjYSW";
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

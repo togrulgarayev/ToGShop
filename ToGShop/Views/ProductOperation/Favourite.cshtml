@@ -46,11 +46,12 @@
                                 }
                                 else
                                 {
+                                    
                                     @product.Price;
                                 }
 
                             </td>
-                            <td><a asp-controller="ProductOperation" asp-action="DeleteFavourite"><s><i class="fa-solid fa-heart"></i></s></a></td>
+                            <td><a asp-controller="ProductOperation" asp-action="DeleteFavourite" asp-route-id="@product.Id"><s><i class="bi bi-trash-fill"></i></s></a></td>
                         </tr>
 
                             count++;

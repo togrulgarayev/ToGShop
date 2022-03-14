@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
 using Business.ViewModels.CartViewModel;
+using Business.ViewModels.PaymentViewModel;
 using Core;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Stripe;
 
 namespace ToGShop.Controllers
 {
@@ -65,6 +67,19 @@ namespace ToGShop.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        [Authorize]
+        public async Task<IActionResult> DeleteFavourite(int id)
+        {
+
+            var userId = _userManager.GetUserId(HttpContext.User);
+
+            await _productOperationService.DeleteFavourite(id, userId);
+
+
+            return RedirectToAction("Favourite");
+        }
+
+        
 
 
         [Authorize]
@@ -88,6 +103,7 @@ namespace ToGShop.Controllers
             return View(cartViewModel);
         }
 
+
         [Authorize]
         public async Task<IActionResult> SetCart(int id)
         {
@@ -100,13 +116,42 @@ namespace ToGShop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
+        public async Task<IActionResult> DeleteCart(int id)
+        {
+
+            var userId = _userManager.GetUserId(HttpContext.User);
+
+            await _productOperationService.DeleteCart(id, userId);
+
+
+            return RedirectToAction("Cart");
+        }
+        [Authorize]
+        public IActionResult CartEmpty()
+        {
+
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Payment(decimal id)
+        {
+
+            var paymentViewModel = new PaymentViewModel
+            {
+                Price = id
+            };
+
+            return View(paymentViewModel);
+        }
 
 
 
-        
-        
 
-        
+
+
+
 
     }
 }

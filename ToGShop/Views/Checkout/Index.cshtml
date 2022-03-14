@@ -1,0 +1,35 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<ToGShop.Data.StripeSettings> Stripe
+@{
+    ViewData["Title"] = "Ödəniş";
+}
+
+
+<div style="padding-top: 55px; padding-bottom: 55px;">
+    
+    
+    <div class="container">
+        <div class="text-left">
+            <form asp-controller="Checkout" asp-action="Processing" method="post">
+                <article>
+                    <label>Məbləğ: @ViewBag.DollarAmount AZN</label>
+                </article>
+
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="@Stripe.Value.PublishableKey"
+                        data-amount="@ViewBag.Total"
+                        data-name="ToG Shopping"
+                        data-description="Online ödəniş portalı"
+                        data-image="https://cdn-icons-png.flaticon.com/512/2433/2433545.png"
+                        data-locale="en"
+                        data-zip-code="false">
+
+                </script>
+
+            </form>
+        </div>
+    </div>
+
+
+</div>
+

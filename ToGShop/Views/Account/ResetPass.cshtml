@@ -1,4 +1,4 @@
-﻿@model LoginViewModel
+﻿@model ResetPassViewModel
 @{
     Layout = null;
 }
@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Daxil ol</title>
+    <title>SB Admin 2 - Forgot Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,48 +39,46 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block" style="padding-top: 80px"><img height="400" style="background-position:center; background-size:cover;" src="~/admin/img/login.png" /></div>
+                            <div class="col-lg-6 d-none d-lg-block "><img height="500" style="background-position:center; background-size:cover;" src="~/admin/img/change.png" /></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Daxil ol</h1>
+                                        <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
+                                        <p class="mb-4">
+                                            Please enter your new password and repeat for confirm!
+                                        </p>
                                     </div>
-                                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <form class="user" method="post">
+
+                                        <input type="hidden" asp-for="Email" />
+
+                                        <input type="hidden" asp-for="Token" />
+
                                         <div class="form-group">
-                                            <input asp-for="Email" class="form-control form-control-user"
-                                                   placeholder="Email">
-                                            <span class="text-danger" asp-validation-for="Email"></span>
+                                            <input class="form-control form-control-user"
+                                                   asp-for="NewPassword"
+                                                   placeholder="Enter New Password...">
+                                            <span asp-validation-for="NewPassword" class="text-danger"></span>
                                         </div>
+
                                         <div class="form-group">
-                                            <input asp-for="Password" class="form-control form-control-user" placeholder="Şifrə">
-                                            <span class="text-danger" asp-validation-for="Password"></span>
+                                            <input class="form-control form-control-user"
+                                                   asp-for="ConfirmPassword"
+                                                   placeholder="Confirm New Password...">
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input asp-for="RememberMe" class="custom-control-input">
-                                                <label class="custom-control-label" asp-for="RememberMe">
-                                                    Yaddaşda saxla
-                                                </label>
-                                            </div>
-                                        </div>
+
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Daxil ol
+                                            Set Password
                                         </button>
-                                        <hr>
-                                        <a asp-controller="Account" asp-action="GoogleLogin" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a asp-controller="Account" asp-action="FacebookLogin" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" asp-controller="Account" asp-action="ForgetPass">Forgot Password?</a>
+                                        <a class="small" asp-controller="Auth" asp-action="Register">Create an Account!</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" asp-controller="Account" asp-action="Register">Create an Account!</a>
+                                        <a class="small" asp-controller="Auth" asp-action="Login">Already have an account? Login!</a>
                                     </div>
                                 </div>
                             </div>
@@ -103,11 +101,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/admin/js/sb-admin-2.min.js"></script>
-    
 
 </body>
 
 </html>
-
-
-
