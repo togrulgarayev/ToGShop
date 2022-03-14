@@ -15,14 +15,16 @@ namespace ToGShop.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
         private readonly IProductImageService _productImageService;
 
 
 
-        public HomeController(IProductService productService, ICategoryService categoryService, IProductImageService productImageService)
+        public HomeController(IProductService productService, ICategoryService categoryService, IProductImageService productImageService, IBrandService brandService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _brandService = brandService;
             _productImageService = productImageService;
         }
 
@@ -32,6 +34,7 @@ namespace ToGShop.Controllers
             var homeViewModel = new HomeViewModel()
             {
                 Categories = await _categoryService.GetAllAsync(),
+                Brands = await _brandService.GetAllAsync(),
                 Products = await _productService.GetAllAsync(),
                 ProductImages = await _productImageService.GetAllAsync()
             };

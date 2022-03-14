@@ -145,7 +145,7 @@ namespace ToGShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel, string ReturnUrl)
         {
 
             if (!ModelState.IsValid) return View(loginViewModel);
@@ -179,12 +179,26 @@ namespace ToGShop.Controllers
                 return View(loginViewModel);
             }
 
-            return RedirectToAction("Index", "Home");
+
+            if (ReturnUrl != null)
+            {
+
+                return Redirect(ReturnUrl);
+            }
+
+            return RedirectToAction("Index","Home");
         }
 
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(string ReturnUrl)
         {
             await _signInManager.SignOutAsync();
+
+            if (ReturnUrl != null)
+            {
+
+                return Redirect(ReturnUrl);
+            }
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -324,7 +338,11 @@ namespace ToGShop.Controllers
             }, protocol: HttpContext.Request.Scheme);
 
 
-            var msg = $"<a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Verify Email</a>";
+            //var msg = $"<a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Verify Email</a>";
+
+            var msg =
+                $"<div style=\"border:2px solid #a2a2a2; border-radius:8px; text-align:center;\"><h3 style=\"background:#a2a2a2; color:white; border: 2px solid #a2a2a2; border-radius:8px;text-align:center;\">ToG Shopping - Email Təsdiqləmə</h3><p>Sizi ToG Shopping-də gördüyümüz üçün şad olduq ! Aşağıdakı keçid linkinə tıklayın və emailinizi təsdiqləyərək hesabınızı aktivləşdirin! Diqqətiniz üçün təşəkkürlər :) </p><br><a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Təsdiqlə</a></div>";
+
 
             //SendMailHelper sendEmailHelper = new SendMailHelper();
             bool emailResponse = SendEmail(forget.Email, msg);

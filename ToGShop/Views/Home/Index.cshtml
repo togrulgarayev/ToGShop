@@ -1,11 +1,12 @@
-﻿@model HomeViewModel
+﻿@using System.Linq
+@model HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 
     ViewData["Loader"] = "<div id=\"loader\"></div>";
     ViewData["LoaderTwo"] = "<div id=\"loader_two\"></div>";
-    
+
 
 
 
@@ -58,39 +59,40 @@
 
                             <div class="slider">
 
-                                <a class="go-product" asp-controller="Product" asp-action="Index">
-                                    <div class="product-card">
-                                        <div class="product-image">
-                                            <img src="~/assets/img/laptops/acer1.jpg" alt="">
-                                        </div>
+                                
+                                    <a class="go-product" asp-controller="Product" asp-action="Index" asp-route-id="@Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().Id">
+                                        <div class="product-card">
+                                            <div class="product-image">
+                                                <img src="~/assets/img/@Model.ProductImages.Where(p => p.ProductId == Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().Id && p.IsMain == true).FirstOrDefault().Image" alt="">
+                                            </div>
 
-                                        <div class="add-fav">
-                                            <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                        </div>
+                                            <div class="add-fav">
+                                                <a class="add-fav-btn" asp-controller="ProductOperation" asp-action="SetFavourite" asp-route-id="@Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().Id"><i class="fas fa-heart"></i></a>
+                                            </div>
 
-                                        <div class="product-detail">
-                                            <h2>Acer</h2>
-                                            <div class="fav-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                            <div class="product-detail">
+                                                <h2>@Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().Name</h2>
+                                                <div class="fav-stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+
+
+                                                <p class="product-price">₼ <s>@Model.Products.Where(p => p.IsDiscount == true).LastOrDefault().Price</s> @Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().DiscountPrice</p>
+
+                                            </div>
+
+                                            <div class="product-operations">
+
+                                                <a class="add-to-cart-btn" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().Id" ><i class="bi bi-cart-plus-fill"></i></a>
                                             </div>
 
 
-                                            <p class="product-price">₼ <s>250</s> 500</p>
-
                                         </div>
-
-                                        <div class="product-operations">
-
-                                            <a class="add-to-cart-btn" ><i class="bi bi-cart-plus-fill"></i></a>
-                                        </div>
-
-
-                                    </div>
-                                </a>
+                                    </a>
 
                             </div>
 
@@ -159,8 +161,16 @@
                                                     <i class="fas fa-star"></i>
                                                 </div>
 
+                                                @if (product.IsDiscount == true)
+                                                {
+                                                    <p class="product-price">₼ <s>@product.Price</s> @product.DiscountPrice</p>
 
-                                                <p class="product-price">₼ @product.Price</p>
+                                                }
+                                                else
+                                                {
+                                                    
+                                                    <p class="product-price">₼ @product.Price</p>
+                                                }
 
                                             </div>
 
@@ -189,119 +199,52 @@
                     <div class="tab-pane fade" id="discount-@item.Name" role="tabpanel" aria-labelledby="discount-@item.Name-tab">
 
                         <div class="myproduct owl-carousel owl-theme">
-                            <div class="myproduct-item">
+                            
+                            
+                            @foreach (var discoutproduct in @Model.Products.Where(p=>p.CategoryId == item.Id && p.IsDiscount==true))
+                            {
+                                
+                                <div class="myproduct-item">
 
-                                <a class="go-product" asp-controller="Product" asp-action="Index">
-                                    <div class="product-card">
-                                        <div class="product-image">
-                                            <img src="~/assets/img/laptops/acer1.jpg" alt="">
-                                        </div>
+                                    <a class="go-product" asp-controller="Product" asp-action="Index">
+                                        <div class="product-card">
+                                            <div class="product-image">
+                                                <img src="~/assets/img/@Model.ProductImages.Where(p => p.ProductId == discoutproduct.Id && p.IsMain == true).FirstOrDefault().Image" alt="">
+                                            </div>
 
-                                        <div class="add-fav">
-                                            <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                        </div>
+                                            <div class="add-fav">
+                                                <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
+                                            </div>
 
-                                        <div class="product-detail">
-                                            <h2>Acer</h2>
-                                            <div class="fav-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                            <div class="product-detail">
+                                                <h2>@discoutproduct.Name</h2>
+                                                <div class="fav-stars">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+
+
+                                                <p class="product-price">₼ <s>@discoutproduct.Price</s> @discoutproduct.DiscountPrice</p>
+
+                                            </div>
+
+                                            <div class="product-operations">
+
+                                                <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
                                             </div>
 
 
-                                            <p class="product-price">₼ <s>1000</s> 500</p>
-
                                         </div>
+                                    </a>
 
-                                        <div class="product-operations">
+                                </div>
 
-                                            <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                        </div>
-
-
-                                    </div>
-                                </a>
-
-                            </div>
-
-                            <div class="myproduct-item">
-
-                                <a class="go-product" asp-controller="Product" asp-action="Index">
-                                    <div class="product-card">
-                                        <div class="product-image">
-                                            <img src="~/assets/img/laptops/mac1.jpg" alt="">
-                                        </div>
-
-                                        <div class="add-fav">
-                                            <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                        </div>
-
-                                        <div class="product-detail">
-                                            <h2>Acer</h2>
-                                            <div class="fav-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
+                            }
 
 
-                                            <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                        </div>
-
-                                        <div class="product-operations">
-
-                                            <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                        </div>
-
-
-                                    </div>
-                                </a>
-
-                            </div>
-
-                            <div class="myproduct-item">
-
-                                <a class="go-product" asp-controller="Product" asp-action="Index">
-                                    <div class="product-card">
-                                        <div class="product-image">
-                                            <img src="~/assets/img/laptops/laptop1.png" alt="">
-                                        </div>
-
-                                        <div class="add-fav">
-                                            <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                        </div>
-
-                                        <div class="product-detail">
-                                            <h2>Acer</h2>
-                                            <div class="fav-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-
-
-                                            <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                        </div>
-
-                                        <div class="product-operations">
-
-                                            <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                        </div>
-
-
-                                    </div>
-                                </a>
-
-                            </div>
                         </div>
 
                     </div>
@@ -315,802 +258,7 @@
 
 
 
-
-
-    <!--<section class="laptops">
-
-
-            <ul class="nav nav-tabs" id="ComputerTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="all-computers-tab" data-toggle="tab" href="#all-computers" role="tab" aria-controls="all-computers" aria-selected="true">Bütün kompüterlər</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="discount-computers-tab" data-toggle="tab" href="#discount-computers" role="tab" aria-controls="discount-computers" aria-selected="false">Endirimdə olanlar</a>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="ComputerTabContent">
-                <div class="tab-pane fade show active" id="all-computers" role="tabpanel" aria-labelledby="all-computers-tab">
-
-
-                    <div class="myproduct owl-carousel owl-theme">
-
-
-                        
-                            <div class="myproduct-item">
-
-                                <a class="go-product" asp-controller="Product" asp-action="Index">
-                                    <div class="product-card">
-                                        <div class="product-image">
-                                            <img src="~/assets/img/laptops/acer1.jpg" alt="">
-                                        </div>
-
-                                        <div class="add-fav">
-                                            <a class="add-fav-btn" asp-controller="Favourite" asp-action="AddFavourite" asp-route-id="Id"><i class="fas fa-heart"></i></a>
-                                        </div>
-
-                                        <div class="product-detail">
-                                            <h2>Name</h2>
-                                            <div class="fav-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-
-
-                                            <p class="product-price">₼ Price</p>
-
-                                        </div>
-
-                                        <div class="product-operations">
-
-                                            <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                        </div>
-
-
-                                    </div>
-                                </a>
-
-                            </div>
-
-
-                    </div>
-
-
-                </div>
-
-                <div class="tab-pane fade" id="discount-computers" role="tabpanel" aria-labelledby="discount-computers-tab">
-
-                    <div class="myproduct owl-carousel owl-theme">
-                        <div class="myproduct-item">
-
-                            <a class="go-product" asp-controller="Product" asp-action="Index">
-                                <div class="product-card">
-                                    <div class="product-image">
-                                        <img src="~/assets/img/laptops/acer1.jpg" alt="">
-                                    </div>
-
-                                    <div class="add-fav">
-                                        <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                    </div>
-
-                                    <div class="product-detail">
-                                        <h2>Acer</h2>
-                                        <div class="fav-stars">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-
-
-                                        <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                    </div>
-
-                                    <div class="product-operations">
-
-                                        <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                    </div>
-
-
-                                </div>
-                            </a>
-
-                        </div>
-
-                        <div class="myproduct-item">
-
-                            <a class="go-product" asp-controller="Product" asp-action="Index">
-                                <div class="product-card">
-                                    <div class="product-image">
-                                        <img src="~/assets/img/laptops/mac1.jpg" alt="">
-                                    </div>
-
-                                    <div class="add-fav">
-                                        <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                    </div>
-
-                                    <div class="product-detail">
-                                        <h2>Acer</h2>
-                                        <div class="fav-stars">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-
-
-                                        <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                    </div>
-
-                                    <div class="product-operations">
-
-                                        <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                    </div>
-
-
-                                </div>
-                            </a>
-
-                        </div>
-
-                        <div class="myproduct-item">
-
-                            <a class="go-product" asp-controller="Product" asp-action="Index">
-                                <div class="product-card">
-                                    <div class="product-image">
-                                        <img src="~/assets/img/laptops/laptop1.png" alt="">
-                                    </div>
-
-                                    <div class="add-fav">
-                                        <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                    </div>
-
-                                    <div class="product-detail">
-                                        <h2>Acer</h2>
-                                        <div class="fav-stars">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-
-
-                                        <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                    </div>
-
-                                    <div class="product-operations">
-
-                                        <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                    </div>
-
-
-                                </div>
-                            </a>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-        <section class="smartphones">-->
-    <!-- <div class="container example-title">
-        <div class="row">
-
-            <h2 class="text-center">Smartfonlar
-
-                <a class="example-title-btn" href="#smartfonlar">Daha çox</a>
-
-            </h2>
-        </div>
-    </div> -->
-    <!--<ul class="nav nav-tabs" id="SmartphoneTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="all-smartphones-tab" data-toggle="tab" href="#all-smartphones" role="tab" aria-controls="all-smartphones" aria-selected="true">Bütün Smartfonlar</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="discount-smartphones-tab" data-toggle="tab" href="#discount-smartphones" role="tab" aria-controls="discount-smartphones" aria-selected="false">Endirimdə olanlar</a>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="SmartphoneTabContent">
-            <div class="tab-pane fade show active" id="all-smartphones" role="tabpanel" aria-labelledby="all-smartphones-tab">
-
-                <div class="myproduct owl-carousel owl-theme">
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/smartphones/13progold.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/smartphones/a50.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/smartphones/zflip3.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="tab-pane fade" id="discount-smartphones" role="tabpanel" aria-labelledby="discount-smartphones-tab">
-
-                <div class="myproduct owl-carousel owl-theme">
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/smartphones/13progold.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/smartphones/a50.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/smartphones/zflip3.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </section>
-
-
-    <section class="discount-products">-->
-    <!-- <div class="container example-title">
-        <div class="row">
-
-            <h2 class="text-center">Endirimdə olan məhsullar
-
-                <a class="example-title-btn" href="#kateqoriyalar">Daha çox</a>
-
-            </h2>
-        </div>
-    </div> -->
-    <!--<ul class="nav nav-tabs" id="AccessorieTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="all-accessories-tab" data-toggle="tab" href="#all-accessories" role="tab" aria-controls="all-accessories" aria-selected="true">Bütün Aksesuarlar</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="discount-accessories-tab" data-toggle="tab" href="#discount-accessories" role="tab" aria-controls="discount-accessories" aria-selected="false">Endirimdə olanlar</a>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="AccessorieTabContent">
-            <div class="tab-pane fade show active" id="all-accessories" role="tabpanel" aria-labelledby="all-accessories-tab">
-
-                <div class="myproduct owl-carousel owl-theme">
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/adapter.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/micrototypec.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/screendefender.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/wireless-charge.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="tab-pane fade" id="discount-accessories" role="tabpanel" aria-labelledby="discount-accessories-tab">
-
-
-                <div class="myproduct owl-carousel owl-theme">
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/adapter.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/micrototypec.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/screendefender.png" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-
-                    <div class="myproduct-item">
-
-                        <a class="go-product" asp-controller="Product" asp-action="Index">
-                            <div class="product-card">
-                                <div class="product-image">
-                                    <img src="~/assets/img/accessories/" alt="">
-                                </div>
-
-                                <div class="add-fav">
-                                    <a class="add-fav-btn" href="#"><i class="fas fa-heart"></i></a>
-                                </div>
-
-                                <div class="product-detail">
-                                    <h2>Acer</h2>
-                                    <div class="fav-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-
-
-                                    <p class="product-price">₼ <s>1000</s> 500</p>
-
-                                </div>
-
-                                <div class="product-operations">
-
-                                    <a class="add-to-cart-btn" href="#buy"><i class="bi bi-cart-plus-fill"></i></a>
-                                </div>
-
-
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>-->
-
+    
 
 
     <section class="brands">
@@ -1118,27 +266,15 @@
         <div class="container">
             <div class="row">
                 <div class="brands-slider owl-carousel owl-theme">
-                    <div class="brands-item">
-                        <img src="~/assets/img/brands/apple.png" alt="">
-                    </div>
-                    <div class="brands-item">
-                        <img src="~/assets/img/brands/dell.png" alt="">
-                    </div>
-                    <div class="brands-item">
-                        <img src="~/assets/img/brands/htc.png" alt="">
-                    </div>
-                    <div class="brands-item">
-                        <img src="~/assets/img/brands/lenovo.png" alt="">
-                    </div>
-                    <div class="brands-item">
-                        <img src="~/assets/img/brands/nokia.png" alt="">
-                    </div>
-                    <div class="brands-item">
-                        <img src="~/assets/img/brands/samsung.png" alt="">
-                    </div>
-                    <div class="brands-item">
-                        <img src="~/assets/img/brands/xiaomi.png" alt="">
-                    </div>
+                    
+                    @foreach (var item in Model.Brands)
+                    {
+                        <div class="brands-item">
+                            <img src="~/assets/img/@item.Logo" alt="">
+                        </div>
+                    }
+                    
+
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@ namespace Business.Validators.Product
         public BrandCreateViewModelValidator()
         {
             RuleFor(p => p.Name).NotNull().NotEmpty().MaximumLength(255).WithMessage("Zəhmət olmasa brendin adını daxil edin !");
+            RuleFor(p => p.Logo).NotNull().NotEmpty().WithMessage("Zəhmət olmasa şəkil daxil edin !");
         }
     }
 }

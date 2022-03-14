@@ -25,6 +25,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Logo</th>
                             <th>Ad</th>
                             <th>Tarix</th>
                             <th>Əməliyyatlar</th>
@@ -34,15 +35,16 @@
 
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@count</td>
-                                <td>@item.Name</td>
-                                <td>@item.CreateDT</td>
-                                <td>
-                                    <a asp-controller="Brand" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                    <a asp-controller="Brand" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>@count</td>
+                            <td> <img width="150" src="~/assets/img/@item.Logo"/> </td>
+                            <td>@item.Name</td>
+                            <td>@item.CreateDT</td>
+                            <td>
+                                <a asp-controller="Brand" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                <a asp-controller="Brand" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                            </td>
+                        </tr>
 
                             count++;
                         }

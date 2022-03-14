@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Business.Interfaces;
+using Business.Utilities;
 using Business.ViewModels.BrandViewModels;
 using Core;
 using Core.Entities;
@@ -37,9 +38,29 @@ namespace ToGShop.Areas.Admin.Controllers
         public async Task<IActionResult> Create(BrandCreateViewModel brandViewModel)
         {
 
-            await _brandService.Create(brandViewModel);
+            if (ModelState.IsValid)
+            {
 
-            return RedirectToAction(nameof(Index));
+                    if (!brandViewModel.Logo.CheckFileType("image/"))
+                    {
+                        ModelState.AddModelError("ImageFiles", "Seçdiyiniz fayl şəkil tipində olmalıdır ! ");
+                        return View(brandViewModel);
+                    }
+
+                    if (!brandViewModel.Logo.CheckFileSize(300))
+                    {
+                        ModelState.AddModelError("ImageFiles", "Seçdiyiniz faylın ölçüsü 300 kb dan çox olmamalıdır !");
+                        return View(brandViewModel);
+                    }
+
+
+                    await _brandService.Create(brandViewModel);
+                    return RedirectToAction(nameof(Index));
+            }
+
+
+
+            return View(brandViewModel);
         }
 
 

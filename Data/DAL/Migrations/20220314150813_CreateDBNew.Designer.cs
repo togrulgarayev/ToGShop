@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220307230924_CreateDb")]
-    partial class CreateDb
+    [Migration("20220314150813_CreateDBNew")]
+    partial class CreateDBNew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,6 +132,9 @@ namespace Data.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
+
+                    b.Property<string>("Logo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

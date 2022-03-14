@@ -89,8 +89,8 @@
                                     @User.Identity.Name
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Index" class="dropdown-item my-login-btn text-center"><i class="fas fa-user"></i> <p style="display: inline-block ;margin-left: 2px">Hesabım</p></a>
-                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Logout" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-left"></i> <p style="display: inline-block ;margin-left: 2px">Çıxış</p></a>
+                                    <a style="cursor: pointer" asp-controller="Account" asp-action="User" class="dropdown-item my-login-btn text-center"><i class="fas fa-user"></i> <p style="display: inline-block ;margin-left: 2px">Hesabım</p></a>
+                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Logout" asp-route-ReturnUrl="@Context.Request.Path.Value" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-left"></i> <p style="display: inline-block ;margin-left: 2px">Çıxış</p></a>
                                 </div>
                             }
                             else
@@ -99,7 +99,7 @@
                                     <i class="fas fa-user"></i> Hesab
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Login" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-in-right"></i> <p style="display: inline-block ;margin-left: 2px">Daxil ol</p></a>
+                                    <a style="cursor: pointer" asp-controller="Account" asp-action="Login" asp-route-ReturnUrl="@Context.Request.Path.Value" class="dropdown-item my-login-btn text-center"><i class="bi bi-box-arrow-in-right"></i> <p style="display: inline-block ;margin-left: 2px">Daxil ol</p></a>
                                 </div>
                             }
                         </li>
@@ -199,7 +199,7 @@
                             </a>
                         </div>
                         <div>
-                            <a href="./togshopping.apk">
+                            <a href="./togshopping.apk" download> 
                                 <img height="50" src="~/assets/img/android.png" alt="">
                             </a>
                             <img height="50" src='https://www.unitag.io/qreator/generate?crs=Ppv8rOENN3V1lAwTz82zPpEYgrTpeQPpAxSJGcmyf1zqoOPAufHCjI4ccbj8leQIffpWitL50YSc%252FcPVAqhvQT7ZfCzgzDHhj6riQCrHh69Z33TmIhniBGi4Sn3mf5JsPCmdI2N02YAQTnPOQ3bA3A%253D%253D&crd=fhOysE0g3Bah%252BuqXA7NPQ87MoHrnzb%252BauJLKoOEbJspeXSbfqb%252BZaquyPxogqYgQuIaz0%252FjOjvn0swuMO%252FWXsw%253D%253D' alt='QR Code' />

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
+using Business.Utilities;
 using Business.ViewModels.BrandViewModels;
 using Core;
 using Core.Entities;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Business.Implementations
 {
@@ -12,11 +14,13 @@ namespace Business.Implementations
     {
 
 
+        private readonly IWebHostEnvironment _env;
         private readonly IUnitOfWork _unitOfWork;
 
-        public BrandService(IUnitOfWork unitOfWork)
+        public BrandService(IUnitOfWork unitOfWork, IWebHostEnvironment env)
         {
             _unitOfWork = unitOfWork;
+            _env = env;
         }
 
 
@@ -32,9 +36,12 @@ namespace Business.Implementations
 
         public async Task Create(BrandCreateViewModel brandViewModel)
         {
+            string logo = await brandViewModel.Logo.SaveFileAsync(_env.WebRootPath, "assets", "img");
+
             var newBrand = new Brand()
             {
-                Name = brandViewModel.Name
+                Name = brandViewModel.Name,
+                Logo = logo
             };
 
             await _unitOfWork.brandRepository.CreateAsync(newBrand);

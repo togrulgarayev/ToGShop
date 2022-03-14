@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.DAL.Migrations
 {
-    public partial class CreateDb : Migration
+    public partial class CreateDBNew : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,6 +183,7 @@ namespace Data.DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
+                    Logo = table.Column<string>(nullable: true),
                     CreateDT = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()"),
                     IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     CategoryId = table.Column<int>(nullable: true)
@@ -262,7 +263,7 @@ namespace Data.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false,defaultValue:false),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
                     IsFavourite = table.Column<bool>(nullable: false, defaultValue: false),
                     InCart = table.Column<bool>(nullable: false, defaultValue: false),
                     IsOrdered = table.Column<bool>(nullable: false, defaultValue: false),
