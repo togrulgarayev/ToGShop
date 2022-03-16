@@ -17,7 +17,17 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Ümumi Brendlər</h6>
+            <div class="input-group">
+
+                <form method="get" asp-action="Index">
+                    <div class="form-outline">
+                        <input type="search" placeholder="Brendlərdə axtar..." value="@ViewData["SearchedBrend"]" name="brendSearch" class="form-control" /> <a style="padding-left: 15px" asp-action="Index">Bütün brendlər</a>
+
+
+                    </div>
+
+                </form>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">

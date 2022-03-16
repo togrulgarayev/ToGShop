@@ -7,6 +7,8 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    
+    
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Kateqoriyalar</h1>
@@ -17,7 +19,20 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Ümumi Kateqoriyalar</h6>
+            
+            
+            <div class="input-group">
+                
+                <form method="get" asp-action="Index">
+                    <div class="form-outline">
+                        <input type="search" placeholder="Kateqoriyalarda axtar..." value="@ViewData["SearchedCategory"]" name="categorySearch" class="form-control"/> <a style="padding-left: 15px" asp-action="Index">Bütün kateqoriyalar</a>
+                        
+                        
+                    </div>
+                
+                </form>
+            </div>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">

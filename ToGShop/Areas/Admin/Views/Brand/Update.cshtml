@@ -4,29 +4,52 @@
     ViewData["Title"] = "Brend Yenilə";
 }
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Brend Yenilə</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <form method="post" asp-controller="Brand" asp-action="Update" enctype="multipart/form-data">
 
-                <div class="form-group">
-                    <label asp-for="Name">Məhsulun adı:</label>
-                    <input required class="form-control" asp-for="Name" placeholder="Məhsulun adını daxil edin...">
-                    <span asp-validation-for="Name"></span>
+
+<div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Brend Yenilə</h1>
+                                </div>
+                                <form class="user" method="post" asp-controller="Brand" asp-action="Update" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <input asp-for="Name" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Kateqoriyanın adı">
+                                        <span class="text-danger" asp-validation-for="Name"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="Logo" class="form-control  text-center" style="font-size: 15px;"
+                                               placeholder="Kateqoriyanın adı">
+                                        <span class="text-danger" asp-validation-for="Logo"></span>
+                                    </div>
+
+                                    <button style="font-weight: bold; text-transform: uppercase;" type="submit" class="btn btn-primary btn-user btn-block">
+                                        Yenilə
+                                    </button>
+                                    <hr>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-
-                <div class="form-group">
-                    <label asp-for="Logo">Brend Logo:</label>
-                    <input class="form-control" asp-for="Logo">
-                    <span class="text-danger" asp-validation-for="Logo"></span>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Yenilə</button>
-            </form>
         </div>
+
     </div>
+
 </div>
+

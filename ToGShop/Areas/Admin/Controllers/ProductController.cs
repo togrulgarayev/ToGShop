@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
@@ -29,6 +31,23 @@ namespace ToGShop.Areas.Admin.Controllers
         {
             return View(await _unitOfWork.productRepository.GetAllAsync());
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Index(string productSearch)
+        {
+            ViewData["SearchedProduct"] = productSearch;
+
+            var productQuery = from p in await _unitOfWork.productRepository.GetAllAsync() select p;
+
+            if (!String.IsNullOrEmpty(productSearch))
+            {
+                productQuery = productQuery.Where(p => p.Name.Contains(productSearch) || p.Description.Contains(productSearch) || p.Information.Contains(productSearch));
+            }
+
+            return View(productQuery.ToList());
+        }
+
 
 
         [HttpGet]

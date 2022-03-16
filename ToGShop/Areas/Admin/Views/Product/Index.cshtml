@@ -17,7 +17,17 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Ümumi Məhsullar</h6>
+            <div class="input-group">
+
+                <form method="get" asp-action="Index">
+                    <div class="form-outline">
+                        <input type="search" placeholder="Məhsullarda axtar..." value="@ViewData["SearchedProduct"]" name="productSearch" class="form-control" /> <a style="padding-left: 15px" asp-action="Index">Bütün məhsullar</a>
+
+
+                    </div>
+
+                </form>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -25,6 +35,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            @*<th>Məhsul</th>*@
                             <th>Ad</th>
                             <th>Haqqında</th>
                             <th>Əlavə Məlumat</th>
@@ -40,6 +51,7 @@
                         {
                         <tr>
                             <td>@count</td>
+                            @*<td>@item.ProductImages.Where(pi=>pi.ProductId==item.Id &&pi.IsMain==true).FirstOrDefault().Image</td>*@
                             <td>@item.Name</td>
                             <td>@item.Description</td>
                             <td>@item.Information</td>

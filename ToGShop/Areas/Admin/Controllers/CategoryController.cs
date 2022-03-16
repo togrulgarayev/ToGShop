@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.CategoryViewModels;
 using Core;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,SuperModerator,Moderator")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -23,6 +27,22 @@ namespace ToGShop.Areas.Admin.Controllers
         {
             return View(await _unitOfWork.categoryRepository.GetAllAsync());
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Index(string categorySearch)
+        {
+            ViewData["SearchedCategory"] = categorySearch;
+
+            var categoryQuery = from c in await _unitOfWork.categoryRepository.GetAllAsync() select c;
+
+            if (!String.IsNullOrEmpty(categorySearch))
+            {
+                categoryQuery = categoryQuery.Where(c => c.Name.Contains(categorySearch));
+            }
+
+            return View(categoryQuery.ToList());
+        }
+
 
         public async Task<IActionResult> Create()
         {

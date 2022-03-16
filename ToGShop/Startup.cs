@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Data.DAL;
 using Data.Repositories;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Stripe;
 using ToGShop.Data;
@@ -57,6 +58,11 @@ namespace ToGShop
             });
 
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Error/Problem");
+            });
 
             services.AddAuthentication().AddFacebook(options =>
             {

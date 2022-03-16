@@ -50,9 +50,22 @@ namespace Business.Implementations
 
         public async Task Update(int id, BrandUpdateViewModel brandViewModel)
         {
+
+
+
             Brand dbBrand = await _unitOfWork.brandRepository.Get(b => b.Id == id);
 
             dbBrand.Name = brandViewModel.Name;
+
+            if (brandViewModel.Logo != null)
+            {
+                
+                    string filename = await brandViewModel.Logo.SaveFileAsync(_env.WebRootPath, "assets", "img");
+
+                    dbBrand.Logo = filename;
+
+            }
+
 
             await _unitOfWork.SaveAsync();
         }

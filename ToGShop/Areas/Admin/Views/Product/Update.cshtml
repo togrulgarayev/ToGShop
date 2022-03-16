@@ -4,97 +4,113 @@
 }
 
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Məhsul əlavə et</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <form method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label asp-for="Name">Məhsulun adı:</label>
-                    <input class="form-control" asp-for="Name" placeholder="Məhsulun adını daxil edin...">
-                    <span class="text-danger" asp-validation-for="Name"></span>
+<div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Məhsul yenilə</h1>
+                                </div>
+                                <form class="user" method="post" asp-controller="Product" asp-action="Update" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <input asp-for="Name" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Məhsulun adı">
+                                        <span class="text-danger" asp-validation-for="Name"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="Description" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Məhsul haqqında">
+                                        <span class="text-danger" asp-validation-for="Description"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="Information" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Məhsul haqqında əlavə məlumat">
+                                        <span class="text-danger" asp-validation-for="Information"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="Count" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Məhsulun sayı">
+                                        <span class="text-danger" asp-validation-for="Count"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="Price" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Məhsulun qiyməti">
+                                        <span class="text-danger" asp-validation-for="Price"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input asp-for="IsDiscount" class="custom-control-input">
+                                            <label class="custom-control-label" asp-for="IsDiscount">
+                                                Endirimdədirmi ?
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="DiscountPrice" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Məhsulun endirimli qiyməti">
+                                        <span class="text-danger" asp-validation-for="DiscountPrice"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="CategoryId">Kateqoriya seçin:<span class="text-danger" class="text-danger">*</span></label>
+                                        <select class="form-control" asp-for="CategoryId">
+                                            @foreach (var item in (List<Category>)ViewBag.categories)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="BrandId">Brend seçin:<span class="text-danger" class="text-danger">*</span></label>
+                                        <select class="form-control" asp-for="BrandId">
+                                            @foreach (var item in (List<Brand>)ViewBag.brands)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="ImageFiles" class="form-control  text-center" style="font-size: 15px;"
+                                               placeholder="Məhsulun şəkili(şəkilləri)">
+                                        <span class="text-danger" asp-validation-for="ImageFiles"></span>
+                                    </div>
+
+
+                                    <button style="font-weight: bold; text-transform: uppercase;" type="submit" class="btn btn-primary btn-user btn-block">
+                                        Yenilə
+                                    </button>
+                                    <hr>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-
-
-                <div class="form-group">
-                    <label asp-for="Description">Məhsul haqqında:</label>
-                    <input class="form-control" asp-for="Description" placeholder="Məhsul haqqında məlumat daxil edin...">
-                    <span class="text-danger" asp-validation-for="Description"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Information">Məhsul haqqında əlavə məlumat:</label>
-                    <input class="form-control" asp-for="Information" placeholder="Məhsul haqqında əlavə məlumat daxil edin...">
-                    <span class="text-danger" asp-validation-for="Information"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Count">Məhsulun sayı:</label>
-                    <input class="form-control" asp-for="Count" placeholder="Məhsulun sayını daxil edin...">
-                    <span class="text-danger" asp-validation-for="Count"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Price">Məhsulun qiyməti:</label>
-                    <input class="form-control" asp-for="Price" placeholder="Məhsulun qiymətini daxil edin...">
-                    <span class="text-danger" asp-validation-for="Price"></span>
-                </div>
-
-                <br />
-                <div class="form-check">
-                    <input class="form-check-input" asp-for="IsDiscount">
-                    <label class="form-check-label" asp-for="IsDiscount">
-                        Endirimdədirmi?
-                    </label>
-                    <span class="text-danger" asp-validation-for="IsDiscount"></span>
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <label asp-for="DiscountPrice">Endirim qiyməti:</label>
-                    <input class="form-control" asp-for="DiscountPrice">
-                    <span class="text-danger" asp-validation-for="DiscountPrice"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="CategoryId">Kateqoriya seçin:<span class="text-danger" class="text-danger">*</span></label>
-                    <select class="form-control" asp-for="CategoryId">
-                        @foreach (var item in (List<Category>)ViewBag.categories)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
-
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="BrandId">Brend seçin:<span class="text-danger" class="text-danger">*</span></label>
-                    <select class="form-control" asp-for="BrandId">
-                        @foreach (var item in (List<Brand>)ViewBag.brands)
-                        {
-                            <option value="@item.Id">@item.Name</option>
-                        }
-
-
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="ImageFiles">Məhsulun şəkilləri:</label>
-                    <input class="form-control" asp-for="ImageFiles">
-                    <span class="text-danger" asp-validation-for="ImageFiles"></span>
-                </div>
-
-
-
-                <button type="submit" class="btn btn-primary">Yenile</button>
-            </form>
         </div>
+
     </div>
+
 </div>
-
-
