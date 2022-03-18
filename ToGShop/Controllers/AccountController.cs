@@ -85,7 +85,9 @@ namespace ToGShop.Controllers
 
 
 
-                bool emailResponse = SendEmail(registerViewModel.Email, msgArea);
+                //bool emailResponse = SendEmail(registerViewModel.Email, msgArea);
+                bool emailResponse = Helper.SendEmail(registerViewModel.Email, msgArea);
+
 
                 if (emailResponse)
                     await _userManager.AddToRoleAsync(newUser, UserRoles.User.ToString());
@@ -313,7 +315,9 @@ namespace ToGShop.Controllers
 
 
             //SendMailHelper sendEmailHelper = new SendMailHelper();
-            bool emailResponse = SendEmail(forget.Email, msg);
+            //bool emailResponse = SendEmail(forget.Email, msg);
+            bool emailResponse = Helper.SendEmail(forget.Email, msg);
+
 
 
             if (emailResponse)
@@ -339,32 +343,32 @@ namespace ToGShop.Controllers
 
         //Send Email Operation
 
-        public bool SendEmail(string userEmail, string msgArea)
-        {
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("contact.togshop@gmail.com");
-            mailMessage.To.Add(new MailAddress(userEmail));
+        //public bool SendEmail(string userEmail, string msgArea)
+        //{
+        //    MailMessage mailMessage = new MailMessage();
+        //    mailMessage.From = new MailAddress("contact.togshop@gmail.com");
+        //    mailMessage.To.Add(new MailAddress(userEmail));
 
-            mailMessage.Subject = "Email Təsdiq Mesajı - ToG Shopping";
-            mailMessage.IsBodyHtml = true;
-            mailMessage.Body = msgArea;
+        //    mailMessage.Subject = "Email Təsdiq Mesajı - ToG Shopping";
+        //    mailMessage.IsBodyHtml = true;
+        //    mailMessage.Body = msgArea;
 
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new NetworkCredential("contact.togshop@gmail.com", "ohtiqxjdkojlpqez");
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.EnableSsl = true;
-            try
-            {
-                client.Send(mailMessage);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                // log exception
-            }
-            return false;
-        }
+        //    SmtpClient client = new SmtpClient();
+        //    client.Credentials = new NetworkCredential("contact.togshop@gmail.com", "ohtiqxjdkojlpqez");
+        //    client.Host = "smtp.gmail.com";
+        //    client.Port = 587;
+        //    client.EnableSsl = true;
+        //    try
+        //    {
+        //        client.Send(mailMessage);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // log exception
+        //    }
+        //    return false;
+        //}
 
         //Send Email Operation - End
 
