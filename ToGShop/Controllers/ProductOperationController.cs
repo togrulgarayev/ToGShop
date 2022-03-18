@@ -21,13 +21,15 @@ namespace ToGShop.Controllers
         private readonly IProductOperationService _productOperationService;
         private readonly IProductImageService _productImageService;
         private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public ProductOperationController(IUnitOfWork unitOfWork, IProductOperationService productOperationService, UserManager<ApplicationUser> userManager, IProductService productService, IProductImageService productImageService)
+        public ProductOperationController(IOrderService orderService,IUnitOfWork unitOfWork, IProductOperationService productOperationService, UserManager<ApplicationUser> userManager, IProductService productService, IProductImageService productImageService)
         {
             _unitOfWork = unitOfWork;
+            _orderService = orderService;
             _productOperationService = productOperationService;
             _userManager = userManager;
             _productService = productService;
@@ -61,10 +63,10 @@ namespace ToGShop.Controllers
 
             var userId = _userManager.GetUserId(HttpContext.User);
 
-            await _productOperationService.SetFavourite(id,userId);
+            await _productOperationService.SetFavourite(id, userId);
 
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -79,7 +81,7 @@ namespace ToGShop.Controllers
             return RedirectToAction("Favourite");
         }
 
-        
+
 
 
         [Authorize]
@@ -127,12 +129,24 @@ namespace ToGShop.Controllers
 
             return RedirectToAction("Cart");
         }
-        [Authorize]
-        public IActionResult CartEmpty()
-        {
 
-            return View();
+
+        public async Task<IActionResult> SetSend(int id)
+        {
+            await _productOperationService.SetSend(id);
+
+            return Redirect("../../Admin/UserOrder");
         }
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productOperationService.Delete(id);
+
+            return Redirect("../../Admin/UserSend");
+        }
+
+        
 
         [Authorize]
         public IActionResult Payment(decimal id)
@@ -145,7 +159,22 @@ namespace ToGShop.Controllers
 
             return View(paymentViewModel);
         }
+        [HttpPost]
+        public async Task<IActionResult> Payment(PaymentViewModel paymentViewModel)
+        {
 
+            decimal price = paymentViewModel.Price;
+
+            if (ModelState.IsValid)
+            {
+                await _orderService.Create(paymentViewModel.Order);
+                return Redirect($"/Checkout?met={price}");
+
+
+            }
+
+            return View(paymentViewModel);
+        }
 
 
 

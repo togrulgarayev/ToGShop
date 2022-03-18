@@ -8,6 +8,40 @@
 }
 
 
+<section class="side-navbar">
+    <div id="mySidenav" class="sidenav">
+        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+            <a class="text-center category-item" href="#"><p>HP</p></a>
+            <a class="text-center category-item" href="#"><p>Dell</p></a>
+            <a class="text-center category-item" href="#"><p>Acer</p></a>
+            <a class="text-center category-item" href="#"><p>Asus</p></a>
+            <a class="text-center category-item" href="#"><p>MSI</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Samsung</p></a>
+            <a class="text-center category-item" href="#"><p>LG</p></a>
+            <a class="text-center category-item" href="#"><p>Nokia</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+        </div>
+
+        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+    </div>
+</section>
+
+
 <main>
 
     <section class="shopping-cart">
@@ -55,11 +89,11 @@
                                 </div>
                                 <div class="price"> @product.Price</div>
                                 <div class="quantity">
-                                    <input type="number" value="1" min="1" class="quantity-field text-center">
+                                    <input disabled type="number" value="1" min="1" class="quantity-field text-center">
                                 </div>
                                 <div class="subtotal"> @product.Price</div>
-                                <div class="remove">
-                                    <a asp-controller="ProductOperation" asp-action="DeleteCart" asp-route-id="@item.ProductId"><i class="fas fa-trash"></i> Sil</a>
+                                <div  class="remove">
+                                    <a style="color: #a4a4a4;" asp-controller="ProductOperation" asp-action="DeleteCart" asp-route-id="@item.ProductId"><i class="fas fa-trash"></i> Sil</a>
                                 </div>
                             </div>
 
@@ -92,7 +126,7 @@
                                 <div class="total-value final-value" id="basket-total"> @totalprice</div>
                             </div>
                             <div class="summary-checkout">
-                                <a class="checkout-cta" asp-controller="ProductOperation" asp-action="Payment" asp-route-id="@totalprice">Satın Al</a>
+                                <a style="color: #343434;" class="checkout-cta" asp-controller="ProductOperation" asp-action="Payment" asp-route-id="@totalprice">Satın Al</a>
                             </div>
                         </div>
                     </aside>
@@ -104,7 +138,11 @@
 
     else
     {
-        <h2>Sebet boşdur !</h2>
+        <div class="container">
+            <h2>
+                Səbətiniz boşdur !
+            </h2>
+        </div>
     }
 
     </section>

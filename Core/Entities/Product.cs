@@ -25,5 +25,7 @@ namespace Core.Entities
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
 
+        public List<ProductComment> ProductComments { get; set; }
+
     }
 }

@@ -26,7 +26,7 @@ namespace Business.Implementations
         public async Task<List<Product>> GetAllAsync()
         {
 
-            return await _unitOfWork.productRepository.GetAllAsync(p=> p.IsDeleted == false);
+            return await _unitOfWork.productRepository.GetAllAsync(p=> p.IsDeleted == false, "ProductImages");
 
              
 
@@ -109,6 +109,18 @@ namespace Business.Implementations
             dbProduct.IsDiscount = productViewModel.IsDiscount;
             dbProduct.DiscountPrice = productViewModel.DiscountPrice;
 
+
+            var images = await _unitOfWork.productImageRepository.GetAllAsync();
+
+            foreach (var image in images)
+            {
+                if (dbProduct.Id == image.ProductId)
+                {
+                     _unitOfWork.productImageRepository.Remove(image);
+                     await _unitOfWork.SaveAsync();
+                }
+            }
+
             await _unitOfWork.SaveAsync();
 
             if (productViewModel.ImageFiles != null)
@@ -122,7 +134,14 @@ namespace Business.Implementations
                         ProductId = id
 
                     };
+
+                    if (i==0)
+                    {
+                        productImage.IsMain = true;
+                    }
+
                     await _unitOfWork.productImageRepository.CreateAsync(productImage);
+                    await _unitOfWork.SaveAsync();
                 }
             }
         }

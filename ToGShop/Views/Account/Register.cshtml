@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Qeydiyyat</title>
+    <title>Qeydiyyat - ToG Shopping</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,7 +34,11 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-6 d-none d-lg-block " style="padding-top: 50px"><img height="450" style="background-position:center; background-size:cover;" src="~/admin/img/register.png" /></div>
+                    <div class="col-lg-6 d-none d-lg-block " style="padding-top: 50px"><img height="450" style="background-position:center; background-size:cover;" src="~/admin/img/register.png" />
+                        <hr>
+                        <div class="text-center">
+                            <a class="text-center" asp-controller="Home" asp-action="Index">Əsas səhifəyə geri dön</a>
+                        </div></div>
                     <div class="col-lg-6">
                         <div class="p-5">
                             <div class="text-center">
@@ -76,18 +80,15 @@
                                 </button>
                                 <hr>
                                 <a asp-controller="Account" asp-action="GoogleLogin" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                    <i class="fab fa-google fa-fw"></i> Google ilə qeydiyyat
                                 </a>
                                 <a asp-controller="Account" asp-action="FacebookLogin" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                    <i class="fab fa-facebook-f fa-fw"></i> Facebook ilə qeydiyyat
                                 </a>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" asp-controller="Account" asp-action="ForgetPass">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" asp-controller="Account" asp-action="Login">Already have an account? Login!</a>
+                                Hesabın var? <a asp-controller="Account" asp-action="Login"> Daxil ol</a>
                             </div>
                         </div>
                     </div>

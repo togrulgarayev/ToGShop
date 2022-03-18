@@ -1,0 +1,143 @@
+﻿@model Business.ViewModels.UserSettingsViewModel.UserSettingsViewModel
+@{
+    ViewData["Title"] = "Hesab Parametrləri";
+    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+}
+
+
+<section class="side-navbar">
+    <div id="mySidenav" class="sidenav">
+        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+            <a class="text-center category-item" href="#"><p>HP</p></a>
+            <a class="text-center category-item" href="#"><p>Dell</p></a>
+            <a class="text-center category-item" href="#"><p>Acer</p></a>
+            <a class="text-center category-item" href="#"><p>Asus</p></a>
+            <a class="text-center category-item" href="#"><p>MSI</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Samsung</p></a>
+            <a class="text-center category-item" href="#"><p>LG</p></a>
+            <a class="text-center category-item" href="#"><p>Nokia</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+        </div>
+
+        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+    </div>
+</section>
+
+
+<main>
+
+<section>
+        <div class="mt-5 bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="profile-tab-nav border-right">
+                <div class="p-4">
+                    <div class="img-circle text-center mb-3">
+                        <img src="~/user/img/userlogo.png" alt="Image" class="shadow">
+                    </div>
+                    <h4 class="text-center">@Model.Fullname</h4>
+                </div>
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+                        <i class="bi bi-person-fill text-center mr-1"></i>
+                        Hesab
+                    </a>
+                    <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                        <i class="bi bi-key-fill text-center mr-1"></i>
+                        Şifrə
+                    </a>
+                    
+                    <a class="user-go-back" asp-controller="Account" asp-action="User">
+                        <i class="bi bi-chevron-left text-center mr-1"></i>
+                        Geri
+                    </a>
+                </div>
+            </div>
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                    <h3 class="mb-4">Hesab Parametrləri</h3>
+                    
+                    <form  method="post" asp-controller="Account" asp-action="ChangeUserData">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ad Soyad</label>
+                                    <input asp-for="Fullname" value="@Model.Fullname">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ad</label>
+                                    <input asp-for="Name" value="@Model.Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Soyad</label>
+                                    <input asp-for="Surname" value="@Model.Surname">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Telefon</label>
+                                    <input asp-for="Phone" value="@Model.Phone">
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <div>
+                            <button class="user-btn">Yenilə</button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                    <h3 class="mb-4">Şifrə parametrləri</h3>
+                    <form  method="post" asp-controller="Account" asp-action="ChangePassword">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Hazırki şifrəniz</label>
+                                    <input asp-for="CurrentPassword" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Yeni şifrəniz</label>
+                                    <input asp-for="NewPassword" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Yeni şifrənizin təkrarı</label>
+                                    <input asp-for="ConfirmPassword" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-danger">Sosial şəbəkələr vasitəsilə daxil olan istifadəçilər şifrələrini yeniləyə bilməzlər ! </div>
+                        <div>
+                            <button class="user-btn">Yenilə</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+
+    </main>

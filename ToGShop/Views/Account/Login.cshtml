@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Daxil ol</title>
+    <title>Daxil ol - ToG Shopping</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,11 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block" style="padding-top: 80px"><img height="400" style="background-position:center; background-size:cover;" src="~/admin/img/login.png" /></div>
+                            <div class="col-lg-6 d-none d-lg-block" style="padding-top: 80px"><img height="400" style="background-position:center; background-size:cover;" src="~/admin/img/login.png" />
+                                <hr>
+                                <div class="text-center">
+                                    <a class="text-center" asp-controller="Home" asp-action="Index">Əsas səhifəyə geri dön</a>
+                                </div></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -69,18 +73,18 @@
                                         </button>
                                         <hr>
                                         <a asp-controller="Account" asp-action="GoogleLogin" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                            <i class="fab fa-google fa-fw"></i> Google ilə daxil ol
                                         </a>
                                         <a asp-controller="Account" asp-action="FacebookLogin" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                            <i class="fab fa-facebook-f fa-fw"></i> Facebook ilə daxil ol
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" asp-controller="Account" asp-action="ForgetPass">Forgot Password?</a>
+                                        <a class="small" asp-controller="Account" asp-action="ForgetPass">Şifrəni unutmusan?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" asp-controller="Account" asp-action="Register">Create an Account!</a>
+                                        <a class="small" asp-controller="Account" asp-action="Register">Yeni hesab yarat</a>
                                     </div>
                                 </div>
                             </div>

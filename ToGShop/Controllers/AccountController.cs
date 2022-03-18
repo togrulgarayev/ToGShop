@@ -1,13 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Business.Interfaces;
 using Business.Utilities;
 using Business.ViewModels.AuthViewModels;
+using Business.ViewModels.ContactAdminViewModels;
+using Business.ViewModels.UserSettingsViewModel;
 using Core;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace ToGShop.Controllers
@@ -17,15 +22,25 @@ namespace ToGShop.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IContactAdminService _contactAdminService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
+        private readonly IProductOperationService _productOperationService;
+        private readonly IProductImageService _productImageService;
+        private readonly IProductService _productService;
+
+        public AccountController(IProductService productService,IProductImageService productImageService,IProductOperationService productOperationService,UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager, IContactAdminService contactAdminService, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _contactAdminService = contactAdminService;
             _unitOfWork = unitOfWork;
             _roleManager = roleManager;
+
+            _productOperationService = productOperationService;
+            _productImageService = productImageService;
+            _productService = productService;
         }
 
 
@@ -411,6 +426,9 @@ namespace ToGShop.Controllers
                             EmailConfirmed = true
                         };
                         var createResult = await _userManager.CreateAsync(user);
+
+                        await _userManager.AddToRoleAsync(user, UserRoles.User.ToString());
+
                         if (createResult.Succeeded)
                         {
                             var identityLogin = await _userManager.AddLoginAsync(user, loginInfo);
@@ -426,12 +444,144 @@ namespace ToGShop.Controllers
 
             return RedirectToAction("Register");
         }
-        
+
         // Social network login/register operation - End
-        
+
 
         #endregion
-        
+
+
+
+
+        #region User Page
+
+        [Authorize]
+        public async Task<IActionResult> User()
+        {
+
+            ApplicationUser appUser = await _userManager.GetUserAsync(HttpContext.User);
+            var products = await _productService.GetAllAsync();
+            var productOperationsFavourite = await _productOperationService.GetAllFavouriteAsync(appUser.Id);
+            var productOperationsOrderedSend = await _productOperationService.GetAllOrderedSendAsync(appUser.Id);
+            var productImages = await _productImageService.GetAllAsync();
+
+            var contactAdminViewModel = new ContactAdminViewModel()
+            {
+                Fullname = appUser.FullName,
+                Username = appUser.UserName,
+                Email = appUser.Email,
+                Name = appUser.Name,
+                Surname = appUser.Surname,
+                Phone = appUser.PhoneNumber,
+                Products = products,
+                ProductOperationsFavourite = productOperationsFavourite,
+                ProductOperationsSendAndOrder = productOperationsOrderedSend,
+                ProductImages = productImages
+            };
+
+            return View(contactAdminViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> User(ContactAdminViewModel contactAdminViewModel)
+        {
+
+            ApplicationUser appUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            
+            
+
+            await _contactAdminService.Create(contactAdminViewModel, appUser);
+
+            return RedirectToAction(nameof(SendSucces));
+        }
+
+        public IActionResult SendSucces()
+        {
+            return View();
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> UserSettings()
+        {
+
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var userSettingsViewModel = new UserSettingsViewModel()
+            {
+                Fullname = user.FullName,
+                Name = user.Name,
+                Surname = user.Surname,
+                Phone = user.PhoneNumber
+            };
+
+            return View(userSettingsViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(UserSettingsViewModel userSettingsViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+
+                var result = await _userManager.ChangePasswordAsync(user,
+                    userSettingsViewModel.CurrentPassword, userSettingsViewModel.NewPassword);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return RedirectToAction("Problem","Error");
+                }
+
+                await _signInManager.RefreshSignInAsync(user);
+                return View("ChangePasswordConfirmation");
+            }
+
+            return RedirectToAction("Problem","Error");
+        }
+
+        public IActionResult ChangePasswordConfirmation()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeUserData(UserSettingsViewModel userSettingsViewModel)
+        {
+
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+
+
+
+            user.Name = userSettingsViewModel.Name;
+            user.Surname = userSettingsViewModel.Surname;
+            user.PhoneNumber = userSettingsViewModel.Phone;
+            user.FullName = userSettingsViewModel.Fullname;
+
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction("UserSettings");
+        }
+
+
+        #endregion
+
+
+
+
+
 
         #region for create roles
 
@@ -441,7 +591,7 @@ namespace ToGShop.Controllers
         //    {
         //        if (!await _roleManager.RoleExistsAsync(role.ToString()))
         //        {
-        //            await _roleManager.CreateAsync(new IdentityRole {Name = role.ToString()});
+        //            await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
         //        }
         //    }
         //}

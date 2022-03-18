@@ -3,26 +3,43 @@
     Layout = null;
 }
 
+
+
 <!DOCTYPE html>
-<html>
-
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
 <head>
-    <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    
+    <meta charset="utf-8">
+    <title>4 0 4 - ToG Shopping</title>
+    <!-- My Error Css -->
+    <link rel="stylesheet" href="~/assets/css/error.css"> 
+    <!--    Bootstrap Icon CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 </head>
-
 <body>
-    
-    <div style="display: flex; justify-content: center;">
 
-        <img src="~/assets/img/error.gif" alt="Error Image" />
+<div id="loadertop"></div>
 
+<div id="error-page">
+    <div class="content">
+        <h2 class="header" data-text="404">
+            404
+        </h2>
+        <h4 data-text="Xəta baş verdi !">
+            Xəta baş verdi !
+        </h4>
+        <p>
+            <i style="color: red;" class="bi bi-exclamation-circle-fill"></i> Sizin sorğunuzun emalı zamanı gözlənilməz xəta baş verdi. 
+        </p>
+        <div class="btns">
+            <a asp-controller="Home" asp-action="Index">Əsas səhifə</a>
+            <a asp-controller="Error" asp-action="Report">Bildir</a>
+        </div>
     </div>
+</div>
+    
+<script src="~/assets/js/script.js"></script>
 
 </body>
-
 </html>
-

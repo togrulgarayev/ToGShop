@@ -17,6 +17,10 @@ namespace Data.Repositories
         private IBrandRepository _brandRepository;
         private IProductImageRepository _productImageRepository;
         private IProductOperationsRepository _productOperationsRepository;
+        private IProductCommentRepository _productCommentRepository;
+        private IContactAdminRepository _contactAdminRepository;
+        private IDiscountTimerRepository _discountTimerRepository;
+        private IOrderRepository _orderRepository;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -36,6 +40,17 @@ namespace Data.Repositories
 
         public IProductOperationsRepository productOperationsRepository =>
             _productOperationsRepository = _productOperationsRepository ?? new ProductOperationRepository(_context);
+
+        public IProductCommentRepository productCommentRepository =>
+            _productCommentRepository = _productCommentRepository ?? new ProductCommentRepository(_context);
+        public IContactAdminRepository contactAdminRepository =>
+            _contactAdminRepository = _contactAdminRepository ?? new ContactAdminRepository(_context);
+
+        public IDiscountTimerRepository discountTimerRepository =>
+            _discountTimerRepository = _discountTimerRepository ?? new DiscountTimerRepository(_context);
+
+        public IOrderRepository orderRepository =>
+            _orderRepository = _orderRepository ?? new OrderRepository(_context);
 
 
         public async Task SaveAsync()

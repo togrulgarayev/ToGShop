@@ -1,0 +1,297 @@
+﻿@model Business.ViewModels.ContactAdminViewModels.ContactAdminViewModel
+@{
+    ViewData["Title"] = "Hesab";
+    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+    int count = 1;
+}
+
+
+<section class="side-navbar">
+    <div id="mySidenav" class="sidenav">
+        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+            <a class="text-center category-item" href="#"><p>HP</p></a>
+            <a class="text-center category-item" href="#"><p>Dell</p></a>
+            <a class="text-center category-item" href="#"><p>Acer</p></a>
+            <a class="text-center category-item" href="#"><p>Asus</p></a>
+            <a class="text-center category-item" href="#"><p>MSI</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Samsung</p></a>
+            <a class="text-center category-item" href="#"><p>LG</p></a>
+            <a class="text-center category-item" href="#"><p>Nokia</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+        </div>
+
+        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+    </div>
+</section>
+
+
+
+
+<main>
+<section>
+        <div class="mt-5 bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="profile-tab-nav border-right">
+                <div class="p-4">
+                    <div class="img-circle text-center mb-3">
+                        <img src="~/user/img/userlogo.png" alt="Image" class="shadow">
+                    </div>
+                    <h4 class="text-center">@Model.Fullname</h4>
+
+                </div>
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+                        <i class="bi bi-person-lines-fill text-center mr-1"></i>
+                        Adminlə Əlaqə
+                    </a>
+                    <a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+                        <i class="bi bi-info-circle-fill text-center mr-1"></i>
+                        Məlumatlarım
+                    </a>
+                    <a class="nav-link" id="security-tab" data-toggle="pill" href="#security" role="tab" aria-controls="security" aria-selected="false">
+                        <i class="bi bi-heart-fill text-center mr-1"></i>
+                        Bəyəndiklərim
+                    </a>
+                    <a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
+                        <i class="bi bi-bag-fill text-center mr-1"></i>
+                        Sifarişlərim
+                    </a>
+                    <a class="nav-link" asp-controller="Account" asp-action="UserSettings">
+                        <i class="bi bi-gear-fill text-center mr-1"></i>
+                        Parametrlər
+                    </a>
+                </div>
+            </div>
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                    <h3 class="mb-4">Adminlə əlaqə</h3>
+                    
+                    
+                    
+                    <form class="user" method="post" asp-controller="Account" asp-action="User" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <textarea asp-for="@Model.Message" autocomplete="off" class="form-control form-control-user text-center" style="width: 350px;height: 250px;resize:none ;font-size: 15px;"
+                                   placeholder="Mesajınız"></textarea>
+                        </div>
+
+                        <button style="font-weight: bold; text-transform: uppercase; width: 350px;" type="submit" class="user-btn">
+                            Göndər
+                        </button>
+                        <hr>
+                    </form>
+
+                </div>
+                <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                    <h3 class="mb-4">Hesab məlumatlarım</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ad Soyad</label><br />
+                                <input style="width: 450px; text-align: center" disabled  asp-for="Fullname" value="@Model.Fullname">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ad</label><br />
+                                <input style="width: 450px; text-align: center" disabled  asp-for="Name" value="@Model.Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Soyad</label><br />
+                                <input style="width: 450px; text-align: center" disabled  asp-for="Surname" value="@Model.Surname">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Telefon</label><br />
+                                <input style="width: 450px; text-align: center" disabled  asp-for="Phone" value="@Model.Phone">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>İstifadəçi adı</label><br />
+                                <input style="width: 450px; text-align: center" disabled asp-for="Username" value="@Model.Username">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email</label><br />
+                                <input style="width: 450px; text-align: center" disabled asp-for="Email" value="@Model.Email">
+                            </div>
+                        </div>
+                        
+                        <div class="text-danger">
+                            Hesab məlumatlarını dəyişdirmək üçün : Parametrlər > Hesab 
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                    <h3 class="mb-4">Bəyəndiklərim</h3>
+                    <div class="row">
+
+                        
+                        @if (Model.ProductOperationsFavourite.Count != 0)
+                        {
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Məhsul</th>
+                                        <th scope="col">Məhsulun adı</th>
+                                        <th scope="col">Məhsulun sayı</th>
+                                        <th scope="col">Məhsulun qiyməti</th>
+                                        <th scope="col"></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ProductOperationsFavourite)
+                                    {
+                                        var product = Model.Products.Where(p => p.Id == item.ProductId).FirstOrDefault();
+
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td><img width="150" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image" /></td>
+                                            <td>@product.Name</td>
+                                            <td>@product.Count</td>
+                                            <td>
+                                                ₼
+                                                @if (@product.IsDiscount == true)
+                                                {
+                                                    <s>@product.Price</s> @product.DiscountPrice
+                                                }
+                                                else
+                                                {
+
+                                                    @product.Price;
+                                                }
+
+                                            </td>
+                                            <td><a asp-controller="ProductOperation" asp-action="DeleteFavourite" asp-route-id="@product.Id"><i class="bi bi-trash-fill"></i></a></td>
+                                        </tr>
+
+                                        count++;
+
+
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        }
+
+                        else
+                        {
+                            <p>Bəyəndiklərim siyahısı boşdur !</p>
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="application" role="tabpanel" aria-labelledby="application-tab">
+                    <h3 class="mb-4">Sifarişlərim</h3>
+                    <div class="row">
+
+                        @if (Model.ProductOperationsSendAndOrder.Count != 0)
+                        {
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Məhsul</th>
+                                        <th scope="col">Məhsulun adı</th>
+                                        <th scope="col">Məhsulun sayı</th>
+                                        <th scope="col">Məhsulun qiyməti</th>
+                                        <th scope="col"></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ProductOperationsSendAndOrder)
+                                    {
+                                        var product = Model.Products.Where(p => p.Id == item.ProductId).FirstOrDefault();
+
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td><img width="150" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image" /></td>
+                                            <td>@product.Name</td>
+                                            <td>@product.Count</td>
+                                            <td>
+                                                ₼
+                                                @if (@product.IsDiscount == true)
+                                                {
+                                                    <s>@product.Price</s> @product.DiscountPrice
+                                                }
+                                                else
+                                                {
+
+                                                    @product.Price;
+                                                }
+
+                                            </td>
+                                            
+
+                                            <td>
+                                                
+                                                @if (item.IsOrdered)
+                                                {
+                                                <p>Sifariş edilib</p>
+                                                }
+                                                else if (item.IsSend)
+                                                {
+                                                <p>Təhvil alınıb</p>
+                                                }
+                                                else
+                                                {
+                                                <p>Gözləmədədir</p>
+                                                }
+
+                                            </td>
+                                            
+
+                                        </tr>
+
+                                        count++;
+
+
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        }
+
+                        else
+                        {
+                            <p>Sifarişlərim siyahısı boşdur !</p>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+    </main>

@@ -31,17 +31,18 @@ namespace ToGShop.Controllers
 
         [TempData]
         public string TotalAmount { get; set; }
-        [HttpPost]
-        public async Task<IActionResult> Index(PaymentViewModel paymentViewModel)
+        public async Task<IActionResult> Index(decimal met)
         {
 
-            var price = paymentViewModel.Price;
+            var price = met;
 
             ViewBag.DollarAmount = price;
             ViewBag.total = Math.Round(ViewBag.DollarAmount, 2) * 100;
             ViewBag.total = Convert.ToInt64(ViewBag.total);
             long total = ViewBag.total;
             TotalAmount = total.ToString();
+
+
             return View();
         }
 

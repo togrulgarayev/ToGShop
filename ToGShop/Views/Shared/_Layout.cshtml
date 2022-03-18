@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <!--My CSS-->
     <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/user/css/style.css">
     <!--    Owl Carousel CSS-->
     <link rel="stylesheet" href="~/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="~/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
-    
+
 
 
 </head>
@@ -64,22 +65,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <div class="search-responsive">
-                        <form class="search" id="form">
+                        <form class="search" method="get" asp-controller="SearchResult" asp-action="Index">
                             <div class="search-input">
-                                <input type="search" id="query" name="q" placeholder="Axtar...">
+                                <input autocomplete="off" type="search"  value="@ViewData["SearchedAll"]" name="allSearch" placeholder="Axtar...">
+                                
                             </div>
-                            <button class="search-btn">Axtar</button>
+                            <button type="submit" class="search-btn">Axtar</button>
                         </form>
                     </div>
 
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item text-center">
-                            <a class="nav-link" asp-controller="Cart" asp-action="Index"><i class="fas fa-shopping-cart"></i> 2</a>
+                            <a class="nav-link" asp-controller="ProductOperation" asp-action="Cart"><i class="fas fa-shopping-cart"></i></a>
                         </li>
 
                         <li class="nav-item text-center">
-                            <a class="nav-link"><i class="fas fa-wallet"></i> 400 ₼</a>
+                            <a asp-controller="ProductOperation" asp-action="Favourite" class="nav-link"><i class="bi bi-heart-fill"></i></a>
                         </li>
 
                         <li class="nav-item text-center dropdown">
@@ -149,45 +151,13 @@
             </div>
         </nav>
 
-
-        <section class="side-navbar">
-            <div id="mySidenav" class="sidenav">
-                <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
-                <div class="dropdown-container">
-                    <a class="text-center category-item" href="#"><p>Apple</p></a>
-                    <a class="text-center category-item" href="#"><p>Lenovo</p></a>
-                    <a class="text-center category-item" href="#"><p>HP</p></a>
-                    <a class="text-center category-item" href="#"><p>Dell</p></a>
-                    <a class="text-center category-item" href="#"><p>Acer</p></a>
-                    <a class="text-center category-item" href="#"><p>Asus</p></a>
-                    <a class="text-center category-item" href="#"><p>MSI</p></a>
-                </div>
-                <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
-                <div class="dropdown-container">
-                    <a class="text-center category-item" href="#"><p>Apple</p></a>
-                    <a class="text-center category-item" href="#"><p>Samsung</p></a>
-                    <a class="text-center category-item" href="#"><p>LG</p></a>
-                    <a class="text-center category-item" href="#"><p>Nokia</p></a>
-                </div>
-                <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
-                <div class="dropdown-container">
-                    <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
-                    <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
-                    <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
-                    <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
-                    <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
-                    <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
-                </div>
-
-                <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
-            </div>
-        </section>
-
-
-
-
-
     </header>
+
+
+
+
+
+   
 
 
 

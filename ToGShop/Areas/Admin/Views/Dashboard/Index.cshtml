@@ -1,7 +1,57 @@
-﻿
+﻿@model Business.ViewModels.DashboardViewModel.DashboardViewModel
 @{
     ViewData["Title"] = "Əsas Səhifə";
 }
 
-<h1>Xosh Geldin - Admin</h1>
 
+<div class="row">
+
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="text-primary card-title text-md-center text-xl-left">Məhsullar</p>
+                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="text-primary mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@Model.ProductCount</h3>
+                    <i style="font-size: 50px;" class="text-primary bi bi-box-seam"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="text-primary card-title text-md-center text-xl-left">Sifarişlər</p>
+                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="text-primary mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@Model.OrderCount</h3>
+                    <i style="font-size: 50px;" class="text-primary bi bi-receipt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="text-primary card-title text-md-center text-xl-left">Bəyənmələr</p>
+                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="text-primary mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@Model.FavouriteCount</h3>
+                    <i style="font-size: 50px;" class="text-primary bi bi-heart"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="text-primary card-title text-md-center text-xl-left">Müştərilər</p>
+                <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <h3 class="text-primary mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">@Model.CustomerCount</h3>
+                    <i style="font-size: 50px;" class="text-primary bi bi-person"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

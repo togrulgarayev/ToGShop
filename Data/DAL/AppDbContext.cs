@@ -22,6 +22,8 @@ namespace Data.DAL
             builder.ApplyConfiguration(new BrandConfiguration());
             builder.ApplyConfiguration(new ProductConfiguration());
             builder.ApplyConfiguration(new ProductImagesConfiguration());
+            builder.ApplyConfiguration(new ContactAdminConfiguration());
+            builder.ApplyConfiguration(new CommentConfiguration());
 
 
 
@@ -36,6 +38,10 @@ namespace Data.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductOperation> ProductOperations { get; set; }
+        public DbSet<ContactAdmin> ContactAdmin { get; set; }
+        public DbSet<ProductComment> Comments { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<DiscountTimer> DiscountTimers { get; set; }
 
     }
 }

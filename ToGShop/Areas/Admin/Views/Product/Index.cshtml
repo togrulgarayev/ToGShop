@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<Product>
 @{
     ViewData["Title"] = "Mehsullar";
+
+
+
     int count = 1;
 }
 
@@ -35,7 +38,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            @*<th>Məhsul</th>*@
+                            <th>Məhsul</th>
                             <th>Ad</th>
                             <th>Haqqında</th>
                             <th>Əlavə Məlumat</th>
@@ -51,7 +54,6 @@
                         {
                         <tr>
                             <td>@count</td>
-                            @*<td>@item.ProductImages.Where(pi=>pi.ProductId==item.Id &&pi.IsMain==true).FirstOrDefault().Image</td>*@
                             <td>@item.Name</td>
                             <td>@item.Description</td>
                             <td>@item.Information</td>

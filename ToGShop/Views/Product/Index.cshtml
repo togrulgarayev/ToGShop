@@ -1,4 +1,4 @@
-﻿@model ProductViewModel
+﻿@model Business.ViewModels.ProductCommentViewModels.ProductCommentViewModel
 @{
     ViewData["Title"] = "Index";
 
@@ -8,7 +8,38 @@
 }
 
 
+<section class="side-navbar">
+    <div id="mySidenav" class="sidenav">
+        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+            <a class="text-center category-item" href="#"><p>HP</p></a>
+            <a class="text-center category-item" href="#"><p>Dell</p></a>
+            <a class="text-center category-item" href="#"><p>Acer</p></a>
+            <a class="text-center category-item" href="#"><p>Asus</p></a>
+            <a class="text-center category-item" href="#"><p>MSI</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Samsung</p></a>
+            <a class="text-center category-item" href="#"><p>LG</p></a>
+            <a class="text-center category-item" href="#"><p>Nokia</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+        </div>
 
+        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+    </div>
+</section>
 
 
 <main>
@@ -18,28 +49,33 @@
             <div class="product-div">
                 <div class="product-div-left">
                     <div class="img-container">
-                        <img class="product-page-image" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId==Model.Products.Id && pi.IsMain==true).FirstOrDefault().Image" alt="watch">
+                        <img class="product-page-image" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId==Model.Product.Id && pi.IsMain==true).FirstOrDefault().Image" alt="watch">
                         
-
-                        @*<img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png" alt="watch">*@
+                        
                     </div>
                     <div class="hover-container">
 
-                        @foreach (var item in Model.ProductImages.Where(pi => pi.ProductId == Model.Products.Id).ToList())
+                        @foreach (var item in Model.ProductImages.Where(pi => pi.ProductId == Model.Product.Id).ToList())
                         {
                             <div><img class="product-page-image" src="~/assets/img/@item.Image"></div>
                         }
 
-                        @*<div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
-        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
-        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
-        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>
-        <div><img class="product-page-image" src="~/assets/img/381b1dd7-ff92-44e9-9485-b2ab5472781c_wireless-charge.png"></div>*@
+                        
                     </div>
                 </div>
                 <div class="product-div-right">
-                    <span class="product-name">Salamzade</span>
-                    <span class="product-price">$ 50.25</span>
+                    <span class="product-name">@Model.Product.Name</span>
+
+                    @if (@Model.Product.IsDiscount == true)
+                    {
+                        <span class="product-price"> <s>@Model.Product.Price</s> @Model.Product.DiscountPrice ₼</span>
+                    }
+                    else
+                    {
+                        <span class="product-price"> @Model.Product.Price ₼</span>
+                    }
+
+
                     <div class="product-rating">
                         <span><i class="fas fa-star"></i></span>
                         <span><i class="fas fa-star"></i></span>
@@ -48,13 +84,68 @@
                         <span><i class="fas fa-star-half-alt"></i></span>
                         <span>(350 ratings)</span>
                     </div>
-                    <p class="product-description">Description</p>
+                    <p class="product-description">@Model.Product.Description</p>
                     <div class="btn-groups">
-                        <button type="button"  asp-controller="ProductOperation" asp-action="SetCart"  class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Səbətə at</button>
+                        <button type="button" asp-controller="ProductOperation" asp-action="SetCart" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Səbətə at</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" asp-controller="Product" asp-action="AddComment">
+
+                    <input asp-for="@Model.Comment" placeholder="Komment daxil et" />
+                    <input asp-for="@Model.Username" hidden value="@User.Identity.Name"/>
+                    <input asp-for="@Model.ProductId" hidden value="@Model.Product.Id" />
+                    
+                    <button type="submit">Yaz</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <section>
+            <div class="container">
+                <div class="row">
+
+                    @foreach (var item in @Model.Comments)
+                    {
+                        <div class="col-md-8">
+                            <div class="media g-mb-30 media-comment">
+                                <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15" src="~/user/img/userlogo.png" alt="Image Description">
+                                @if (item.Username == User.Identity.Name)
+                                {
+                                    <a asp-controller="Product" asp-action="DeleteComment" asp-route-id="@item.Id">Sil</a>
+                                }
+                                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                                    <div class="g-mb-15">
+                                        <h5 class="h5 g-color-gray-dark-v1 mb-0">@item.Username</h5>
+
+                                        
+
+                                        <span class="g-color-gray-dark-v4 g-font-size-12">@item.CreateDT</span>
+                                    </div>
+
+                                    <p>
+                                        @item.Comment
+                                    </p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                </div>
+            </div>
+        </section>
     </div>
 
 </main>

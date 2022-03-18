@@ -12,7 +12,38 @@
 
 }
 
+<section class="side-navbar">
+    <div id="mySidenav" class="sidenav">
+        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+            <a class="text-center category-item" href="#"><p>HP</p></a>
+            <a class="text-center category-item" href="#"><p>Dell</p></a>
+            <a class="text-center category-item" href="#"><p>Acer</p></a>
+            <a class="text-center category-item" href="#"><p>Asus</p></a>
+            <a class="text-center category-item" href="#"><p>MSI</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Samsung</p></a>
+            <a class="text-center category-item" href="#"><p>LG</p></a>
+            <a class="text-center category-item" href="#"><p>Nokia</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+        </div>
 
+        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+    </div>
+</section>
 
 <main>
 
@@ -27,11 +58,10 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
 
                             <div class="timer">
-                                <h2 class="time-title">Bayram endirimləri davam edir !</h2>
+                                <h2 class="time-title">@Model.DiscountTimer.DiscountTittle</h2>
 
                                 <div id="time" class="time d-flex justify-content-center">
-                                    <!-- <p style="display: none;" class="endtime">28 January 2022 10:00:00 GMT+01:00</p> -->
-                                    <input type="hidden" id="endtime" value="25 April 2022 10:00:00 GMT+01:00">
+                                    <input type="hidden" id="endtime" value="@Model.DiscountTimer.DiscountTime">
                                     <div class="time-card">
                                         <h3 class="time-item" data-days="">00</h3>
                                         <p>Days</p>
@@ -78,6 +108,7 @@
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
+                                                    
                                                 </div>
 
 

@@ -1,26 +1,101 @@
 ﻿
 @{
     ViewData["Title"] = "Processing";
+    //Layout = null;
 }
-<div class="text-center">
-    <form asp-action="Processing" asp-controller="Checkout" method="post">
+
+<section class="side-navbar">
+    <div id="mySidenav" class="sidenav">
+        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+            <a class="text-center category-item" href="#"><p>HP</p></a>
+            <a class="text-center category-item" href="#"><p>Dell</p></a>
+            <a class="text-center category-item" href="#"><p>Acer</p></a>
+            <a class="text-center category-item" href="#"><p>Asus</p></a>
+            <a class="text-center category-item" href="#"><p>MSI</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Samsung</p></a>
+            <a class="text-center category-item" href="#"><p>LG</p></a>
+            <a class="text-center category-item" href="#"><p>Nokia</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+        </div>
+
+        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+    </div>
+</section>
+
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+</head>
+<style>
+    
+    .checkout-succes-h1 {
+        color: #88B04B;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    .checkout-succes-p {
+        color: #404F5E;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-size: 20px;
+        margin: 0;
+    }
+    .checkout-succes-i {
+        color: #9ABC66;
+        font-size: 100px;
+        line-height: 200px;
+        margin-left: -15px;
+    }
+    .checkout-succes-card {
+        background: white;
+        padding: 60px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px #C8D0D8;
+        display: inline-block;
+        margin: 0 auto;
+    }
+</style>
+<body>
+
+<div style="display: flex; justify-items: center; justify-content: center; text-align: center; align-items: center; align-content: center;">
+    
+    <div class="card checkout-succes-card">
+    
+    
+    
+        <form asp-action="Processing" asp-controller="Checkout" method="post">
+
         
-        <label class="text-info">Ödəniş uğurla başa çatdı !</label>
-        <br />
-        <br />
-        <p class="blockquote text-center">
-            Qeydə alınan sifariş:  <br />
-            Müştəri : @ViewBag.Customer <br /> <br />
-            Məbləğ : $ @ViewBag.AmountPaid 
+        
+            <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+                <i class="checkmark checkout-succes-i">✓</i>
+            </div>
+            <h1 class="checkout-succes-h1">Uğurlu ödəniş</h1> 
+            <p class="checkout-succes-p">Müştərinin istifadəçi adı: @ViewBag.Customer<br /> Ödənilən məbləğ: @ViewBag.AmountPaid ₼</p> <br />
+            <a class="btn btn-success" asp-controller="Home" asp-action="Index">Əsas Səhifə</a>
 
 
-        </p>
-            
-        @*@if (TempData.Peek("TotalAmount") != null)
-                {
-                    var result = Convert.ToInt64(TempData.Peek("TotalAmount"));
-                    result /= 100; 
-                    <h3>Amount: @result USD has been processed successfully.</h3>
-                }*@ 
-    </form>
+        </form>
+    
+
+    </div>
 </div>
+
+</body>
+</html>

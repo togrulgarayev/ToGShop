@@ -1,0 +1,88 @@
+﻿@model Business.ViewModels.UserOrderViewModel.UserOrderViewModel
+@{
+    ViewData["Title"] = "Yeni Sifarişlər";
+    int count = 1;
+}
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Yeni Sifarişlər</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+
+
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Müştəri</th>
+                            <th scope="col">Məhsul</th>
+                            <th scope="col">Məhsulun adı</th>
+                            <th scope="col">Məhsulun qiyməti</th>
+                            <th scope="col">Vəziyyəti</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ProductOperationsOrders)
+                        {
+                            var product = Model.Products.Where(p => p.Id == item.ProductId).FirstOrDefault();
+
+
+
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td scope="row">@item.ApplicationUser.FullName</td>
+                            <td><img width="150" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image" /></td>
+                            <td>@product.Name</td>
+                            <td>
+
+                                @if (@product.IsDiscount == true)
+                                {
+                                    <s>@product.Price</s> @product.DiscountPrice
+                                }
+                                else
+                                {
+
+                                    @product.Price;
+                                }
+                                ₼
+                            </td>
+                            <td>
+                                Sifariş edilib
+                            </td>
+                            <td>
+                                
+                                    <a class="btn btn-primary" asp-area="Default" asp-controller="ProductOperation" asp-action="SetSend" asp-route-id="@item.Id">Göndər</a>
+                                
+                            </td>
+                        </tr>
+
+                            count++;
+
+
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<!-- End of Main Content -->

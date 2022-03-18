@@ -5,10 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DAL\Migrations\20220314150211_CreateOrginalDb.cs" />
-    <Compile Remove="DAL\Migrations\20220314150211_CreateOrginalDb.Designer.cs" />
-    <Compile Remove="DAL\Migrations\20220314150548_CreateDB.cs" />
-    <Compile Remove="DAL\Migrations\20220314150548_CreateDB.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220318163820_UpdateCommentTable.cs" />
+    <Compile Remove="DAL\Migrations\20220318163820_UpdateCommentTable.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220318163955_UpdateCommentTable.cs" />
+    <Compile Remove="DAL\Migrations\20220318163955_UpdateCommentTable.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220318164128_UpdateProduct.cs" />
+    <Compile Remove="DAL\Migrations\20220318164128_UpdateProduct.Designer.cs" />
+    <Compile Remove="DAL\Migrations\20220318164413_UpdateProduct.cs" />
+    <Compile Remove="DAL\Migrations\20220318164413_UpdateProduct.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DAL\Migrations\" />
   </ItemGroup>
 
 </Project>

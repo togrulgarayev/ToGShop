@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "Müştərilər";
+    int count = 1;
+}
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Müştərilər</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ad</th>
+                            <th>Soyad</th>
+                            <th>Ünvan</th>
+                            <th>Şəhər</th>
+                            <th>Telefon</th>
+                            <th>Poçt kodu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@count</td>
+                            <td> @item.Name</td>
+                            <td>@item.Surname</td>
+                            <td>@item.Address</td>
+                            <td>@item.City</td>
+                            <td>@item.Number</td>
+                            <td>@item.PostalCode</td>
+
+                        </tr>
+
+                            count++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<!-- End of Main Content -->

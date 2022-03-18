@@ -1,0 +1,53 @@
+﻿@model DiscountTimer
+@{
+    ViewData["Title"] = "Endirim";
+    int count = 1;
+}
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Endirimlər</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="input-group">
+
+                
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlıq</th>
+                            <th>Tarix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <tr>
+                            <td>@count</td>
+                            <td>@Model.DiscountTittle</td>
+                            <td>@Model.DiscountTime</td>
+                            <td>
+                                <a asp-controller="Discount" asp-action="Update"><i class="bi bi-pencil-square"></i></a>
+                            </td>
+                        </tr>
+                            
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+<!-- End of Main Content -->

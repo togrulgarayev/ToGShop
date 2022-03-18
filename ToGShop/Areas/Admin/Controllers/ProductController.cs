@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
+using Business.ViewModels.ProductAdminViewModels;
+using Business.ViewModels.ProductViewModel;
 using Business.ViewModels.ProductViewModels;
 using Core;
 using Core.Entities;
@@ -15,21 +17,25 @@ namespace ToGShop.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProductService _productService;
+        private readonly IProductImageService _productImageService;
         private readonly ICategoryService _categoryService;
         private readonly IBrandService _brandService;
 
-        public ProductController(IUnitOfWork unitOfWork, IProductService productService, ICategoryService categoryService, IBrandService brandService)
+        public ProductController(IProductImageService productImageService,IUnitOfWork unitOfWork, IProductService productService, ICategoryService categoryService, IBrandService brandService)
         {
             _unitOfWork = unitOfWork;
             _productService = productService;
             _categoryService = categoryService;
             _brandService = brandService;
+            _productImageService = productImageService;
         }
 
 
         public async Task<ActionResult> Index()
         {
-            return View(await _unitOfWork.productRepository.GetAllAsync());
+            var product = await _productService.GetAllAsync();
+
+            return View(product);
         }
 
 

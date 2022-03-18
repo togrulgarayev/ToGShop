@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Core.Entities.Product>
+@{
+    ViewData["Title"] = "Axtarış";
+
+    ViewData["Loader"] = "<div id=\"loadertop\"></div>";
+}
+
+
+
+
+
+<section class="side-navbar">
+    <div id="mySidenav" class="sidenav">
+        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
+            <a class="text-center category-item" href="#"><p>HP</p></a>
+            <a class="text-center category-item" href="#"><p>Dell</p></a>
+            <a class="text-center category-item" href="#"><p>Acer</p></a>
+            <a class="text-center category-item" href="#"><p>Asus</p></a>
+            <a class="text-center category-item" href="#"><p>MSI</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Apple</p></a>
+            <a class="text-center category-item" href="#"><p>Samsung</p></a>
+            <a class="text-center category-item" href="#"><p>LG</p></a>
+            <a class="text-center category-item" href="#"><p>Nokia</p></a>
+        </div>
+        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
+        <div class="dropdown-container">
+            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
+            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
+            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
+            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
+            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
+        </div>
+
+        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+    </div>
+</section>
+
+
+<main>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="form-outline">
+            <a style="padding-left: 15px; color: #343434" asp-action="Index">Axtarış nəticələrini sıfırla</a>
+        </div>
+    </div>
+
+
+
+    <div style="padding-top: 55px; padding-bottom: 55px;" class="container">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4">
+
+                    <div class="myproduct-item">
+
+                        <a class="go-product" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                            <div class="product-card">
+                                <!--<div class="product-image">-->
+                                    @*<img src="~/assets/img/@product.ProductImages.Where(pi=>pi.IsMain==true).FirstOrDefault().Image" alt="">*@
+                                    @*<img src="~/assets/img/@Model.ProductImages.Where(p => p.ProductId == product.Id && p.IsMain == true).FirstOrDefault().Image" alt="">*@
+                                <!--</div>-->
+
+                                <div class="add-fav">
+                                    <a class="add-fav-btn" asp-controller="ProductOperation" asp-action="SetFavourite" asp-route-id="@product.Id"><i class="fas fa-heart"></i></a>
+                                </div>
+
+                                <div class="product-detail">
+                                    <a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id"><h2>@product.Name</h2></a>
+                                    <div class="fav-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+
+                                    @if (product.IsDiscount == true)
+                                    {
+                                        <p class="product-price">₼ <s>@product.Price</s> @product.DiscountPrice</p>
+
+                                    }
+                                    else
+                                    {
+
+                                        <p class="product-price">₼ @product.Price</p>
+                                    }
+
+                                </div>
+
+                                <div class="product-operations">
+
+                                    <a class="add-to-cart-btn" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@product.Id"><i class="bi bi-cart-plus-fill"></i></a>
+                                </div>
+
+
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+</main>

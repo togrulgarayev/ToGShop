@@ -13,6 +13,10 @@ namespace Core
         public IBrandRepository brandRepository { get; }
         public IProductImageRepository productImageRepository { get; }
         public IProductOperationsRepository productOperationsRepository { get; }
+        public IProductCommentRepository productCommentRepository { get; }
+        public IContactAdminRepository contactAdminRepository { get; }
+        public IDiscountTimerRepository discountTimerRepository { get; }
+        public IOrderRepository orderRepository { get; }
         Task SaveAsync();
     }
 }
