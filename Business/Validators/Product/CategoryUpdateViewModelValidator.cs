@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Business.ViewModels.CategoryViewModels;
+﻿using Business.ViewModels.CategoryViewModels;
 using FluentValidation;
 
 namespace Business.Validators.Product

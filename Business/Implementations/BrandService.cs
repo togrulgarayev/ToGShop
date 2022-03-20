@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
@@ -14,6 +13,8 @@ namespace Business.Implementations
     {
 
 
+        #region Injects
+
         private readonly IWebHostEnvironment _env;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -22,6 +23,8 @@ namespace Business.Implementations
             _unitOfWork = unitOfWork;
             _env = env;
         }
+
+        #endregion
 
 
         public async Task<List<Brand>> GetAllAsync()

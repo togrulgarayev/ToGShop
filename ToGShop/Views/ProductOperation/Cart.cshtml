@@ -7,40 +7,18 @@
     decimal totalprice = 0;
 }
 
-
 <section class="side-navbar">
     <div id="mySidenav" class="sidenav">
-        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
-            <a class="text-center category-item" href="#"><p>HP</p></a>
-            <a class="text-center category-item" href="#"><p>Dell</p></a>
-            <a class="text-center category-item" href="#"><p>Acer</p></a>
-            <a class="text-center category-item" href="#"><p>Asus</p></a>
-            <a class="text-center category-item" href="#"><p>MSI</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Samsung</p></a>
-            <a class="text-center category-item" href="#"><p>LG</p></a>
-            <a class="text-center category-item" href="#"><p>Nokia</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
-            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
-            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
-            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
-        </div>
 
-        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+        @foreach (var category in @Model.Categories)
+        {
+
+            <a class="category-title"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
+        }
+
+
     </div>
 </section>
-
 
 <main>
 
@@ -126,7 +104,7 @@
                                 <div class="total-value final-value" id="basket-total"> @totalprice</div>
                             </div>
                             <div class="summary-checkout">
-                                <a style="color: #343434;" class="checkout-cta" asp-controller="ProductOperation" asp-action="Payment" asp-route-id="@totalprice">Satın Al</a>
+                                <a style="color: #343434;" class="checkout-cta" asp-controller="ProductOperation" asp-action="Payment" asp-route-crypted="CfDJ8E6aunCR%2B8lDjMS%2BzxHjhpa8Is9vO9p0p4emWBxLWMiQek7emlAl9Bfxg73pAqJej8mcdn0LS5%2F%2BuOnDUDT5uM32xsrLglxxdIUytACa2FtZoZSChKPwaVoPQRqf%2FhLr6twnWjYOccgCM82SCf%2FHB8NxTx8rRQlbLLdokiGm0waW%2FBh2LYC7%2BaBvhNXjWHE8TZX7%2BRB34DK1yXoiQTcSs55za9W9dkGDzCG4ANhdMuvB4l1IqTPDNo" asp-route-met="@totalprice" asp-route-key="Dn0LS5%2F%2BuOnDUDT5uM32xsrLglxxdIUytACa2FtZoZSChKPwaVoPQRqf%2FhLr6twnWjYOccgCM82SCf%2FHB8NxTx8rRQlbLLdokiGm0waW%2FBh2LYC7%2BaBvhNXjWHE8TZX7%2BRB34DK1yXoiQTcSs55za9W9dkGDzCG4ANhdMuvB4l1IqTPDNoCfDJ8E6aunCR%2B8lDjMS%2BzxHjhpa8Is9vO9p0p4emWBxLWMiQek7emlAl9Bfxg73pAqJej8mc">Satın Al</a>
                             </div>
                         </div>
                     </aside>

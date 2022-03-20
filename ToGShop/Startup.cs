@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Business.Implementations;
+﻿using Business.Implementations;
 using Business.Interfaces;
 using Business.Validators.Product;
 using Core;

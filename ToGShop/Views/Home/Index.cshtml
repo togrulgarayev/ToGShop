@@ -14,34 +14,14 @@
 
 <section class="side-navbar">
     <div id="mySidenav" class="sidenav">
-        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
-            <a class="text-center category-item" href="#"><p>HP</p></a>
-            <a class="text-center category-item" href="#"><p>Dell</p></a>
-            <a class="text-center category-item" href="#"><p>Acer</p></a>
-            <a class="text-center category-item" href="#"><p>Asus</p></a>
-            <a class="text-center category-item" href="#"><p>MSI</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Samsung</p></a>
-            <a class="text-center category-item" href="#"><p>LG</p></a>
-            <a class="text-center category-item" href="#"><p>Nokia</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
-            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
-            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
-            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
-        </div>
+        
+        @foreach (var category in @Model.Categories)
+        {
+            
+            <a class="category-title"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
+        }
 
-        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+        
     </div>
 </section>
 

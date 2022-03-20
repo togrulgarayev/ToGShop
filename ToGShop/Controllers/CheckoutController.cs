@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Business.Interfaces;
-using Business.ViewModels.PaymentViewModel;
+using Business.ViewModels.CheckoutViewModel;
 using Core;
 using Core.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -16,22 +14,28 @@ namespace ToGShop.Controllers
     {
 
 
+        #region Injects
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProductOperationService _productOperationService;
+        private readonly ICategoryService _categoryService;
 
 
-        public CheckoutController(UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork, IProductOperationService productOperationService)
+        public CheckoutController(ICategoryService categoryService,UserManager<ApplicationUser> userManager, IUnitOfWork unitOfWork, IProductOperationService productOperationService)
         {
 
             _productOperationService = productOperationService;
             _userManager = userManager;
             _unitOfWork = unitOfWork;
+            _categoryService = categoryService;
         }
+
+        #endregion
 
         [TempData]
         public string TotalAmount { get; set; }
-        public async Task<IActionResult> Index(decimal met)
+        public async Task<IActionResult> Index(string crypted, decimal met)
         {
 
             var price = met;
@@ -43,8 +47,19 @@ namespace ToGShop.Controllers
             TotalAmount = total.ToString();
 
 
-            return View();
+
+
+            var categories = await _categoryService.GetAllAsync();
+
+            var checkoutViewModel = new CheckoutViewModel()
+            {
+                Categories = categories
+            };
+
+            return View(checkoutViewModel);
         }
+
+        
 
 
         [HttpPost]
@@ -104,12 +119,19 @@ namespace ToGShop.Controllers
 
 
 
-            
+            var categories = await _categoryService.GetAllAsync();
+
+            var checkoutViewModel = new CheckoutViewModel()
+            {
+                Categories = categories
+            };
+
+            return View(checkoutViewModel);
 
 
 
 
-            return View();
+            //return View();
         }
     }
 }

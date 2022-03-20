@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Business.ViewModels.AuthViewModels;
+﻿using Business.ViewModels.AuthViewModels;
 using FluentValidation;
 
 namespace Business.Validators.Account

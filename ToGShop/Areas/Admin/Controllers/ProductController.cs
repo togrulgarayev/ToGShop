@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
-using Business.ViewModels.ProductAdminViewModels;
-using Business.ViewModels.ProductViewModel;
 using Business.ViewModels.ProductViewModels;
 using Core;
 using Core.Entities;

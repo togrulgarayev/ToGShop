@@ -1,40 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels;
 using Business.ViewModels.CartViewModel;
 using Business.ViewModels.PaymentViewModel;
-using Core;
 using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Stripe;
 
 namespace ToGShop.Controllers
 {
     public class ProductOperationController : Controller
     {
+        #region Injects
+
         private readonly IProductOperationService _productOperationService;
         private readonly IProductImageService _productImageService;
         private readonly IProductService _productService;
         private readonly IOrderService _orderService;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
         private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public ProductOperationController(IOrderService orderService,IUnitOfWork unitOfWork, IProductOperationService productOperationService, UserManager<ApplicationUser> userManager, IProductService productService, IProductImageService productImageService)
+        public ProductOperationController(ICategoryService categoryService,IBrandService brandService,IOrderService orderService,IProductOperationService productOperationService, UserManager<ApplicationUser> userManager, IProductService productService, IProductImageService productImageService)
         {
-            _unitOfWork = unitOfWork;
             _orderService = orderService;
             _productOperationService = productOperationService;
             _userManager = userManager;
             _productService = productService;
             _productImageService = productImageService;
+            _categoryService = categoryService;
+            _brandService = brandService;
         }
+
+        #endregion
+
+
+        #region Favourite Operations
 
         [Authorize]
         public async Task<IActionResult> Favourite()
@@ -45,12 +48,16 @@ namespace ToGShop.Controllers
             var products = await _productService.GetAllAsync();
             var productOperations = await _productOperationService.GetAllFavouriteAsync(userId);
             var productImages = await _productImageService.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
+            var brands = await _brandService.GetAllAsync();
 
             FavouriteViewModel favouriteViewModel = new FavouriteViewModel
             {
                 Products = products,
                 ProductOperations = productOperations,
-                ProductImages = productImages
+                ProductImages = productImages,
+                Categories = categories,
+                Brands = brands
             };
 
 
@@ -81,8 +88,10 @@ namespace ToGShop.Controllers
             return RedirectToAction("Favourite");
         }
 
+        #endregion
 
 
+        #region Cart Operations
 
         [Authorize]
         public async Task<IActionResult> Cart()
@@ -93,12 +102,16 @@ namespace ToGShop.Controllers
             var products = await _productService.GetAllAsync();
             var productOperations = await _productOperationService.GetAllCartAsync(userId);
             var productImages = await _productImageService.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
+            var brands = await _brandService.GetAllAsync();
 
             CartViewModel cartViewModel = new CartViewModel
             {
                 Products = products,
                 ProductOperations = productOperations,
-                ProductImages = productImages
+                ProductImages = productImages,
+                Categories = categories,
+                Brands = brands
             };
 
 
@@ -130,6 +143,10 @@ namespace ToGShop.Controllers
             return RedirectToAction("Cart");
         }
 
+        #endregion
+
+
+        #region Send Operations
 
         public async Task<IActionResult> SetSend(int id)
         {
@@ -146,15 +163,18 @@ namespace ToGShop.Controllers
             return Redirect("../../Admin/UserSend");
         }
 
-        
+        #endregion
+
+
+        #region PaymentOperations
 
         [Authorize]
-        public IActionResult Payment(decimal id)
+        public IActionResult Payment(string crypted,decimal met)
         {
 
             var paymentViewModel = new PaymentViewModel
             {
-                Price = id
+                Price = met
             };
 
             return View(paymentViewModel);
@@ -168,7 +188,7 @@ namespace ToGShop.Controllers
             if (ModelState.IsValid)
             {
                 await _orderService.Create(paymentViewModel.Order);
-                return Redirect($"/Checkout?met={price}");
+                return Redirect($"/Checkout?token=CfDJ8E6aunCR%2B8lDjMS%2BzxHjhpa8Is9vO9p0p4emWBxLWMiQek7emlAl9Bfxg73pAqJej8mcdn0LS5%2F%2BuOnDUDT5uM32xsrLglxxdIUytACa2FtZoZSChKPwaVoPQRqf%2FhLr6twnWjYOccgCM82SCf%2FHB8NxTx8rRQlbLLdokiGm0waW%2FBh2LYC7%2BaBvhNXjWHE8TZX7%2BRB34DK1yXoiQTcSs55za9W9dkGDzCG4ANhdMuvB4l1IqTPDNo&met={price}&key=Dn0LS5%2F%2BuOnDUDT5uM32xsrLglxxdIUytACa2FtZoZSChKPwaVoPQRqf%2FhLr6twnWjYOccgCM82SCf%2FHB8NxTx8rRQlbLLdokiGm0waW%2FBh2LYC7%2BaBvhNXjWHE8TZX7%2BRB34DK1yXoiQTcSs55za9W9dkGDzCG4ANhdMuvB4l1IqTPDNoCfDJ8E6aunCR%2B8lDjMS%2BzxHjhpa8Is9vO9p0p4emWBxLWMiQek7emlAl9Bfxg73pAqJej8mc");
 
 
             }
@@ -176,10 +196,7 @@ namespace ToGShop.Controllers
             return View(paymentViewModel);
         }
 
-
-
-
-
+        #endregion
 
 
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.ProductImageViewModels;
@@ -34,20 +33,6 @@ namespace Business.Implementations
             return await _unitOfWork.productImageRepository.Get(p => p.Id == id);
 
         }
-
-        public async Task Create(ProductImageCreateViewModel productImageViewModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task Update(int id, ProductImageUpdateViewModel productImageViewModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

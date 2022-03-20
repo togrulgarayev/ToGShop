@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
@@ -7,7 +6,6 @@ using Business.ViewModels.ProductViewModels;
 using Core;
 using Core.Entities;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 
 namespace Business.Implementations
 {
@@ -26,10 +24,15 @@ namespace Business.Implementations
         public async Task<List<Product>> GetAllAsync()
         {
 
-            return await _unitOfWork.productRepository.GetAllAsync(p=> p.IsDeleted == false, "ProductImages");
+            return await _unitOfWork.productRepository.GetAllAsync(p=> p.IsDeleted == false, "ProductImages" , "Category");
 
              
 
+        }
+
+        public async Task<List<Product>> GetAllProductAsync()
+        {
+            return await _unitOfWork.productRepository.GetAllAsync();
         }
 
         public async Task <Product> Get(int id)

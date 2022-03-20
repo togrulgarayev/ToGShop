@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Core;
@@ -29,7 +27,12 @@ namespace Business.Implementations
 
         public async Task<List<ProductOperation>> GetAllFavouriteProductAsync()
         {
-            return await _unitOfWork.productOperationsRepository.GetAllAsync();
+            return await _unitOfWork.productOperationsRepository.GetAllAsync(po=>po.IsFavourite==true);
+        }
+
+        public async Task<List<ProductOperation>> GetAllOrderProductAsync()
+        {
+            return await _unitOfWork.productOperationsRepository.GetAllAsync(po => po.IsDeleted == true);
         }
 
         public async Task<List<ProductOperation>> GetAllCartAsync(string userId)

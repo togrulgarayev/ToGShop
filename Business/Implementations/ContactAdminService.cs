@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.ContactAdminViewModels;
 using Core;
 using Core.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace Business.Implementations
 {
     public class ContactAdminService:IContactAdminService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<ApplicationUser> _userManager;
+        #region Injects
 
-        public ContactAdminService(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ContactAdminService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _userManager = userManager;
         }
+
+        #endregion
 
         public async Task<List<ContactAdmin>> GetAllAsync()
         {

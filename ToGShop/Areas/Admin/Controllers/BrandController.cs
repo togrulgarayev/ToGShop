@@ -43,7 +43,7 @@ namespace ToGShop.Areas.Admin.Controllers
 
             return View(brendQuery.ToList());
         }
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }

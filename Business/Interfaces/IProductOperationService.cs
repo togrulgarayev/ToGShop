@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities;
 
@@ -11,6 +9,7 @@ namespace Business.Interfaces
         Task<List<ProductOperation>> GetAllAsync(string userId);
         Task<List<ProductOperation>> GetAllFavouriteAsync(string userId);
         Task<List<ProductOperation>> GetAllFavouriteProductAsync();
+        Task<List<ProductOperation>> GetAllOrderProductAsync();
         Task<List<ProductOperation>> GetAllCartAsync(string userId);
         Task<List<ProductOperation>> GetAllProductOrderedAsync();
         Task<List<ProductOperation>> GetAllProductSendAsync();

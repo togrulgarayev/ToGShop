@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Business.Interfaces;
@@ -20,6 +16,8 @@ namespace ToGShop.Controllers
     public class AccountController : Controller
     {
 
+        #region Injects
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IContactAdminService _contactAdminService;
@@ -30,7 +28,7 @@ namespace ToGShop.Controllers
         private readonly IProductImageService _productImageService;
         private readonly IProductService _productService;
 
-        public AccountController(IProductService productService,IProductImageService productImageService,IProductOperationService productOperationService,UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager, IContactAdminService contactAdminService, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
+        public AccountController(IProductService productService, IProductImageService productImageService, IProductOperationService productOperationService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IContactAdminService contactAdminService, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -42,6 +40,8 @@ namespace ToGShop.Controllers
             _productImageService = productImageService;
             _productService = productService;
         }
+
+        #endregion
 
 
         #region Register
@@ -76,22 +76,20 @@ namespace ToGShop.Controllers
                 var confirmationLink = Url.Action("ConfirmEmail", "Account", new { token, email = registerViewModel.Email }, Request.Scheme);
 
 
-                //var msg = $"<a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Təsdiqlə</a>";
-
+                
                 var msgArea =
-                    $"<div style=\"border:2px solid #a2a2a2; border-radius:8px; text-align:center;\"><h3 style=\"background:#a2a2a2; color:white; border: 2px solid #a2a2a2; border-radius:8px;text-align:center;\">ToG Shopping - Email Təsdiqləmə</h3><p>Sizi ToG Shopping-də gördüyümüz üçün şad olduq ! Aşağıdakı keçid linkinə tıklayın və emailinizi təsdiqləyərək hesabınızı aktivləşdirin! Diqqətiniz üçün təşəkkürlər :) </p><br><a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Təsdiqlə</a></div>";
+                    $"<body style=\"height: 100% !important;margin: 0 !important;padding: 0 !important;width: 100% !important;background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;\"><div style=\"display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: \'Lato\', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;\"> Sizinlə əlaqə saxlamaq üçün mesajdır. </div><table style=\"border-collapse: collapse !important;\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr><td bgcolor=\"#6d6d6d\" align=\"center\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;\"><tr><td align=\"center\" valign=\"top\" style=\"padding: 40px 10px 40px 10px;\"> </td></tr></table></td></tr><tr><td bgcolor=\"#6d6d6d\" align=\"center\" style=\"padding: 0px 10px 0px 10px;\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;border-collapse: collapse !important;\"><tr><td bgcolor=\"#ffffff\" align=\"center\" valign=\"top\" style=\"padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;\"><h1 style=\"font-size: 48px; font-weight: 400; margin: 2;\">Xoş Gəlmisiniz</h1> <img src=\"https://www.logomaker.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6khvGJqhNGmBrNwXs1M3EMoAJtliQqgPto9foz\" width=\"125\" height=\"120\" style=\"border: 0;height: auto; line-height: 100%;outline: none; text-decoration: none; display: block; border: 0px;\" /></td></tr></table></td></tr><tr><td bgcolor=\"#f4f4f4\" align=\"center\" style=\"padding: 0px 10px 0px 10px;\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;border-collapse: collapse !important;\"><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 20px 30px 40px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">ToG Shopping-də qeydiyyatdan keçdiyiniz üçün təşəkkür edirik. Aşağıdakı keçidə vuraraq hesabınızı aktivləşdirin.</p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\"><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse !important;\"><tr><td bgcolor=\"#ffffff\" align=\"center\" style=\"padding: 20px 30px 60px 30px;\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse !important;\"><tr><td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#343434\"><a href=\"{confirmationLink}\" target=\"_blank\" style=\"font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #6d6d6d; display: inline-block;\">Doğrula</a></td></tr></table></td></tr></table></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 0px 30px 0px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">Doğrulama zamanı səhv baş verərsə adminlə əlaqə saxlamağınız xahiş olunur !</p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 20px 30px 20px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\"><a href=\"mailto:contact.togshop@gmail.com\" target=\"_blank\" style=\"color: #6d6d6d;\">contact.togshop@gmail.com</a></p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 0px 30px 20px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">Diqqətiniz üçün çox sağolun !</p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">Hörmətlə: <br>ToG Shopping ©</p></td></tr></table></td></tr><tr><td bgcolor=\"#f4f4f4\" align=\"center\" style=\"padding: 0px 10px 0px 10px;\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;border-collapse: collapse !important;\"><tr><td bgcolor=\"#f4f4f4\" align=\"left\" style=\"padding: 0px 30px 30px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;\"> <br><p style=\"margin: 0; text-align: center;\">© 2022 Bütün Hüquqlar Qorunur | <a href=\"mailto:togrulgarazade@gmail.com\" target=\"_blank\" style=\"color: #111111; font-weight: 700;\"> Togrul Garazade</a>.</p></td></tr></table></td></tr></table></body>";
 
+                var subject = "ToG Shopping - Hesab Doğrulama";
 
-
-
-
-                //bool emailResponse = SendEmail(registerViewModel.Email, msgArea);
-                bool emailResponse = Helper.SendEmail(registerViewModel.Email, msgArea);
+                bool emailResponse = Helper.SendEmail(registerViewModel.Email, msgArea, subject);
 
 
                 if (emailResponse)
+                {
                     await _userManager.AddToRoleAsync(newUser, UserRoles.User.ToString());
-                return RedirectToAction("ConfirmedEmail", "Account");
+                    return RedirectToAction("ConfirmedEmail", "Account");
+                }
             }
             else
             {
@@ -308,15 +306,15 @@ namespace ToGShop.Controllers
             }, protocol: HttpContext.Request.Scheme);
 
 
-            //var msg = $"<a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Verify Email</a>";
-
+            
             var msg =
-                $"<div style=\"border:2px solid #a2a2a2; border-radius:8px; text-align:center;\"><h3 style=\"background:#a2a2a2; color:white; border: 2px solid #a2a2a2; border-radius:8px;text-align:center;\">ToG Shopping - Email Təsdiqləmə</h3><p>Sizi ToG Shopping-də gördüyümüz üçün şad olduq ! Aşağıdakı keçid linkinə tıklayın və emailinizi təsdiqləyərək hesabınızı aktivləşdirin! Diqqətiniz üçün təşəkkürlər :) </p><br><a style=\"text-decoration:none;\" href=\"{confirmationLink}\">Təsdiqlə</a></div>";
+                    $"<body style=\"height: 100% !important;margin: 0 !important;padding: 0 !important;width: 100% !important;background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;\"><div style=\"display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: \'Lato\', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;\"> Sizinlə əlaqə saxlamaq üçün mesajdır. </div><table style=\"border-collapse: collapse !important;\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr><td bgcolor=\"#6d6d6d\" align=\"center\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;\"><tr><td align=\"center\" valign=\"top\" style=\"padding: 40px 10px 40px 10px;\"> </td></tr></table></td></tr><tr><td bgcolor=\"#6d6d6d\" align=\"center\" style=\"padding: 0px 10px 0px 10px;\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;border-collapse: collapse !important;\"><tr><td bgcolor=\"#ffffff\" align=\"center\" valign=\"top\" style=\"padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;\"><h1 style=\"font-size: 48px; font-weight: 400; margin: 2;\">Xoş Gəlmisiniz</h1> <img src=\"https://www.logomaker.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6khvGJqhNGmBrNwXs1M3EMoAJtliQqgPto9foz\" width=\"125\" height=\"120\" style=\"border: 0;height: auto; line-height: 100%;outline: none; text-decoration: none; display: block; border: 0px;\" /></td></tr></table></td></tr><tr><td bgcolor=\"#f4f4f4\" align=\"center\" style=\"padding: 0px 10px 0px 10px;\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;border-collapse: collapse !important;\"><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 20px 30px 40px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">ToG Shopping-ə müraciət etdiyiniz üçün təşəkkür edirik. Aşağıdakı keçidə vuraraq şifrəni yeniləyənin siz olduğunuzu təsdiqləyin!</p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\"><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse !important;\"><tr><td bgcolor=\"#ffffff\" align=\"center\" style=\"padding: 20px 30px 60px 30px;\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse !important;\"><tr><td align=\"center\" style=\"border-radius: 3px;\" bgcolor=\"#343434\"><a href=\"{confirmationLink}\" target=\"_blank\" style=\"font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #6d6d6d; display: inline-block;\">Təsdiqlə</a></td></tr></table></td></tr></table></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 0px 30px 0px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">Təsdiqləmə zamanı səhv baş verərsə adminlə əlaqə saxlamağınız xahiş olunur !</p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 20px 30px 20px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\"><a href=\"mailto:contact.togshop@gmail.com\" target=\"_blank\" style=\"color: #6d6d6d;\">contact.togshop@gmail.com</a></p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 0px 30px 20px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">Diqqətiniz üçün çox sağolun !</p></td></tr><tr><td bgcolor=\"#ffffff\" align=\"left\" style=\"padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;\"><p style=\"margin: 0; text-align: center;\">Hörmətlə: <br>ToG Shopping ©</p></td></tr></table></td></tr><tr><td bgcolor=\"#f4f4f4\" align=\"center\" style=\"padding: 0px 10px 0px 10px;\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"max-width: 600px;border-collapse: collapse !important;\"><tr><td bgcolor=\"#f4f4f4\" align=\"left\" style=\"padding: 0px 30px 30px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;\"> <br><p style=\"margin: 0; text-align: center;\">© 2022 Bütün Hüquqlar Qorunur | <a href=\"mailto:togrulgarazade@gmail.com\" target=\"_blank\" style=\"color: #111111; font-weight: 700;\"> Togrul Garazade</a>.</p></td></tr></table></td></tr></table></body>";
 
+            var subject = "ToG Shopping - Şifrə yeniləmə";
 
             //SendMailHelper sendEmailHelper = new SendMailHelper();
             //bool emailResponse = SendEmail(forget.Email, msg);
-            bool emailResponse = Helper.SendEmail(forget.Email, msg);
+            bool emailResponse = Helper.SendEmail(forget.Email, msg,subject);
 
 
 
@@ -338,43 +336,7 @@ namespace ToGShop.Controllers
 
         #endregion
 
-
-        #region Send Email
-
-        //Send Email Operation
-
-        //public bool SendEmail(string userEmail, string msgArea)
-        //{
-        //    MailMessage mailMessage = new MailMessage();
-        //    mailMessage.From = new MailAddress("contact.togshop@gmail.com");
-        //    mailMessage.To.Add(new MailAddress(userEmail));
-
-        //    mailMessage.Subject = "Email Təsdiq Mesajı - ToG Shopping";
-        //    mailMessage.IsBodyHtml = true;
-        //    mailMessage.Body = msgArea;
-
-        //    SmtpClient client = new SmtpClient();
-        //    client.Credentials = new NetworkCredential("contact.togshop@gmail.com", "ohtiqxjdkojlpqez");
-        //    client.Host = "smtp.gmail.com";
-        //    client.Port = 587;
-        //    client.EnableSsl = true;
-        //    try
-        //    {
-        //        client.Send(mailMessage);
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // log exception
-        //    }
-        //    return false;
-        //}
-
-        //Send Email Operation - End
-
-        #endregion
-
-
+        
         #region External login register
 
         //Login with Facebook
@@ -455,8 +417,6 @@ namespace ToGShop.Controllers
         #endregion
 
 
-
-
         #region User Page
 
         [Authorize]
@@ -506,6 +466,10 @@ namespace ToGShop.Controllers
             return View();
         }
 
+        #endregion
+
+
+        #region User Settings Page
 
         [Authorize]
         public async Task<IActionResult> UserSettings()
@@ -530,7 +494,7 @@ namespace ToGShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
 
 
@@ -543,14 +507,14 @@ namespace ToGShop.Controllers
                     {
                         ModelState.AddModelError("", error.Description);
                     }
-                    return RedirectToAction("Problem","Error");
+                    return RedirectToAction("Problem", "Error");
                 }
 
                 await _signInManager.RefreshSignInAsync(user);
                 return View("ChangePasswordConfirmation");
             }
 
-            return RedirectToAction("Problem","Error");
+            return RedirectToAction("Problem", "Error");
         }
 
         public IActionResult ChangePasswordConfirmation()
@@ -580,12 +544,9 @@ namespace ToGShop.Controllers
         }
 
 
+
         #endregion
-
-
-
-
-
+        
 
         #region for create roles
 
@@ -601,31 +562,6 @@ namespace ToGShop.Controllers
         //}
 
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

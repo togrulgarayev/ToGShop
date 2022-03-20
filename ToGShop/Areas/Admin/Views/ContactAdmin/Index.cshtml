@@ -40,7 +40,7 @@
                             <td>@count</td>
                             <td>@item.Fullname</td>
                             <td>@item.Username</td>
-                            <td>@item.Email</td>
+                            <td> <a href="mailto:@item.Email">@item.Email</a> </td>
                             <td>@item.Message</td>
                             <td>
                                 <a asp-controller="ContactAdmin" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>

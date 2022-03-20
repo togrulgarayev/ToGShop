@@ -12,21 +12,32 @@ namespace ToGShop.Areas.Admin.Controllers
     public class DashboardController : Controller
     {
 
+        
+        private readonly IProductOperationService _productOperationService;
+        private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
+        private readonly IProductImageService _productImageService;
 
-        private readonly IUnitOfWork _unitOfWork;
-
-        public DashboardController(IUnitOfWork unitOfWork)
+        public DashboardController(IProductImageService productImageService,IOrderService orderService,IBrandService brandService,ICategoryService categoryService, IProductOperationService productOperationService,IProductService productService)
         {
-            _unitOfWork = unitOfWork;
+            _orderService = orderService;
+            _productOperationService = productOperationService;
+            _productService = productService;
+            _categoryService = categoryService;
+            _brandService = brandService;
+            _productImageService = productImageService;
         }
 
         public async Task<IActionResult> Index()
         {
 
-            var productCount = (await _unitOfWork.productRepository.GetAllAsync()).Count;
-            var favouriteCount = (await _unitOfWork.productOperationsRepository.GetAllAsync(p=>p.IsFavourite==true)).Count;
-            var orderCount = (await _unitOfWork.productOperationsRepository.GetAllAsync(p=>p.IsOrdered==true)).Count;
-            var customerCount = (await _unitOfWork.orderRepository.GetAllAsync()).Count;
+            var productCount = (await _productService.GetAllProductAsync()).Count;
+            var favouriteCount = (await _productOperationService.GetAllFavouriteProductAsync()).Count;
+            var orderCount = (await _productOperationService.GetAllOrderProductAsync()).Count;
+            var customerCount = (await _orderService.GetAllAsync()).Count;
+
 
 
             var dashboard = new DashboardViewModel()
@@ -34,7 +45,14 @@ namespace ToGShop.Areas.Admin.Controllers
                 ProductCount = productCount,
                 OrderCount = orderCount,
                 FavouriteCount = favouriteCount,
-                CustomerCount = customerCount
+                CustomerCount = customerCount,
+
+                Categories = await _categoryService.GetAllAsync(),
+                Brands = await _brandService.GetAllAsync(),
+                Products = await _productService.GetAllAsync(),
+                ProductImages = await _productImageService.GetAllAsync(),
+
+                Orders = await _orderService.GetAllAsync()
             };
 
             return View(dashboard);

@@ -1,6 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Text;
 using Core.Entities;
 
 namespace Business.ViewModels.DashboardViewModel
@@ -11,5 +10,14 @@ namespace Business.ViewModels.DashboardViewModel
         public int OrderCount { get; set; }
         public int FavouriteCount { get; set; }
         public int CustomerCount { get; set; }
+
+
+
+        public List<Category> Categories { get; set; }
+        public List<Brand> Brands { get; set; }
+        public List<Product> Products { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

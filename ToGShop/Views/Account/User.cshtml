@@ -84,7 +84,7 @@
                     
                     <form class="user" method="post" asp-controller="Account" asp-action="User" enctype="multipart/form-data">
                         <div class="form-group">
-                            <textarea asp-for="@Model.Message" autocomplete="off" class="form-control form-control-user text-center" style="width: 350px;height: 250px;resize:none ;font-size: 15px;"
+                            <textarea required asp-for="@Model.Message" autocomplete="off" class="form-control form-control-user text-center" style="width: 350px;height: 250px;resize:none ;font-size: 15px;"
                                    placeholder="Mesajınız"></textarea>
                         </div>
 

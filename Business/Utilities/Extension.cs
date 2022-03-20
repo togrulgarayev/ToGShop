@@ -7,6 +7,8 @@ namespace Business.Utilities
 {
     public static class Extension
     {
+        #region Check Image
+
         public static bool CheckFileType(this IFormFile file, string type)
         {
             return file.ContentType.Contains(type);
@@ -28,5 +30,7 @@ namespace Business.Utilities
 
             return filename;
         }
+
+        #endregion
     }
 }

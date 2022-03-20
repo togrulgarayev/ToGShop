@@ -4,40 +4,20 @@
 
     ViewData["Loader"] = "<div id=\"loadertop\"></div>";
 
-    
+
 }
 
 
 <section class="side-navbar">
     <div id="mySidenav" class="sidenav">
-        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
-            <a class="text-center category-item" href="#"><p>HP</p></a>
-            <a class="text-center category-item" href="#"><p>Dell</p></a>
-            <a class="text-center category-item" href="#"><p>Acer</p></a>
-            <a class="text-center category-item" href="#"><p>Asus</p></a>
-            <a class="text-center category-item" href="#"><p>MSI</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Samsung</p></a>
-            <a class="text-center category-item" href="#"><p>LG</p></a>
-            <a class="text-center category-item" href="#"><p>Nokia</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
-            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
-            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
-            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
-        </div>
 
-        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+        @foreach (var category in @Model.Categories)
+        {
+
+            <a class="category-title"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
+        }
+
+
     </div>
 </section>
 
@@ -50,8 +30,8 @@
                 <div class="product-div-left">
                     <div class="img-container">
                         <img class="product-page-image" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId==Model.Product.Id && pi.IsMain==true).FirstOrDefault().Image" alt="watch">
-                        
-                        
+
+
                     </div>
                     <div class="hover-container">
 
@@ -60,11 +40,16 @@
                             <div><img class="product-page-image" src="~/assets/img/@item.Image"></div>
                         }
 
-                        
+
                     </div>
                 </div>
                 <div class="product-div-right">
                     <span class="product-name">@Model.Product.Name</span>
+
+
+                    <div class="product-rating">
+                        <h5>@Model.Product.Description</h5>
+                    </div>
 
                     @if (@Model.Product.IsDiscount == true)
                     {
@@ -75,40 +60,33 @@
                         <span class="product-price"> @Model.Product.Price ₼</span>
                     }
 
-
-                    <div class="product-rating">
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star"></i></span>
-                        <span><i class="fas fa-star-half-alt"></i></span>
-                        <span>(350 ratings)</span>
-                    </div>
-                    <p class="product-description">@Model.Product.Description</p>
+                    <p class="product-description">@Model.Product.Information</p>
                     <div class="btn-groups">
-                        <button type="button" asp-controller="ProductOperation" asp-action="SetCart" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Səbətə at</button>
+                        <a type="button" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@Model.Product.Id" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Səbətə at</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <form method="post" asp-controller="Product" asp-action="AddComment">
-
-                    <input asp-for="@Model.Comment" placeholder="Komment daxil et" />
-                    <input asp-for="@Model.Username" hidden value="@User.Identity.Name"/>
-                    <input asp-for="@Model.ProductId" hidden value="@Model.Product.Id" />
                     
-                    <button type="submit">Yaz</button>
+                    <a class="add-comment-empty"></a>
+
+                    <input autocomplete="off" class="add-comment-input" asp-for="@Model.Comment" placeholder="Məhsul haqqında şərh əlavə et" />
+                    <input autocomplete="off" asp-for="@Model.Username" hidden value="@User.Identity.Name" />
+                    <input autocomplete="off" asp-for="@Model.ProductId" hidden value="@Model.Product.Id" />
+
+                    <button class="add-comment-btn" type="submit">Əlavə et</button>
                 </form>
             </div>
         </div>
     </div>
-    
+
 
     <div class="container">
         <section>
@@ -128,7 +106,7 @@
                                     <div class="g-mb-15">
                                         <h5 class="h5 g-color-gray-dark-v1 mb-0">@item.Username</h5>
 
-                                        
+
 
                                         <span class="g-color-gray-dark-v4 g-font-size-12">@item.CreateDT</span>
                                     </div>
@@ -142,7 +120,7 @@
                             </div>
                         </div>
                     }
-                    
+
                 </div>
             </div>
         </section>

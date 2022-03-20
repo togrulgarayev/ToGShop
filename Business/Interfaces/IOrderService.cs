@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities;
 
@@ -10,6 +8,5 @@ namespace Business.Interfaces
     {
         Task<List<Order>> GetAllAsync();
         Task Create(Order order);
-        Task Remove(int id);
     }
 }

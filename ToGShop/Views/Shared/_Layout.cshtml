@@ -67,7 +67,7 @@
                     <div class="search-responsive">
                         <form class="search" method="get" asp-controller="SearchResult" asp-action="Index">
                             <div class="search-input">
-                                <input autocomplete="off" type="search"  value="@ViewData["SearchedAll"]" name="allSearch" placeholder="Axtar...">
+                                <input required autocomplete="off" type="search"  value="@ViewData["SearchedAll"]" name="allSearch" placeholder="Axtar...">
                                 
                             </div>
                             <button type="submit" class="search-btn">Axtar</button>
@@ -77,11 +77,11 @@
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item text-center">
-                            <a class="nav-link" asp-controller="ProductOperation" asp-action="Cart"><i class="fas fa-shopping-cart"></i></a>
+                            <a class="nav-link" asp-controller="ProductOperation" asp-action="Cart"><i style="font-size: 20px" class="bi bi-cart-fill"></i></a>
                         </li>
 
                         <li class="nav-item text-center">
-                            <a asp-controller="ProductOperation" asp-action="Favourite" class="nav-link"><i class="bi bi-heart-fill"></i></a>
+                            <a asp-controller="ProductOperation" asp-action="Favourite" class="nav-link"><i style="font-size: 20px" class="bi bi-heart-fill"></i></a>
                         </li>
 
                         <li class="nav-item text-center dropdown">

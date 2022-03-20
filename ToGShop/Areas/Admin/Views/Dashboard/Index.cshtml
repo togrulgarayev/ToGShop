@@ -1,6 +1,7 @@
 ﻿@model Business.ViewModels.DashboardViewModel.DashboardViewModel
 @{
-    ViewData["Title"] = "Əsas Səhifə";
+    ViewData["Title"] = "Admin Panel";
+    int count = 1;
 }
 
 
@@ -54,4 +55,178 @@
         </div>
     </div>
 
+</div>
+
+<div style="padding-top: 45px" class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="text-center card-title">Son əlavə olunan məhsul</h4>
+                <a class="go-product" asp-controller="Product" asp-action="Index" asp-route-id="@Model.Products.LastOrDefault().Id">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="~/assets/img/@Model.ProductImages.Where(p => p.ProductId == Model.Products.LastOrDefault().Id && p.IsMain == true).FirstOrDefault().Image" alt="">
+                        </div>
+
+
+                        <div class="product-detail">
+                            <h2>@Model.Products.LastOrDefault().Name</h2>
+                            <div class="fav-stars">
+                                <p>@Model.Products.LastOrDefault().Description</p>
+                            </div>
+
+                            @if (@Model.Products.LastOrDefault().IsDiscount == true)
+                            {
+                                <p class="product-price">₼ <s>@Model.Products.LastOrDefault().Price</s> @Model.Products.LastOrDefault().DiscountPrice</p>
+
+                            }
+                            else
+                            {
+
+                                <p class="product-price">₼ @Model.Products.LastOrDefault().Price</p>
+                            }
+
+                        </div>
+
+
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-3">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center mb-4">
+                    <p class="text-center card-title">Kateqoriyalar</p>
+                </div>
+                <div>
+                    <div class="table-responsive" style="max-height: 300px !important;">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Ad</th>
+                                    <th>Soyad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Surname</td>
+
+                                    </tr>
+
+                                    count++;
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <canvas height="150" id="activity-chart"></canvas>
+        </div>
+    </div>
+
+
+    <div class="col-3">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center mb-4">
+                    <p class="text-center card-title">Brendlər</p>
+                </div>
+                <div>
+                    <div class="table-responsive" style="max-height: 300px !important;">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Ad</th>
+                                    <th>Soyad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.Brands)
+                                {
+                                    <tr>
+                                        <td>@count</td>
+                                        <td><img height="25" src="~/assets/img/@item.Logo"/></td>
+                                        <td>@item.Name</td>
+
+                                    </tr>
+
+                                    count++;
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <canvas height="150" id="activity-chart"></canvas>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row" style="padding-top: 30px;">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center mb-4">
+                    <h4 class="text-center card-title">Müştərilər</h4>
+                </div>
+                <div>
+                    
+                    <div class="table-responsive" style="max-height: 300px !important;">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>Ünvan</th>
+                                <th>Şəhər</th>
+                                <th>Telefon</th>
+                                <th>Poçt kodu</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach (var item in Model.Orders)
+                            {
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Surname</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.City</td>
+                                    <td>@item.Number</td>
+                                    <td>@item.PostalCode</td>
+
+                                </tr>
+
+                                count++;
+                            }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <canvas height="150" id="activity-chart"></canvas>
+        </div>
+    </div>
 </div>

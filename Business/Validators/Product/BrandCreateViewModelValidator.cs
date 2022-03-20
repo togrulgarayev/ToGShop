@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Business.ViewModels.BrandViewModels;
+﻿using Business.ViewModels.BrandViewModels;
 using FluentValidation;
 
 namespace Business.Validators.Product

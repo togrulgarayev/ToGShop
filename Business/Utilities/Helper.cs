@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 
 namespace Business.Utilities
 {
     public static class Helper
     {
-        public static bool SendEmail(string userEmail, string msgArea)
+        #region Email Sender
+
+
+        public static bool SendEmail(string userEmail, string msgArea, string subject)
         {
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("contact.togshop@gmail.com");
             mailMessage.To.Add(new MailAddress(userEmail));
 
-            mailMessage.Subject = "Email Təsdiq Mesajı - ToG Shopping";
+            mailMessage.Subject = subject;
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = msgArea;
 
@@ -34,7 +35,12 @@ namespace Business.Utilities
             }
             return false;
         }
+
+
+        #endregion
     }
+
+    #region Roles
 
     public enum UserRoles
     {
@@ -43,4 +49,6 @@ namespace Business.Utilities
         Moderator,
         User
     }
+
+    #endregion
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Core;
@@ -30,11 +29,5 @@ namespace Business.Implementations
 
         }
 
-
-
-        public async Task Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
