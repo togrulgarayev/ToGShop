@@ -34,8 +34,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input asp-for="Information" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
-                                               placeholder="Məhsul haqqında əlavə məlumat">
+                                        <textarea id="info-textarea" asp-for="Information" autocomplete="off" class="form-control form-control-user text-center" style="font-size: 15px;"
+                                               placeholder="Məhsul haqqında əlavə məlumat"></textarea>
                                         <span class="text-danger" asp-validation-for="Information"></span>
                                     </div>
 
@@ -114,3 +114,12 @@
     </div>
 
 </div>
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/32.0.0/ckeditor.min.js"></script>
+    <script>
+        ClassicEditor.create(document.querySelector('#info-textarea')).catch(error => {
+            console.error(error);
+        });
+    </script>
+
+}

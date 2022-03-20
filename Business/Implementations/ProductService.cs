@@ -115,12 +115,15 @@ namespace Business.Implementations
 
             var images = await _unitOfWork.productImageRepository.GetAllAsync();
 
-            foreach (var image in images)
+            if (productViewModel.ImageFiles != null)
             {
-                if (dbProduct.Id == image.ProductId)
+                foreach (var image in images)
                 {
-                     _unitOfWork.productImageRepository.Remove(image);
-                     await _unitOfWork.SaveAsync();
+                    if (dbProduct.Id == image.ProductId)
+                    {
+                        _unitOfWork.productImageRepository.Remove(image);
+                        await _unitOfWork.SaveAsync();
+                    }
                 }
             }
 

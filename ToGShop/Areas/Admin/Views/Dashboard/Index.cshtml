@@ -111,23 +111,19 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Ad</th>
-                                    <th>Soyad</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                @foreach (var item in Model.Orders)
+                                @foreach (var item in Model.Categories)
                                 {
                                     <tr>
                                         <td>@count</td>
                                         <td>@item.Name</td>
-                                        <td>@item.Surname</td>
 
                                     </tr>
 
                                     count++;
                                 }
-
                             </tbody>
                         </table>
                     </div>
@@ -155,7 +151,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                
+                                @{
+                                    count = 1;
+                                }
                                 @foreach (var item in Model.Brands)
                                 {
                                     <tr>
@@ -197,13 +196,14 @@
                                 <th>Ad</th>
                                 <th>Soyad</th>
                                 <th>Ünvan</th>
-                                <th>Şəhər</th>
                                 <th>Telefon</th>
-                                <th>Poçt kodu</th>
                             </tr>
                             </thead>
                             <tbody>
-
+                                
+                            @{
+                                count = 1;
+                            }
                             @foreach (var item in Model.Orders)
                             {
                                 <tr>
@@ -211,15 +211,12 @@
                                     <td>@item.Name</td>
                                     <td>@item.Surname</td>
                                     <td>@item.Address</td>
-                                    <td>@item.City</td>
                                     <td>@item.Number</td>
-                                    <td>@item.PostalCode</td>
 
                                 </tr>
 
                                 count++;
                             }
-
                             </tbody>
                         </table>
                     </div>

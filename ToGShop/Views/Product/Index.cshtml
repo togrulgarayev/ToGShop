@@ -60,7 +60,7 @@
                         <span class="product-price"> @Model.Product.Price ₼</span>
                     }
 
-                    <p class="product-description">@Model.Product.Information</p>
+                    <p class="product-description">@Html.Raw(Model.Product.Information)</p>
                     <div class="btn-groups">
                         <a type="button" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@Model.Product.Id" class="add-cart-btn"><i class="fas fa-shopping-cart"></i>Səbətə at</a>
                     </div>

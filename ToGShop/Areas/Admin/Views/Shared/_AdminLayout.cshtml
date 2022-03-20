@@ -158,14 +158,14 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-                    
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item  mx-1">
-                            <a class="nav-link" asp-controller="ContactAdmin" asp-action="Index"  role="button"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" asp-controller="ContactAdmin" asp-action="Index" role="button"
+                               aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
                             </a>
@@ -263,8 +263,8 @@
 
         <!-- Page level custom scripts -->
         <script src="~/admin/js/demo/chart-area-demo.js"></script>
-    <script src="~/admin/js/demo/chart-pie-demo.js"></script>
-    
+        <script src="~/admin/js/demo/chart-pie-demo.js"></script>
+        @RenderSection("scripts", false)
     </div>
     
 
