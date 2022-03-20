@@ -19,5 +19,7 @@ namespace Business.ViewModels.DashboardViewModel
         public List<ProductImage> ProductImages { get; set; }
 
         public List<Order> Orders { get; set; }
+
+        public string Message { get; set; }
     }
 }

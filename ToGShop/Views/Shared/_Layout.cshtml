@@ -104,7 +104,7 @@
                                     {
                                         <a style="cursor: pointer" asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="dropdown-item my-login-btn text-center">
                                             <i class="fas fa-user"></i>
-                                            <p style="display: inline-block; margin-left: 2px">Idarəetmə Paneli</p>
+                                            <p style="display: inline-block; margin-left: 2px">Idarəçi Paneli</p>
                                         </a>
                                     }
 
@@ -112,13 +112,13 @@
                                     {
                                         <a style="cursor: pointer" asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="dropdown-item my-login-btn text-center">
                                             <i class="fas fa-user"></i>
-                                            <p style="display: inline-block; margin-left: 2px">İşçi Paneli</p>
+                                            <p style="display: inline-block; margin-left: 2px">Nəzarətçi Paneli</p>
                                         </a>
                                     }
 
                                     @if (User.IsInRole("User"))
                                     {
-                                        <a style="cursor: pointer" asp-controller="Account" asp-action="User" class="dropdown-item my-login-btn text-center">
+                                        <a style="cursor: pointer" asp-controller="Account" asp-action="UserPage" class="dropdown-item my-login-btn text-center">
                                             <i class="fas fa-user"></i>
                                             <p style="display: inline-block; margin-left: 2px">Hesabım</p>
                                         </a>

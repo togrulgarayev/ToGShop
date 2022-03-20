@@ -7,41 +7,22 @@
 
 <section class="side-navbar">
     <div id="mySidenav" class="sidenav">
-        <a class="dropdown-btn category-title"><i class="bi bi-laptop"></i> <p>Kompüterlər</p></a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Lenovo</p></a>
-            <a class="text-center category-item" href="#"><p>HP</p></a>
-            <a class="text-center category-item" href="#"><p>Dell</p></a>
-            <a class="text-center category-item" href="#"><p>Acer</p></a>
-            <a class="text-center category-item" href="#"><p>Asus</p></a>
-            <a class="text-center category-item" href="#"><p>MSI</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-phone"></i> <p>Smartfonlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Apple</p></a>
-            <a class="text-center category-item" href="#"><p>Samsung</p></a>
-            <a class="text-center category-item" href="#"><p>LG</p></a>
-            <a class="text-center category-item" href="#"><p>Nokia</p></a>
-        </div>
-        <a class="dropdown-btn category-title"><i class="bi bi-earbuds"></i> <p>Aksesuarlar</p> </a>
-        <div class="dropdown-container">
-            <a class="text-center category-item" href="#"><p>Qulaqcıqlar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçanlar</p></a>
-            <a class="text-center category-item" href="#"><p>Klaviaturalar</p></a>
-            <a class="text-center category-item" href="#"><p>Siçan Altlıqları</p></a>
-            <a class="text-center category-item" href="#"><p>Yaddaş Qurğuları</p></a>
-            <a class="text-center category-item" href="#"><p>Əlavə Qurğular</p></a>
-        </div>
 
-        <a class="go-to-up category-title" href="#top"><i class="bi bi-arrow-up"></i> <p>Yuxarı</p></a>
+        @foreach (var category in Model.Categories)
+        {
+
+
+            <a class="category-title"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
+
+        }
+
+
     </div>
 </section>
 
-
 <main>
 
-<section>
+    <section>
         <div class="mt-5 bg-white shadow rounded-lg d-block d-sm-flex">
             <div class="profile-tab-nav border-right">
                 <div class="p-4">
@@ -59,8 +40,8 @@
                         <i class="bi bi-key-fill text-center mr-1"></i>
                         Şifrə
                     </a>
-                    
-                    <a class="user-go-back" asp-controller="Account" asp-action="User">
+
+                    <a class="user-go-back" asp-controller="Account" asp-action="UserPage">
                         <i class="bi bi-chevron-left text-center mr-1"></i>
                         Geri
                     </a>
@@ -69,8 +50,8 @@
             <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                     <h3 class="mb-4">Hesab Parametrləri</h3>
-                    
-                    <form  method="post" asp-controller="Account" asp-action="ChangeUserData">
+
+                    <form method="post" asp-controller="Account" asp-action="ChangeUserData">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -97,7 +78,7 @@
                                     <input autocomplete="off" required asp-for="Phone" value="@Model.Phone">
                                 </div>
                             </div>
-                        
+
                         </div>
                         <div>
                             <button class="user-btn">Yenilə</button>
@@ -107,7 +88,7 @@
                 </div>
                 <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
                     <h3 class="mb-4">Şifrə parametrləri</h3>
-                    <form  method="post" asp-controller="Account" asp-action="ChangePassword">
+                    <form method="post" asp-controller="Account" asp-action="ChangePassword">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -138,6 +119,6 @@
                 </div>
             </div>
         </div>
-</section>
+    </section>
 
-    </main>
+</main>

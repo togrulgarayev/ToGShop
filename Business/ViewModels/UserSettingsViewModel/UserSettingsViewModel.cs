@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Core.Entities;
 
 namespace Business.ViewModels.UserSettingsViewModel
 {
@@ -19,7 +21,10 @@ namespace Business.ViewModels.UserSettingsViewModel
         public string Fullname { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        
+
+
+        public List<Category> Categories { get; set; }
+
 
     }
 }

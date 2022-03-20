@@ -19,5 +19,7 @@ namespace Business.ViewModels.ContactAdminViewModels
         public List<ProductOperation> ProductOperationsFavourite { get; set; }
         public List<ProductOperation> ProductOperationsSendAndOrder { get; set; }
         public List<ProductImage> ProductImages { get; set; }
+
+        public List<Category> Categories { get; set; }
     }
 }

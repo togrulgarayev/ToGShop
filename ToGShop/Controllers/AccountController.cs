@@ -28,7 +28,9 @@ namespace ToGShop.Controllers
         private readonly IProductImageService _productImageService;
         private readonly IProductService _productService;
 
-        public AccountController(IProductService productService, IProductImageService productImageService, IProductOperationService productOperationService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IContactAdminService contactAdminService, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
+        private readonly ICategoryService _categoryService;
+
+        public AccountController(ICategoryService categoryService,IProductService productService, IProductImageService productImageService, IProductOperationService productOperationService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IContactAdminService contactAdminService, IUnitOfWork unitOfWork, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -39,6 +41,8 @@ namespace ToGShop.Controllers
             _productOperationService = productOperationService;
             _productImageService = productImageService;
             _productService = productService;
+
+            _categoryService = categoryService;
         }
 
         #endregion
@@ -50,6 +54,12 @@ namespace ToGShop.Controllers
 
         public IActionResult Register()
         {
+
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Problem", "Error");
+            }
+
             return View();
         }
 
@@ -117,6 +127,12 @@ namespace ToGShop.Controllers
 
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Problem", "Error");
+            }
+
+
             return View();
         }
 
@@ -420,7 +436,7 @@ namespace ToGShop.Controllers
         #region User Page
 
         [Authorize]
-        public async Task<IActionResult> User()
+        public async Task<IActionResult> UserPage()
         {
 
             ApplicationUser appUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -440,7 +456,8 @@ namespace ToGShop.Controllers
                 Products = products,
                 ProductOperationsFavourite = productOperationsFavourite,
                 ProductOperationsSendAndOrder = productOperationsOrderedSend,
-                ProductImages = productImages
+                ProductImages = productImages,
+                Categories = await _categoryService.GetAllAsync()
             };
 
             return View(contactAdminViewModel);
@@ -448,7 +465,7 @@ namespace ToGShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> User(ContactAdminViewModel contactAdminViewModel)
+        public async Task<IActionResult> UserPage(ContactAdminViewModel contactAdminViewModel)
         {
 
             ApplicationUser appUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -482,7 +499,8 @@ namespace ToGShop.Controllers
                 Fullname = user.FullName,
                 Name = user.Name,
                 Surname = user.Surname,
-                Phone = user.PhoneNumber
+                Phone = user.PhoneNumber,
+                Categories = await _categoryService.GetAllAsync(),
             };
 
             return View(userSettingsViewModel);

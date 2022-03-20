@@ -96,85 +96,129 @@
         </div>
     </div>
 
+    <div class="col-6">
+        @*<div class="col-12">
 
+            <form method="post" asp-controller="Dashboard" asp-action="SendMessage">
 
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body pb-0">
-                <div class="d-flex align-items-center mb-4">
-                    <p class="text-center card-title">Kateqoriyalar</p>
-                </div>
+                <input style="width: 250px;" class="search-input" asp-for="Message" placeholder="Bildiriş mesajını daxil edin ..." autocomplete="off" />
+
+                <button type="submit" class="btn btn-primary">Göndər</button>
+
+            </form>
+
+        </div>*@
+        
+        
+        <div style="height: 160px;" class="col-12">
+            <div class="card">
+                <div class="card-body pb-0">
+                    <div class="d-flex align-items-center mb-4">
+                        <p class="text-center card-title">Bütün istifadəçilərə bildiriş göndər</p>
+                    </div>
                 <div>
                     <div class="table-responsive" style="max-height: 300px !important;">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Ad</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Categories)
-                                {
-                                    <tr>
-                                        <td>@count</td>
-                                        <td>@item.Name</td>
+                        
+                        <form method="post" asp-controller="Dashboard" asp-action="SendMessage">
 
-                                    </tr>
+                            <input style="width: 250px;" class="search-input" asp-for="Message" placeholder="Bildiriş mesajını daxil edin ..." autocomplete="off" />
 
-                                    count++;
-                                }
-                            </tbody>
-                        </table>
+                            <button type="submit" class="btn btn-primary">Göndər</button>
+
+                        </form>
+                        
                     </div>
+            </div>
+            </div>
+                <canvas height="150" id="activity-chart"></canvas>
+            </div>
+        </div>
+
+
+
+
+            <div style="height: 300px;" class="col-12">
+                <div class="card">
+                    <div class="card-body pb-0">
+                        <div class="d-flex align-items-center mb-4">
+                            <p class="text-center card-title">Kateqoriyalar</p>
+                        </div>
+                        <div>
+                            <div class="table-responsive" style="max-height: 300px !important;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ad</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.Name</td>
+
+                                        </tr>
+
+                                        count++;
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas height="150" id="activity-chart"></canvas>
                 </div>
             </div>
-            <canvas height="150" id="activity-chart"></canvas>
-        </div>
-    </div>
 
 
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body pb-0">
-                <div class="d-flex align-items-center mb-4">
-                    <p class="text-center card-title">Brendlər</p>
-                </div>
-                <div>
-                    <div class="table-responsive" style="max-height: 300px !important;">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Ad</th>
-                                    <th>Soyad</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                @{
-                                    count = 1;
-                                }
-                                @foreach (var item in Model.Brands)
-                                {
+            <div style="height: 100px;" class="col-12">
+                <div class="card">
+                    <div class="card-body pb-0">
+                        <div class="d-flex align-items-center mb-4">
+                            <p class="text-center card-title">Brendlər</p>
+                        </div>
+                        <div>
+                            <div class="table-responsive" style="max-height: 300px !important;">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
                                     <tr>
-                                        <td>@count</td>
-                                        <td><img height="25" src="~/assets/img/@item.Logo"/></td>
-                                        <td>@item.Name</td>
-
+                                        <th>#</th>
+                                        <th>Ad</th>
+                                        <th>Soyad</th>
                                     </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    count++;
-                                }
+                                    @{
+                                        count = 1;
+                                    }
+                                    @foreach (var item in Model.Brands)
+                                    {
+                                        <tr>
+                                            <td>@count</td>
+                                            <td><img height="25" src="~/assets/img/@item.Logo"/></td>
+                                            <td>@item.Name</td>
 
-                            </tbody>
-                        </table>
+                                        </tr>
+
+                                        count++;
+                                    }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+                    <canvas height="150" id="activity-chart"></canvas>
                 </div>
             </div>
-            <canvas height="150" id="activity-chart"></canvas>
+
+
+
+
         </div>
-    </div>
 
 
 </div>
