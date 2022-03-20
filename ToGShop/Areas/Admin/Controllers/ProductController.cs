@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,SuperModerator")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -77,60 +77,72 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Product" asp-action="Index">
-                    <i class="fas fa-box"></i>
-                    <span>Məhsullar</span>
-                </a>
-            </li>
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperModerator") )
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Product" asp-action="Index">
+                        <i class="fas fa-box"></i>
+                        <span>Məhsullar</span>
+                    </a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Category" asp-action="Index">
-                    <i class="bi bi-bookmarks-fill"></i>
-                    <span>Kateqoriyalar</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Category" asp-action="Index">
+                        <i class="bi bi-bookmarks-fill"></i>
+                        <span>Kateqoriyalar</span>
+                    </a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Brand" asp-action="Index">
-                    <i class="bi bi-tags-fill"></i>
-                    <span>Brendlər</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Brand" asp-action="Index">
+                        <i class="bi bi-tags-fill"></i>
+                        <span>Brendlər</span>
+                    </a>
+                </li>
+            }
 
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Customer" asp-action="Index">
-                    <i class="bi bi-people-fill"></i>
-                    <span>Müştərilər</span>
-                </a>
-            </li>
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
 
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Discount" asp-action="Index">
-                    <i class="bi bi-clock-fill"></i>
-                    <span>Endirim</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Customer" asp-action="Index">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Müştərilər</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Discount" asp-action="Index">
+                        <i class="bi bi-clock-fill"></i>
+                        <span>Endirim</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                       aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Sifarişlər</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-controller="UserOrder" asp-action="Index">Yeni sifarişlər</a>
+                        </div>
+                    </div>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" asp-controller="UserSend" asp-action="Index">Göndərilən sifarişlər</a>
+                        </div>
+                    </div>
+                </li>
+
+
+            }
             <!-- Nav Item - Tables -->
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                   aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Sifarişlər</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-controller="UserOrder" asp-action="Index">Yeni sifarişlər</a>
-                    </div>
-                </div>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-controller="UserSend" asp-action="Index">Göndərilən sifarişlər</a>
-                    </div>
-                </div>
-            </li>
+            
 
 
 

@@ -7,10 +7,12 @@ using Business.Utilities;
 using Business.ViewModels.BrandViewModels;
 using Core;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,SuperModerator")]
     public class BrandController : Controller
     {
         private readonly IBrandService _brandService;

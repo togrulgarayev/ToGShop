@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,SuperModerator,Moderator")]
+    [Authorize(Roles = "Admin,SuperModerator")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

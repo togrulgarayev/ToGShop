@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.DashboardViewModel;
-using Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

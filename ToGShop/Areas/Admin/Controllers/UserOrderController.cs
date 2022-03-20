@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.UserOrderViewModel;
-using Core;
-using Core.Entities;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class UserOrderController : Controller
     {
         private readonly IProductOperationService _productOperationService;

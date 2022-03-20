@@ -2,10 +2,12 @@
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.ViewModels.DiscountTimerViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class DiscountController : Controller
     {
         private readonly IDiscountTimerService _discountTimerService;

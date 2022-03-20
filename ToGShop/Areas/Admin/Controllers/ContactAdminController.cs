@@ -2,10 +2,12 @@
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ContactAdminController : Controller
     {
 
