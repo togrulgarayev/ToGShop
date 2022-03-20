@@ -38,7 +38,7 @@ namespace ToGShop.Areas.Admin.Controllers
 
             if (!String.IsNullOrEmpty(brendSearch))
             {
-                brendQuery = brendQuery.Where(b => b.Name.Contains(brendSearch));
+                brendQuery = brendQuery.Where(b => b.Name.Trim().ToLower().Contains(brendSearch.Trim().ToLower()));
             }
 
             return View(brendQuery.ToList());

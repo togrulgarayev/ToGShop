@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using Business.Utilities;
+using Business.ViewModels.ProductAdminViewModels;
+using Business.ViewModels.ProductCommentViewModels;
 using Business.ViewModels.ProductViewModels;
 using Core;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToGShop.Areas.Admin.Controllers
 {
@@ -18,22 +21,32 @@ namespace ToGShop.Areas.Admin.Controllers
         private readonly IProductImageService _productImageService;
         private readonly ICategoryService _categoryService;
         private readonly IBrandService _brandService;
+        private readonly IProductCommentService _productCommentService;
 
-        public ProductController(IProductImageService productImageService,IUnitOfWork unitOfWork, IProductService productService, ICategoryService categoryService, IBrandService brandService)
+        public ProductController(IProductCommentService productCommentService,IProductImageService productImageService,IUnitOfWork unitOfWork, IProductService productService, ICategoryService categoryService, IBrandService brandService)
         {
             _unitOfWork = unitOfWork;
             _productService = productService;
             _categoryService = categoryService;
             _brandService = brandService;
             _productImageService = productImageService;
+            _productCommentService = productCommentService;
         }
 
 
         public async Task<ActionResult> Index()
         {
-            var product = await _productService.GetAllAsync();
 
-            return View(product);
+            var productViewModel = new ProductAdminViewModel()
+            {
+                Products = await _productService.GetAllAsync(),
+                Brands = await _brandService.GetAllAsync(),
+                Categories = await _categoryService.GetAllAsync(),
+                ProductImages = await _productImageService.GetAllAsync()
+
+            };
+
+            return View(productViewModel);
         }
 
 
@@ -46,10 +59,22 @@ namespace ToGShop.Areas.Admin.Controllers
 
             if (!String.IsNullOrEmpty(productSearch))
             {
-                productQuery = productQuery.Where(p => p.Name.Contains(productSearch) || p.Description.Contains(productSearch) || p.Information.Contains(productSearch));
+                productQuery = productQuery.Where(p => p.Name.Trim().ToLower().Contains(productSearch.Trim().ToLower()) || p.Description.Trim().ToLower().Contains(productSearch.Trim().ToLower()) || p.Information.Trim().ToLower().Contains(productSearch.Trim().ToLower()));
             }
 
-            return View(productQuery.ToList());
+
+            var productViewModel = new ProductAdminViewModel()
+            {
+                Products = productQuery.ToList(),
+                Brands = await _brandService.GetAllAsync(),
+                Categories = await _categoryService.GetAllAsync(),
+                ProductImages = await _productImageService.GetAllAsync()
+
+            };
+
+            return View(productViewModel);
+
+            
         }
 
 
@@ -177,7 +202,22 @@ namespace ToGShop.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
+        public async Task<IActionResult> ProductDetail(int id)
+        {
 
+            var productCommentViewModel = new ProductCommentViewModel()
+            {
+                Product = await _productService.Get(id),
+                Comments = await _productCommentService.GetProductId(id),
+                ProductImages = await _productImageService.GetAllAsync(),
+                Categories = await _categoryService.GetAllAsync(),
+                Brands = await _brandService.GetAllAsync()
+            };
+
+            return View(productCommentViewModel);
+
+        }
 
     }
 }

@@ -65,13 +65,18 @@ namespace ToGShop.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> SetFavourite(int id)
+        public async Task<IActionResult> SetFavourite(int id, string ReturnUrl)
         {
 
             var userId = _userManager.GetUserId(HttpContext.User);
 
             await _productOperationService.SetFavourite(id, userId);
 
+            if (ReturnUrl != null)
+            {
+
+                return Redirect(ReturnUrl);
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -120,13 +125,18 @@ namespace ToGShop.Controllers
 
 
         [Authorize]
-        public async Task<IActionResult> SetCart(int id)
+        public async Task<IActionResult> SetCart(int id, string ReturnUrl)
         {
 
             var userId = _userManager.GetUserId(HttpContext.User);
 
             await _productOperationService.SetCart(id, userId);
 
+            if (ReturnUrl != null)
+            {
+
+                return Redirect(ReturnUrl);
+            }
 
             return RedirectToAction("Index", "Home");
         }

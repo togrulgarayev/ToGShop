@@ -58,9 +58,17 @@ namespace ToGShop.Controllers
         }
 
 
-        public async Task<IActionResult> DeleteComment(int id)
+        public async Task<IActionResult> DeleteComment(int id, string ReturnUrl)
         {
             await _productCommentService.Remove(id);
+
+
+            if (ReturnUrl != null)
+            {
+
+                return Redirect(ReturnUrl);
+            }
+
             return RedirectToAction("Index", "Home");
         }
 

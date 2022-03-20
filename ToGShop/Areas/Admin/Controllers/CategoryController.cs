@@ -37,7 +37,7 @@ namespace ToGShop.Areas.Admin.Controllers
 
             if (!String.IsNullOrEmpty(categorySearch))
             {
-                categoryQuery = categoryQuery.Where(c => c.Name.Contains(categorySearch));
+                categoryQuery = categoryQuery.Where(c => c.Name.Trim().ToLower().Contains(categorySearch.Trim().ToLower()));
             }
 
             return View(categoryQuery.ToList());

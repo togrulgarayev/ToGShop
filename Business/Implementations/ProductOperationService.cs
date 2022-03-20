@@ -51,7 +51,7 @@ namespace Business.Implementations
 
         public async Task<List<ProductOperation>> GetAllProductSendAsync()
         {
-            return await _unitOfWork.productOperationsRepository.GetAllAsync(po => po.IsDeleted == false && po.IsSend == true);
+            return await _unitOfWork.productOperationsRepository.GetAllAsync(po => po.IsDeleted == false && po.IsSend == true, "ApplicationUser");
         }
 
 
@@ -62,7 +62,7 @@ namespace Business.Implementations
 
         public async Task<List<ProductOperation>> GetAllOrderedSendAsync(string userId)
         {
-            return await _unitOfWork.productOperationsRepository.GetAllAsync(po => po.InCart==false && po.IsFavourite==false);
+            return await _unitOfWork.productOperationsRepository.GetAllAsync(po => po.ApplicationUserId==userId && po.IsFavourite==false && po.InCart==false);
         }
 
         public async Task<List<ProductOperation>> GetAllSendAsync(string userId)

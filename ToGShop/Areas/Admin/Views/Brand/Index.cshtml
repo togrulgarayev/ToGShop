@@ -21,7 +21,7 @@
 
                 <form method="get" asp-action="Index">
                     <div class="form-outline">
-                        <input type="search" placeholder="Brendlərdə axtar..." value="@ViewData["SearchedBrend"]" name="brendSearch" class="form-control" /> <a style="padding-left: 15px" asp-action="Index">Bütün brendlər</a>
+                        <input autocomplete="off" type="search" placeholder="Brendlərdə axtar..." value="@ViewData["SearchedBrend"]" name="brendSearch" class="form-control" /> <a style="padding-left: 15px" asp-action="Index">Bütün brendlər</a>
 
 
                     </div>
@@ -51,8 +51,8 @@
                             <td>@item.Name</td>
                             <td>@item.CreateDT</td>
                             <td>
-                                <a asp-controller="Brand" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                <a asp-controller="Brand" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                <a class="btn btn-primary" asp-controller="Brand" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-primary" asp-controller="Brand" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
                             </td>
                         </tr>
 

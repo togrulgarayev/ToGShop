@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="add-fav">
-                                <a class="add-fav-btn" asp-controller="ProductOperation" asp-action="SetFavourite" asp-route-id="@product.Id"><i class="fas fa-heart"></i></a>
+                                <a class="add-fav-btn" asp-controller="ProductOperation" asp-action="SetFavourite" asp-route-id="@product.Id" asp-route-ReturnUrl="@Context.Request.Path.Value"><i class="fas fa-heart"></i></a>
                             </div>
 
                             <div class="product-detail">
@@ -76,7 +76,7 @@
 
                             <div class="product-operations">
 
-                                <a class="add-to-cart-btn" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@product.Id"><i class="bi bi-cart-plus-fill"></i></a>
+                                <a class="add-to-cart-btn" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@product.Id" asp-route-ReturnUrl="@Context.Request.Path.Value"><i class="bi bi-cart-plus-fill"></i></a>
                             </div>
 
 

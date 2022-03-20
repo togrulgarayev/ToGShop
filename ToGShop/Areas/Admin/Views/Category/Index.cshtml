@@ -25,7 +25,7 @@
                 
                 <form method="get" asp-action="Index">
                     <div class="form-outline">
-                        <input type="search" placeholder="Kateqoriyalarda axtar..." value="@ViewData["SearchedCategory"]" name="categorySearch" class="form-control"/> <a style="padding-left: 15px" asp-action="Index">Bütün kateqoriyalar</a>
+                        <input autocomplete="off" type="search" placeholder="Kateqoriyalarda axtar..." value="@ViewData["SearchedCategory"]" name="categorySearch" class="form-control"/> <a style="padding-left: 15px" asp-action="Index">Bütün kateqoriyalar</a>
                         
                         
                     </div>
@@ -54,8 +54,8 @@
                                 <td>@item.Name</td>
                                 <td>@item.CreateDT</td>
                                 <td>
-                                    <a asp-controller="Category" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                    <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                    <a class="btn btn-primary" asp-controller="Category" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                    <a class="btn btn-primary" asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>
 

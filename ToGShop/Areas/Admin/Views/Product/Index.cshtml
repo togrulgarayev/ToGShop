@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model Business.ViewModels.ProductAdminViewModels.ProductAdminViewModel
 @{
     ViewData["Title"] = "Mehsullar";
 
@@ -24,7 +24,7 @@
 
                 <form method="get" asp-action="Index">
                     <div class="form-outline">
-                        <input type="search" placeholder="Məhsullarda axtar..." value="@ViewData["SearchedProduct"]" name="productSearch" class="form-control" /> <a style="padding-left: 15px" asp-action="Index">Bütün məhsullar</a>
+                        <input autocomplete="off" type="search" placeholder="Məhsullarda axtar..." value="@ViewData["SearchedProduct"]" name="productSearch" class="form-control" /> <a style="padding-left: 15px" asp-action="Index">Bütün məhsullar</a>
 
 
                     </div>
@@ -38,6 +38,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Şəkil</th>
                             <th>Ad</th>
                             <th>Başlıq</th>
                             <th>Göstəricilər</th>
@@ -49,19 +50,30 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Products)
                         {
                         <tr>
                             <td>@count</td>
+                            <td><img height="150" src="~/assets/img/@Model.ProductImages.Where(p=>p.ProductId == item.Id && p.IsMain==true).FirstOrDefault().Image"/> </td>
                             <td>@item.Name</td>
                             <td>@item.Description</td>
                             <td> @Html.Raw(item.Information) </td>
-                            <td>@item.Price</td>
+                            <td>
+                                @if (item.IsDiscount)
+                                {
+                                    <p>₼ <s>@item.Price</s> @item.DiscountPrice</p>
+                                }
+                                else
+                                {
+                                    <p>@item.Price</p>
+                                }
+                            </td>
                             <td>@item.Count</td>
                             <td>@item.CreateDT</td>
                             <td>
-                                <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
+                                <a class="btn btn-primary" asp-controller="Product" asp-action="ProductDetail" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i></a> <br /> <br />
+                                <a class="btn btn-primary" asp-controller="Product" asp-action="Update" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> <br /> <br />
+                                <a class="btn btn-primary" asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i></a>
                             </td>
                         </tr>
 

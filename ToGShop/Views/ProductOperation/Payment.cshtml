@@ -30,24 +30,24 @@
                     <h3 class="payment-title">Sifariş Məlumatları</h3>
 
                     <div class="payment-inputBox">
-                        <input asp-for="Order.Name" placeholder="Adınız">
+                        <input autocomplete="off" asp-for="Order.Name" placeholder="Adınız">
                     </div>
                     <div class="payment-inputBox">
-                        <input asp-for="Order.Surname" placeholder="Soyadınız">
+                        <input autocomplete="off" asp-for="Order.Surname" placeholder="Soyadınız">
                     </div>
                     <div class="payment-inputBox">
-                        <input asp-for="Order.Address" placeholder="küçə - bina - qapı">
+                        <input autocomplete="off" asp-for="Order.Address" placeholder="küçə - bina - qapı">
                     </div>
                     <div class="payment-inputBox">
-                        <input asp-for="Order.City" placeholder="Şəhər">
+                        <input autocomplete="off" asp-for="Order.City" placeholder="Şəhər">
                     </div>
 
                     <div class="payment-flex">
                         <div class="payment-inputBox">
-                            <input asp-for="Order.Number" placeholder="Telefon nömrəsi">
+                            <input autocomplete="off" asp-for="Order.Number" placeholder="Əlaqə nömrəsi">
                         </div>
                         <div class="payment-inputBox">
-                            <input asp-for="Order.PostalCode" placeholder="Poçt kodu">
+                            <input autocomplete="off"t asp-for="Order.PostalCode" placeholder="Poçt kodu">
                         </div>
                     </div>
 
@@ -63,8 +63,7 @@
             </div>
 
             <div class="payment-submit">
-                @*<a asp-controller="Checkout" asp-action="Index"   class="payment-submit-btn">Ödənişə keçid</a>*@
-                <button type="submit">Odenise Kec</button>
+                <button class="payment-submit-btn" type="submit">Odenise Kec</button>
             </div>
         </form>
 

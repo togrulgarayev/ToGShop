@@ -45,7 +45,7 @@
 
                             <tr>
                                 <th scope="row">@count</th>
-                                <td scope="row">@item.ApplicationUserId</td>
+                                <td scope="row">@item.ApplicationUser.FullName</td>
                                 <td><img width="150" src="~/assets/img/@Model.ProductImages.Where(pi=>pi.ProductId == product.Id && pi.IsMain==true).FirstOrDefault().Image" /></td>
                                 <td>@product.Name</td>
                                 <td>
