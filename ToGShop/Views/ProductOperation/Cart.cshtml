@@ -13,7 +13,7 @@
         @foreach (var category in @Model.Categories)
         {
 
-            <a class="category-title"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
+            <a class="category-title" asp-controller="Categories" asp-action="Index"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
         }
 
 

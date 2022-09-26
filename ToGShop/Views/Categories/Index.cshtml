@@ -11,7 +11,7 @@
         @foreach (var category in @Model.Categories)
         {
 
-            <a class="category-title"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
+            <a class="category-title" asp-controller="Categories" asp-action="Index"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
         }
 
 
@@ -62,52 +62,70 @@
                                 <div class="col-9">
                                     <div class="tab-content" id="v-altcategory-tabContent">
                                         
-
-
-                                        @foreach (var product in @Model.Products.Where(p => p.CategoryId == category.Id))
+                                        @foreach (var brand in @Model.Brands)
                                         {
-                                            <a class="go-product" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
-                                                <div class="product-card">
-                                                    <div class="product-image">
-                                                        <img src="~/assets/img/@Model.ProductImages.Where(p => p.ProductId == product.Id && p.IsMain == true).FirstOrDefault().Image" alt="">
-                                                    </div>
-
-                                                    <div class="add-fav">
-                                                        <a class="add-fav-btn" asp-controller="ProductOperation" asp-action="SetFavourite" asp-route-id="@product.Id" asp-route-ReturnUrl="@Context.Request.Path.Value"><i class="fas fa-heart"></i></a>
-                                                    </div>
-
-                                                    <div class="product-detail">
-                                                        <h2>@product.Name</h2>
-                                                        <div class="fav-stars">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-
-                                                        @if (product.IsDiscount == true)
-                                                        {
-                                                            <p class="product-price">₼ <s>@product.Price</s> @product.DiscountPrice</p>
-
-                                                        }
-                                                        else
-                                                        {
-
-                                                            <p class="product-price">₼ @product.Price</p>
-                                                        }
-
-                                                    </div>
-
-                                                    <div class="product-operations">
-
-                                                        <a class="add-to-cart-btn" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@product.Id" asp-route-ReturnUrl="@Context.Request.Path.Value"><i class="bi bi-cart-plus-fill"></i></a>
-                                                    </div>
+                                            
+                                        <div class="tab-pane fade show active" id="v-pills-@brand.Name" role="tabpanel" aria-labelledby="v-pills-@brand.Name-tab">
 
 
-                                                </div>
-                                            </a>
+                                            @foreach (var product in @Model.Products.Where(p => p.CategoryId == category.Id && p.BrandId == brand.Id))
+                                            {
+
+                                                if (Model.Products.Count != 0)
+                                                {
+                                                    
+
+                                                                <a class="go-product" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">
+                                                                    <div class="product-card">
+                                                                        <div class="product-image">
+                                                                            <img src="~/assets/img/@Model.ProductImages.Where(p => p.ProductId == product.Id && p.IsMain == true).FirstOrDefault().Image" alt="">
+                                                                        </div>
+
+                                                                        <div class="add-fav">
+                                                                            <a class="add-fav-btn" asp-controller="ProductOperation" asp-action="SetFavourite" asp-route-id="@product.Id" asp-route-ReturnUrl="@Context.Request.Path.Value"><i class="fas fa-heart"></i></a>
+                                                                        </div>
+
+                                                                        <div class="product-detail">
+                                                                            <h2>@product.Name</h2>
+                                                                            <div class="fav-stars">
+                                                                                <p>@product.Description</p>
+                                                                            </div>
+
+                                                                            @if (product.IsDiscount == true)
+                                                                            {
+                                                                                <p class="product-price">₼ <s>@product.Price</s> @product.DiscountPrice</p>
+
+                                                                            }
+                                                                            else
+                                                                            {
+
+                                                                                <p class="product-price">₼ @product.Price</p>
+                                                                            }
+
+                                                                        </div>
+
+                                                                        <div class="product-operations">
+
+                                                                            <a class="add-to-cart-btn" asp-controller="ProductOperation" asp-action="SetCart" asp-route-id="@product.Id" asp-route-ReturnUrl="@Context.Request.Path.Value"><i class="bi bi-cart-plus-fill"></i></a>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </a>
+                                                                
+
+
+                                                }
+                                                else
+                                                {
+                                                    <p>Axtarışınıza uyğun nəticə tapılmadı !</p>
+                                                }
+
+                                            }
+
+                                        </div>
                                         }
+
 
 
                                     </div>

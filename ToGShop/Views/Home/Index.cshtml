@@ -18,7 +18,7 @@
         @foreach (var category in @Model.Categories)
         {
             
-            <a class="category-title"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
+            <a class="category-title" asp-controller="Categories" asp-action="Index"><i class="bi bi-record-circle"></i> <p>@category.Name</p> </a>
         }
 
         
@@ -83,11 +83,7 @@
                                             <div class="product-detail">
                                                 <h2>@Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().Name</h2>
                                                 <div class="fav-stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                                                    <p>@Model.Products.Where(p=>p.IsDiscount==true).LastOrDefault().Description</p>
                                                     
                                                 </div>
 
@@ -165,11 +161,7 @@
                                             <div class="product-detail">
                                                 <h2>@product.Name</h2>
                                                 <div class="fav-stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                                                    <p>@product.Description</p>
                                                 </div>
 
                                                 @if (product.IsDiscount == true)
@@ -230,11 +222,7 @@
                                             <div class="product-detail">
                                                 <h2>@discoutproduct.Name</h2>
                                                 <div class="fav-stars">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                                                    <p>@discoutproduct.Description</p>
                                                 </div>
 
 

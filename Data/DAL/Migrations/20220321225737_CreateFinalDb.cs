@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.DAL.Migrations
 {
-    public partial class CreateDb : Migration
+    public partial class CreateFinalDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,6 +68,55 @@ namespace Data.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContactAdmin",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(type: "TEXT", nullable: false),
+                    CreateDT = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    Fullname = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactAdmin", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DiscountTimers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DiscountTittle = table.Column<string>(nullable: true),
+                    DiscountTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiscountTimers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Number = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,6 +284,29 @@ namespace Data.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateDT = table.Column<DateTime>(nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    Username = table.Column<string>(maxLength: 255, nullable: false),
+                    Comment = table.Column<string>(type: "TEXT", nullable: false),
+                    IsDelete = table.Column<bool>(nullable: false, defaultValue: false),
+                    ProductId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductImages",
                 columns: table => new
                 {
@@ -263,11 +335,11 @@ namespace Data.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    IsFavourite = table.Column<bool>(nullable: false),
-                    InCart = table.Column<bool>(nullable: false),
-                    IsOrdered = table.Column<bool>(nullable: false),
-                    IsSend = table.Column<bool>(nullable: false)
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
+                    IsFavourite = table.Column<bool>(nullable: false,defaultValue:false),
+                    InCart = table.Column<bool>(nullable: false,defaultValue:false),
+                    IsOrdered = table.Column<bool>(nullable: false,defaultValue:false),
+                    IsSend = table.Column<bool>(nullable: false,defaultValue:false)
                 },
                 constraints: table =>
                 {
@@ -331,6 +403,11 @@ namespace Data.DAL.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_ProductId",
+                table: "Comments",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId");
@@ -372,6 +449,18 @@ namespace Data.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "ContactAdmin");
+
+            migrationBuilder.DropTable(
+                name: "DiscountTimers");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "ProductImages");

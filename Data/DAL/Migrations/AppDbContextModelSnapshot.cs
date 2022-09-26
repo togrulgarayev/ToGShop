@@ -571,7 +571,7 @@ namespace Data.DAL.Migrations
             modelBuilder.Entity("Core.Entities.ProductComment", b =>
                 {
                     b.HasOne("Core.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductComments")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
